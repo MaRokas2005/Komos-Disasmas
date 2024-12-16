@@ -22,7 +22,11 @@ LOCALS @@
     byteInFile              dd  0 ;current
     dataSegmentStart        dd  0
 
-    prefix      db  0
+    opcodeMod   db  0
+    opcodeReg   db  0
+    opcodeRM    db  0
+
+    prefix      db  0ffh
 
     tagDB       db  "    db  ", 0
     tagData     db  "@data", 0
@@ -46,85 +50,6 @@ LOCALS @@
     include     udisasm.inc
     include     unumbers.inc
     include     uopcodes.inc
-
-    ;***************************************************;
-    ;                    PROCESS FILE                   ;
-    ;***************************************************;
-    processFile PROC
-        push    ax
-        push    bx
-        push    cx
-        push    dx
-        push    si
-        push    di
-
-        ; @@readNextChunk:
-        ; mov     ah, 3Fh
-        ; push    bx
-        ; mov     bx, inputHandle
-        ; lea     dx, inputBuffer
-        ; xor     cx, cx
-        ; mov     cl, lineLength
-        ; int     21h
-        ; pop     bx
-        ; jc      @@error
-        ; cmp     ax, 0
-        ; je      @@finish
-
-        ; lea     si, inputBuffer
-        ; lea     di, outputBuffer
-        ; mov     bl, al
-
-        ; @@processChunk:
-        ;     mov     al, [si]
-
-        ;     cmp     al, 0
-        ;     jne     @@continue
-        ;     call    flushBuffer
-        ;     mov     bh, 1
-        ;     jmp     @@finish
-        ;     @@continue:
-
-        ;     cmp     al, 0dh
-        ;     jne     @@continue2
-        ;     call    flushBuffer
-        ;     add     ah, 2
-        ;     call    fixThePointer
-        ;     mov     bh, 1
-        ;     jmp     @@readNextChunk
-        ;     @@continue2:
-
-        ;     mov     [di], al
-        ;     inc     si
-        ;     inc     di
-        ;     inc     ah
-
-        ;     cmp     ah, bl
-        ;     jne     @@continue3
-        ;     call    flushBuffer
-        ;     mov     bh, 1
-        ;     call    fixThePointer
-        ;     jmp     @@readNextChunk
-        ;     @@continue3:
-
-
-        ; loop    @@processChunk
-
-        
-        @@finish:
-        pop     di
-        pop     si
-        pop     dx
-        pop     cx
-        pop     bx
-        pop     ax
-        ret
-        
-        @@error:
-        call    unsuccesfulFileRead
-        call    endProgram
-    processFile ENDP
-
 
     ;***************************************************;
     ;                      ZE MAIN                      ;
@@ -152,8 +77,6 @@ LOCALS @@
         call    printStart
         call    printDataSegment
         call    printCodeSegment
-
-        ; call    processFile
 
         call    endProgram
         
