@@ -26,9 +26,10 @@ LOCALS @@
 
     tagDB       db  "    db  ", 0
     tagData     db  "@data", 0
-    tagByte     db  "byte ptr ", 0
-    tagWord     db  "word ptr ", 0
-    tagDWord    db  "dword ptr ", 0
+    tagByte     db  "byte ptr [ ", 0
+    tagWord     db  "word ptr [ ", 0
+    tagClose    db  " ]", 0
+    ; tagDWord    db  "dword ptr ", 0
 
     segModel    db  ".MODEL SMALL", 0
     segStack    db  ".STACK ", 0

@@ -226,53 +226,72 @@ printCodeSegment PROC
 
     ; call debug
 
-    ; ; Move input handle pointer to code segment start
-    ; mov     ax, 4200h
-    ; mov     bx, inputHandle
-    ; mov     dx, word ptr [codeSegmentOffset]
-    ; mov     cx, word ptr [codeSegmentOffset + 2]
-    ; int     21h
+    ; Move input handle pointer to code segment start
+    mov     ax, 4200h
+    mov     bx, inputHandle
+    mov     dx, word ptr [codeSegmentOffset]
+    mov     cx, 0h
+    int     21h
 
-    ; mov     ax, seg outputBuffer
-    ; mov     es, ax
+    mov     ax, seg outputBuffer
+    mov     es, ax
 
-    
+    mov     word ptr outputLength, 0
+    lea     si, segCode
+    lea     di, outputBuffer
+    call    loadTextToBuffer
+    lea     si, newline
+    call    loadTextToBuffer
+
+    pop     es
+    pop     di
+    pop     si
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+    RET
  
-    ; @@read_and_print:
-    ;     ; check if I am not in data segment
-    ;     mov     ax, 4201h
-    ;     mov     bx, inputHandle
-    ;     xor     cx, cx
-    ;     xor     dx, dx
-    ;     int     21h
+    @@read_and_print:
+        ; check if I am not in data segment
+        mov     ax, 4201h
+        mov     bx, inputHandle
+        xor     cx, cx
+        xor     dx, dx
+        int     21h
 
-    ;     jc      @@error_temp
+        jc      @@error_temp
 
-    ;     cmp     ax, word ptr [dataSegmentOffset]
-    ;     je      @@done
+        cmp     ax, word ptr [dataSegmentStart]
+        jne     @@itIsNotDataSegment
+        cmp     dx, word ptr [dataSegmentStart + 2]
+        je      @@done
 
-    ;     ; read from file
-    ;     mov     ah, 3fh
-    ;     mov     bx, inputHandle
-    ;     mov     cx, 10h
-    ;     lea     dx, inputBuffer
-    ;     int     21h
+        mov     word ptr [byteInFile], ax
+        mov     word ptr [byteInFile + 2], dx
 
-    ;     jc      @@error
+        @@itIsNotDataSegment:
 
-    ;     cmp     ax, 0h
-    ;     je      @@done
+        ; read from file
+        mov     ah, 3fh
+        mov     bx, inputHandle
+        mov     cx, 10h
+        lea     dx, inputBuffer
+        int     21h
 
-    ;     mov     cx, ax
+        jc      @@error
 
-    ;     ; writing to buffer
-    ;     lea     si, tagDB
-    ;     lea     di, outputBuffer
-    ;     mov     word ptr outputLength, 0
-    ;     jmp     @@copy_db
+        cmp     ax, 0h
+        je      @@done
 
-    ;     @@error_temp:
-    ;     jmp     @@error
+        mov     cx, ax
+
+        
+
+        @@error_temp:
+        jmp     @@error
+
+    @@done:
 
 
     pop     es
@@ -283,4 +302,7 @@ printCodeSegment PROC
     pop     bx
     pop     ax
     ret
+    @@error:
+    call    unsuccesfulFileRead
+    call    endProgram
 printCodeSegment ENDP
