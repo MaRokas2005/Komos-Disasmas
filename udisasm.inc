@@ -1,4 +1,26 @@
 ;***************************************************;
+;               Printing output buffer              ;
+;***************************************************;
+printOutputBuffer PROC
+    push    ax
+    push    bx
+    push    cx
+    push    dx
+
+    mov     ah, 40h
+    mov     bx, outputHandle
+    mov     cx, word ptr outputLength
+    lea     dx, outputBuffer
+    int     21h
+
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+    ret
+printOutputBuffer ENDP
+
+;***************************************************;
 ;                 load text to buffer               ;
 ;             si - pointer to input text            ;
 ;           di - pointer to output buffer           ;
@@ -18,6 +40,50 @@ loadTextToBuffer PROC
 loadTextToBuffer ENDP
 
 ;***************************************************;
+;                print byte to buffer               ;
+;***************************************************;
+fixScanPointer PROC
+    push    ax
+    push    bx
+    push    cx
+    push    dx
+
+    mov     ax, 4200h
+    mov     bx, inputHandle
+    mov     cx, word ptr [byteInFile + 2]
+    mov     dx, word ptr [byteInFile]
+    int     21h
+
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+    ret
+fixScanPointer ENDP
+
+;***************************************************;
+;           scan 300 bytes of code segment          ;
+;***************************************************;
+scanCodeSegment PROC
+    push    ax
+    push    bx
+    push    cx
+    push    dx
+
+    mov     ah, 3fh
+    mov     bx, inputHandle
+    mov     cx, 300
+    lea     dx, inputBuffer
+    int     21h
+
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+    ret
+scanCodeSegment ENDP
+
+;***************************************************;
 ;    Printing the start of the disassembled code    ;
 ;***************************************************;
 printStart PROC
@@ -32,10 +98,10 @@ printStart PROC
     mov     ax, seg outputBuffer
     mov     es, ax
 
-    lea     si, segModel
     lea     di, outputBuffer
     mov     word ptr outputLength, 0
 
+    lea     si, segModel
     call    loadTextToBuffer
 
     lea     si, newline
@@ -66,11 +132,7 @@ printStart PROC
     call    loadTextToBuffer
 
     @@print:
-    mov     ah, 40h
-    mov     bx, outputHandle
-    mov     cx, word ptr outputLength
-    lea     dx, outputBuffer
-    int     21h
+    call    printOutputBuffer
 
     pop     es
     pop     di
@@ -93,8 +155,6 @@ printDataSegment PROC
     push    si
     push    di
     push    es
-
-    call debug
 
     ; Move input handle pointer to data segment start
     mov     ax, 4200h
@@ -180,18 +240,10 @@ printDataSegment PROC
             loop    @@loop_print
         
         @@loop_done:
-        mov     al, 0dh
-        stosb
-        inc     word ptr outputLength
-        mov     al, 0ah
-        stosb
-        inc     word ptr outputLength
+        lea     si, newline
+        call    loadTextToBuffer
 
-        mov     ah, 40h
-        mov     bx, outputHandle
-        mov     cx, word ptr outputLength
-        lea     dx, outputBuffer
-        int     21h
+        call    printOutputBuffer
         
 
         jmp     @@read_and_print
@@ -226,70 +278,48 @@ printCodeSegment PROC
 
     ; call debug
 
-    ; Move input handle pointer to code segment start
-    mov     ax, 4200h
-    mov     bx, inputHandle
-    mov     dx, word ptr [codeSegmentOffset]
-    mov     cx, 0h
-    int     21h
-
     mov     ax, seg outputBuffer
     mov     es, ax
 
     mov     word ptr outputLength, 0
-    lea     si, segCode
     lea     di, outputBuffer
+    lea     si, segCode
     call    loadTextToBuffer
     lea     si, newline
     call    loadTextToBuffer
+    call    printOutputBuffer
 
-    pop     es
-    pop     di
-    pop     si
-    pop     dx
-    pop     cx
-    pop     bx
-    pop     ax
-    RET
+    mov     ax, word ptr codeSegmentOffset
+    mov     word ptr byteInFile, ax
+    call    fixScanPointer
  
     @@read_and_print:
-        ; check if I am not in data segment
-        mov     ax, 4201h
-        mov     bx, inputHandle
-        xor     cx, cx
-        xor     dx, dx
-        int     21h
+        ; scan 300 bytes of code segment
+        call    scanCodeSegment
 
-        jc      @@error_temp
+        ; write to buffer
+        @@loop_write:
+            mov     ax, word ptr byteInFile
+            cmp     ax, word ptr dataSegmentStart
+            jne     @@loop_continue
+            mov     ax, word ptr byteInFile + 2
+            cmp     ax, word ptr dataSegmentStart + 2
+            je      @@done
 
-        cmp     ax, word ptr [dataSegmentStart]
-        jne     @@itIsNotDataSegment
-        cmp     dx, word ptr [dataSegmentStart + 2]
-        je      @@done
+            @@loop_continue:
+            lodsb
+            call    OPCODE_00h
 
-        mov     word ptr [byteInFile], ax
-        mov     word ptr [byteInFile + 2], dx
-
-        @@itIsNotDataSegment:
-
-        ; read from file
-        mov     ah, 3fh
-        mov     bx, inputHandle
-        mov     cx, 10h
-        lea     dx, inputBuffer
-        int     21h
-
-        jc      @@error
-
-        cmp     ax, 0h
-        je      @@done
-
-        mov     cx, ax
-
+            cmp     outputLength, 0FFh
+            ; jb      @@loop_write
         
+        ; print to output
+        call    printOutputBuffer
+        
+        jmp     @@read_and_print
 
-        @@error_temp:
-        jmp     @@error
+    @@error_temp:
+    jmp     @@error
 
     @@done:
 
