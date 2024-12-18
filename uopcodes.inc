@@ -23,11 +23,161 @@ getModRegRM PROC
     ret
 getModRegRM ENDP
 
+;***************************************************;
+;                  load mod reg r/m                 ;
+;                     dl - w bit                     ;
+;***************************************************;
+loadModRM PROC
+    push    ax
+    push    bx
+    push    cx
+    push    dx
+    push    si
+
+    cmp     byte ptr opcodeMod, 3h
+    je      @@mod_11_temp
+
+    cmp     dl, 0
+    jne     @@16bits
+    lea     si, tagByte
+    jmp     @@continue
+    @@16bits:
+    lea     si, tagWord
+    @@continue:
+    call    loadTextToBuffer
+
+    @@checking_prefix:
+    cmp     byte ptr prefix, 0ffh
+    je      @@dont_have_prefix
+    xor     ax, ax
+    mov     al, byte ptr prefix
+    shl     al, 3
+    shr     al, 6
+    
+    lea     si, tagSegOFF
+    shl     ax, 1
+    add     si, ax
+    call    loadTextToBuffer
+    jmp     @@continue_2
+
+    @@dont_have_prefix:
+    lea     si, tagStart
+    call    loadTextToBuffer
+
+    @@continue_2:
+    xor     ax, ax
+    mov     al, byte ptr opcodeRM
+    shl     al, 1
+    cmp     byte ptr opcodeMod, 0h
+    jne     @@continue_3
+
+    @@mod_00:
+    cmp     byte ptr opcodeRM, 6h
+    je      @@mod_00_110
+
+    lea     si, mod_00_offset
+    add     si, ax
+    call    loadTextToBuffer
+    jmp     @@continue_4
+
+    @@mod_00_110:
+    call    getWord
+    call    printWord
+    jmp     @@continue_4
+
+    @@mod_11_temp:
+    jmp     @@mod_11
+
+    @@continue_3:
+    lea     si, mod_01_10_offset
+    add     si, ax
+    call    loadTextToBuffer
+
+    cmp     byte ptr opcodeMod, 1h
+    jne     @@mod_10
+
+    @@mod_01:
+    call    getByte
+    mov     dl, al
+    call    printByte
+    jmp     @@continue_4
+
+    @@mod_10:
+    call    getWord
+    mov     dx, ax
+    call    printWord
+    jmp     @@continue_4
+    @@continue_4:
+    lea     si, tagClose
+    call    loadTextToBuffer
+
+    @@reset_prefix:
+    mov     byte ptr prefix, 0ffh
+    jmp     @@done
+
+    @@mod_11:
+    mov     al, byte ptr opcodeMod
+    mov     byte ptr opcodeReg, al
+    call    loadReg
+
+    @@done:
+    pop     si
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+    ret
+loadModRM ENDP
+
+;***************************************************;
+;                 load reg to buffer                ;
+;                     dl - w bit                    ;
+;***************************************************;
+loadReg PROC
+    push    ax
+    push    bx
+    push    cx
+    push    dx
+    push    si
+
+    cmp     dl, 1
+    je      @@reg_large
+
+    @@reg_small:
+    mov     si, reg_small
+    jmp     @@continue
+
+    @@reg_large:
+    mov     si, reg_large
+
+    @@continue:
+    xor     bx, bx
+    mov     bl, byte ptr opcodeReg
+    shr     bx, 1
+    call    loadTextToBuffer
+
+    pop     si
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+    ret
+loadReg ENDP
+
+;***************************************************;
+;   w = 0 => byte                                   ;
+;   add - reg1 to reg2                              ;
+;   add - reg to mem                                ;
+;***************************************************;
 OPCODE_00h PROC
     mov     bl, al
     xor     bl, 00h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
+        push    si
+        lea     si, ins_unknown
+        call    loadTextToBuffer
+        pop     si
         ret
         call    OPCODE_01h
         ret
@@ -35,10 +185,18 @@ OPCODE_00h PROC
     @@continue:
     push    ax
     push    bx
+    push    si
 
-
+    lea     si, ins_add
+    call    loadTextToBuffer
+    call    getByte
+    call    getModRegRM
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
 
     @@done:
+    pop     si
     pop     bx
     pop     ax
     ret
@@ -51,9 +209,9 @@ OPCODE_01h PROC
     mov     bl, al
     xor     bl, 01h
     cmp     bl, 00h
-    jne     @@continue
-    call    OPCODE_02h
-    jmp     @@done
+    je      @@continue
+        call    OPCODE_02h
+        jmp     @@done
 
     @@continue:
     
@@ -71,7 +229,7 @@ OPCODE_02h PROC
     mov     bl, al
     xor     bl, 02h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_03h
     jmp     @@done
 
@@ -91,7 +249,7 @@ OPCODE_03h PROC
     mov     bl, al
     xor     bl, 03h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_04h
     jmp     @@done
 
@@ -111,7 +269,7 @@ OPCODE_04h PROC
     mov     bl, al
     xor     bl, 04h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_05h
     jmp     @@done
 
@@ -131,7 +289,7 @@ OPCODE_05h PROC
     mov     bl, al
     xor     bl, 05h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_06h
     jmp     @@done
 
@@ -151,7 +309,7 @@ OPCODE_06h PROC
     mov     bl, al
     xor     bl, 06h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_07h
     jmp     @@done
 
@@ -171,7 +329,7 @@ OPCODE_07h PROC
     mov     bl, al
     xor     bl, 07h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_08h
     jmp     @@done
 
@@ -191,7 +349,7 @@ OPCODE_08h PROC
     mov     bl, al
     xor     bl, 08h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_09h
     jmp     @@done
 
@@ -211,7 +369,7 @@ OPCODE_09h PROC
     mov     bl, al
     xor     bl, 09h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_0ah
     jmp     @@done
 
@@ -231,7 +389,7 @@ OPCODE_0ah PROC
     mov     bl, al
     xor     bl, 0ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_0bh
     jmp     @@done
 
@@ -251,7 +409,7 @@ OPCODE_0bh PROC
     mov     bl, al
     xor     bl, 0bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_0ch
     jmp     @@done
 
@@ -271,7 +429,7 @@ OPCODE_0ch PROC
     mov     bl, al
     xor     bl, 0ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_0dh
     jmp     @@done
 
@@ -291,7 +449,7 @@ OPCODE_0dh PROC
     mov     bl, al
     xor     bl, 0dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_0eh
     jmp     @@done
 
@@ -311,7 +469,7 @@ OPCODE_0eh PROC
     mov     bl, al
     xor     bl, 0eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_0fh
     jmp     @@done
 
@@ -331,7 +489,7 @@ OPCODE_0fh PROC
     mov     bl, al
     xor     bl, 0fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_10h
     jmp     @@done
 
@@ -351,7 +509,7 @@ OPCODE_10h PROC
     mov     bl, al
     xor     bl, 10h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_11h
     jmp     @@done
 
@@ -371,7 +529,7 @@ OPCODE_11h PROC
     mov     bl, al
     xor     bl, 11h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_12h
     jmp     @@done
 
@@ -391,7 +549,7 @@ OPCODE_12h PROC
     mov     bl, al
     xor     bl, 12h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_13h
     jmp     @@done
 
@@ -411,7 +569,7 @@ OPCODE_13h PROC
     mov     bl, al
     xor     bl, 13h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_14h
     jmp     @@done
 
@@ -431,7 +589,7 @@ OPCODE_14h PROC
     mov     bl, al
     xor     bl, 14h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_15h
     jmp     @@done
 
@@ -451,7 +609,7 @@ OPCODE_15h PROC
     mov     bl, al
     xor     bl, 15h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_16h
     jmp     @@done
 
@@ -471,7 +629,7 @@ OPCODE_16h PROC
     mov     bl, al
     xor     bl, 16h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_17h
     jmp     @@done
 
@@ -491,7 +649,7 @@ OPCODE_17h PROC
     mov     bl, al
     xor     bl, 17h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_18h
     jmp     @@done
 
@@ -511,7 +669,7 @@ OPCODE_18h PROC
     mov     bl, al
     xor     bl, 18h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_19h
     jmp     @@done
 
@@ -531,7 +689,7 @@ OPCODE_19h PROC
     mov     bl, al
     xor     bl, 19h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_1ah
     jmp     @@done
 
@@ -551,7 +709,7 @@ OPCODE_1ah PROC
     mov     bl, al
     xor     bl, 1ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_1bh
     jmp     @@done
 
@@ -571,7 +729,7 @@ OPCODE_1bh PROC
     mov     bl, al
     xor     bl, 1bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_1ch
     jmp     @@done
 
@@ -591,7 +749,7 @@ OPCODE_1ch PROC
     mov     bl, al
     xor     bl, 1ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_1dh
     jmp     @@done
 
@@ -611,7 +769,7 @@ OPCODE_1dh PROC
     mov     bl, al
     xor     bl, 1dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_1eh
     jmp     @@done
 
@@ -631,7 +789,7 @@ OPCODE_1eh PROC
     mov     bl, al
     xor     bl, 1eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_1fh
     jmp     @@done
 
@@ -651,7 +809,7 @@ OPCODE_1fh PROC
     mov     bl, al
     xor     bl, 1fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_20h
     jmp     @@done
 
@@ -671,7 +829,7 @@ OPCODE_20h PROC
     mov     bl, al
     xor     bl, 20h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_21h
     jmp     @@done
 
@@ -691,7 +849,7 @@ OPCODE_21h PROC
     mov     bl, al
     xor     bl, 21h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_22h
     jmp     @@done
 
@@ -711,7 +869,7 @@ OPCODE_22h PROC
     mov     bl, al
     xor     bl, 22h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_23h
     jmp     @@done
 
@@ -731,7 +889,7 @@ OPCODE_23h PROC
     mov     bl, al
     xor     bl, 23h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_24h
     jmp     @@done
 
@@ -751,7 +909,7 @@ OPCODE_24h PROC
     mov     bl, al
     xor     bl, 24h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_25h
     jmp     @@done
 
@@ -771,7 +929,7 @@ OPCODE_25h PROC
     mov     bl, al
     xor     bl, 25h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_26h
     jmp     @@done
 
@@ -791,7 +949,7 @@ OPCODE_26h PROC
     mov     bl, al
     xor     bl, 26h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_27h
     jmp     @@done
 
@@ -811,7 +969,7 @@ OPCODE_27h PROC
     mov     bl, al
     xor     bl, 27h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_28h
     jmp     @@done
 
@@ -831,7 +989,7 @@ OPCODE_28h PROC
     mov     bl, al
     xor     bl, 28h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_29h
     jmp     @@done
 
@@ -851,7 +1009,7 @@ OPCODE_29h PROC
     mov     bl, al
     xor     bl, 29h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_2ah
     jmp     @@done
 
@@ -871,7 +1029,7 @@ OPCODE_2ah PROC
     mov     bl, al
     xor     bl, 2ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_2bh
     jmp     @@done
 
@@ -891,7 +1049,7 @@ OPCODE_2bh PROC
     mov     bl, al
     xor     bl, 2bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_2ch
     jmp     @@done
 
@@ -911,7 +1069,7 @@ OPCODE_2ch PROC
     mov     bl, al
     xor     bl, 2ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_2dh
     jmp     @@done
 
@@ -931,7 +1089,7 @@ OPCODE_2dh PROC
     mov     bl, al
     xor     bl, 2dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_2eh
     jmp     @@done
 
@@ -951,7 +1109,7 @@ OPCODE_2eh PROC
     mov     bl, al
     xor     bl, 2eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_2fh
     jmp     @@done
 
@@ -971,7 +1129,7 @@ OPCODE_2fh PROC
     mov     bl, al
     xor     bl, 2fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_30h
     jmp     @@done
 
@@ -991,7 +1149,7 @@ OPCODE_30h PROC
     mov     bl, al
     xor     bl, 30h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_31h
     jmp     @@done
 
@@ -1011,7 +1169,7 @@ OPCODE_31h PROC
     mov     bl, al
     xor     bl, 31h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_32h
     jmp     @@done
 
@@ -1031,7 +1189,7 @@ OPCODE_32h PROC
     mov     bl, al
     xor     bl, 32h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_33h
     jmp     @@done
 
@@ -1051,7 +1209,7 @@ OPCODE_33h PROC
     mov     bl, al
     xor     bl, 33h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_34h
     jmp     @@done
 
@@ -1071,7 +1229,7 @@ OPCODE_34h PROC
     mov     bl, al
     xor     bl, 34h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_35h
     jmp     @@done
 
@@ -1091,7 +1249,7 @@ OPCODE_35h PROC
     mov     bl, al
     xor     bl, 35h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_36h
     jmp     @@done
 
@@ -1111,7 +1269,7 @@ OPCODE_36h PROC
     mov     bl, al
     xor     bl, 36h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_37h
     jmp     @@done
 
@@ -1131,7 +1289,7 @@ OPCODE_37h PROC
     mov     bl, al
     xor     bl, 37h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_38h
     jmp     @@done
 
@@ -1151,7 +1309,7 @@ OPCODE_38h PROC
     mov     bl, al
     xor     bl, 38h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_39h
     jmp     @@done
 
@@ -1171,7 +1329,7 @@ OPCODE_39h PROC
     mov     bl, al
     xor     bl, 39h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_3ah
     jmp     @@done
 
@@ -1191,7 +1349,7 @@ OPCODE_3ah PROC
     mov     bl, al
     xor     bl, 3ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_3bh
     jmp     @@done
 
@@ -1211,7 +1369,7 @@ OPCODE_3bh PROC
     mov     bl, al
     xor     bl, 3bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_3ch
     jmp     @@done
 
@@ -1231,7 +1389,7 @@ OPCODE_3ch PROC
     mov     bl, al
     xor     bl, 3ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_3dh
     jmp     @@done
 
@@ -1251,7 +1409,7 @@ OPCODE_3dh PROC
     mov     bl, al
     xor     bl, 3dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_3eh
     jmp     @@done
 
@@ -1271,7 +1429,7 @@ OPCODE_3eh PROC
     mov     bl, al
     xor     bl, 3eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_3fh
     jmp     @@done
 
@@ -1291,7 +1449,7 @@ OPCODE_3fh PROC
     mov     bl, al
     xor     bl, 3fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_40h
     jmp     @@done
 
@@ -1311,7 +1469,7 @@ OPCODE_40h PROC
     mov     bl, al
     xor     bl, 40h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_41h
     jmp     @@done
 
@@ -1331,7 +1489,7 @@ OPCODE_41h PROC
     mov     bl, al
     xor     bl, 41h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_42h
     jmp     @@done
 
@@ -1351,7 +1509,7 @@ OPCODE_42h PROC
     mov     bl, al
     xor     bl, 42h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_43h
     jmp     @@done
 
@@ -1371,7 +1529,7 @@ OPCODE_43h PROC
     mov     bl, al
     xor     bl, 43h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_44h
     jmp     @@done
 
@@ -1391,7 +1549,7 @@ OPCODE_44h PROC
     mov     bl, al
     xor     bl, 44h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_45h
     jmp     @@done
 
@@ -1411,7 +1569,7 @@ OPCODE_45h PROC
     mov     bl, al
     xor     bl, 45h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_46h
     jmp     @@done
 
@@ -1431,7 +1589,7 @@ OPCODE_46h PROC
     mov     bl, al
     xor     bl, 46h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_47h
     jmp     @@done
 
@@ -1451,7 +1609,7 @@ OPCODE_47h PROC
     mov     bl, al
     xor     bl, 47h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_48h
     jmp     @@done
 
@@ -1471,7 +1629,7 @@ OPCODE_48h PROC
     mov     bl, al
     xor     bl, 48h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_49h
     jmp     @@done
 
@@ -1491,7 +1649,7 @@ OPCODE_49h PROC
     mov     bl, al
     xor     bl, 49h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_4ah
     jmp     @@done
 
@@ -1511,7 +1669,7 @@ OPCODE_4ah PROC
     mov     bl, al
     xor     bl, 4ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_4bh
     jmp     @@done
 
@@ -1531,7 +1689,7 @@ OPCODE_4bh PROC
     mov     bl, al
     xor     bl, 4bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_4ch
     jmp     @@done
 
@@ -1551,7 +1709,7 @@ OPCODE_4ch PROC
     mov     bl, al
     xor     bl, 4ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_4dh
     jmp     @@done
 
@@ -1571,7 +1729,7 @@ OPCODE_4dh PROC
     mov     bl, al
     xor     bl, 4dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_4eh
     jmp     @@done
 
@@ -1591,7 +1749,7 @@ OPCODE_4eh PROC
     mov     bl, al
     xor     bl, 4eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_4fh
     jmp     @@done
 
@@ -1611,7 +1769,7 @@ OPCODE_4fh PROC
     mov     bl, al
     xor     bl, 4fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_50h
     jmp     @@done
 
@@ -1631,7 +1789,7 @@ OPCODE_50h PROC
     mov     bl, al
     xor     bl, 50h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_51h
     jmp     @@done
 
@@ -1651,7 +1809,7 @@ OPCODE_51h PROC
     mov     bl, al
     xor     bl, 51h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_52h
     jmp     @@done
 
@@ -1671,7 +1829,7 @@ OPCODE_52h PROC
     mov     bl, al
     xor     bl, 52h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_53h
     jmp     @@done
 
@@ -1691,7 +1849,7 @@ OPCODE_53h PROC
     mov     bl, al
     xor     bl, 53h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_54h
     jmp     @@done
 
@@ -1711,7 +1869,7 @@ OPCODE_54h PROC
     mov     bl, al
     xor     bl, 54h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_55h
     jmp     @@done
 
@@ -1731,7 +1889,7 @@ OPCODE_55h PROC
     mov     bl, al
     xor     bl, 55h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_56h
     jmp     @@done
 
@@ -1751,7 +1909,7 @@ OPCODE_56h PROC
     mov     bl, al
     xor     bl, 56h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_57h
     jmp     @@done
 
@@ -1771,7 +1929,7 @@ OPCODE_57h PROC
     mov     bl, al
     xor     bl, 57h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_58h
     jmp     @@done
 
@@ -1791,7 +1949,7 @@ OPCODE_58h PROC
     mov     bl, al
     xor     bl, 58h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_59h
     jmp     @@done
 
@@ -1811,7 +1969,7 @@ OPCODE_59h PROC
     mov     bl, al
     xor     bl, 59h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_5ah
     jmp     @@done
 
@@ -1831,7 +1989,7 @@ OPCODE_5ah PROC
     mov     bl, al
     xor     bl, 5ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_5bh
     jmp     @@done
 
@@ -1851,7 +2009,7 @@ OPCODE_5bh PROC
     mov     bl, al
     xor     bl, 5bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_5ch
     jmp     @@done
 
@@ -1871,7 +2029,7 @@ OPCODE_5ch PROC
     mov     bl, al
     xor     bl, 5ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_5dh
     jmp     @@done
 
@@ -1891,7 +2049,7 @@ OPCODE_5dh PROC
     mov     bl, al
     xor     bl, 5dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_5eh
     jmp     @@done
 
@@ -1911,7 +2069,7 @@ OPCODE_5eh PROC
     mov     bl, al
     xor     bl, 5eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_5fh
     jmp     @@done
 
@@ -1931,7 +2089,7 @@ OPCODE_5fh PROC
     mov     bl, al
     xor     bl, 5fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_60h
     jmp     @@done
 
@@ -1951,7 +2109,7 @@ OPCODE_60h PROC
     mov     bl, al
     xor     bl, 60h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_61h
     jmp     @@done
 
@@ -1971,7 +2129,7 @@ OPCODE_61h PROC
     mov     bl, al
     xor     bl, 61h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_62h
     jmp     @@done
 
@@ -1991,7 +2149,7 @@ OPCODE_62h PROC
     mov     bl, al
     xor     bl, 62h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_63h
     jmp     @@done
 
@@ -2011,7 +2169,7 @@ OPCODE_63h PROC
     mov     bl, al
     xor     bl, 63h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_64h
     jmp     @@done
 
@@ -2031,7 +2189,7 @@ OPCODE_64h PROC
     mov     bl, al
     xor     bl, 64h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_65h
     jmp     @@done
 
@@ -2051,7 +2209,7 @@ OPCODE_65h PROC
     mov     bl, al
     xor     bl, 65h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_66h
     jmp     @@done
 
@@ -2071,7 +2229,7 @@ OPCODE_66h PROC
     mov     bl, al
     xor     bl, 66h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_67h
     jmp     @@done
 
@@ -2091,7 +2249,7 @@ OPCODE_67h PROC
     mov     bl, al
     xor     bl, 67h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_68h
     jmp     @@done
 
@@ -2111,7 +2269,7 @@ OPCODE_68h PROC
     mov     bl, al
     xor     bl, 68h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_69h
     jmp     @@done
 
@@ -2131,7 +2289,7 @@ OPCODE_69h PROC
     mov     bl, al
     xor     bl, 69h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_6ah
     jmp     @@done
 
@@ -2151,7 +2309,7 @@ OPCODE_6ah PROC
     mov     bl, al
     xor     bl, 6ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_6bh
     jmp     @@done
 
@@ -2171,7 +2329,7 @@ OPCODE_6bh PROC
     mov     bl, al
     xor     bl, 6bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_6ch
     jmp     @@done
 
@@ -2191,7 +2349,7 @@ OPCODE_6ch PROC
     mov     bl, al
     xor     bl, 6ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_6dh
     jmp     @@done
 
@@ -2211,7 +2369,7 @@ OPCODE_6dh PROC
     mov     bl, al
     xor     bl, 6dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_6eh
     jmp     @@done
 
@@ -2231,7 +2389,7 @@ OPCODE_6eh PROC
     mov     bl, al
     xor     bl, 6eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_6fh
     jmp     @@done
 
@@ -2251,7 +2409,7 @@ OPCODE_6fh PROC
     mov     bl, al
     xor     bl, 6fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_70h
     jmp     @@done
 
@@ -2271,7 +2429,7 @@ OPCODE_70h PROC
     mov     bl, al
     xor     bl, 70h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_71h
     jmp     @@done
 
@@ -2291,7 +2449,7 @@ OPCODE_71h PROC
     mov     bl, al
     xor     bl, 71h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_72h
     jmp     @@done
 
@@ -2311,7 +2469,7 @@ OPCODE_72h PROC
     mov     bl, al
     xor     bl, 72h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_73h
     jmp     @@done
 
@@ -2331,7 +2489,7 @@ OPCODE_73h PROC
     mov     bl, al
     xor     bl, 73h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_74h
     jmp     @@done
 
@@ -2351,7 +2509,7 @@ OPCODE_74h PROC
     mov     bl, al
     xor     bl, 74h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_75h
     jmp     @@done
 
@@ -2371,7 +2529,7 @@ OPCODE_75h PROC
     mov     bl, al
     xor     bl, 75h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_76h
     jmp     @@done
 
@@ -2391,7 +2549,7 @@ OPCODE_76h PROC
     mov     bl, al
     xor     bl, 76h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_77h
     jmp     @@done
 
@@ -2411,7 +2569,7 @@ OPCODE_77h PROC
     mov     bl, al
     xor     bl, 77h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_78h
     jmp     @@done
 
@@ -2431,7 +2589,7 @@ OPCODE_78h PROC
     mov     bl, al
     xor     bl, 78h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_79h
     jmp     @@done
 
@@ -2451,7 +2609,7 @@ OPCODE_79h PROC
     mov     bl, al
     xor     bl, 79h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_7ah
     jmp     @@done
 
@@ -2471,7 +2629,7 @@ OPCODE_7ah PROC
     mov     bl, al
     xor     bl, 7ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_7bh
     jmp     @@done
 
@@ -2491,7 +2649,7 @@ OPCODE_7bh PROC
     mov     bl, al
     xor     bl, 7bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_7ch
     jmp     @@done
 
@@ -2511,7 +2669,7 @@ OPCODE_7ch PROC
     mov     bl, al
     xor     bl, 7ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_7dh
     jmp     @@done
 
@@ -2531,7 +2689,7 @@ OPCODE_7dh PROC
     mov     bl, al
     xor     bl, 7dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_7eh
     jmp     @@done
 
@@ -2551,7 +2709,7 @@ OPCODE_7eh PROC
     mov     bl, al
     xor     bl, 7eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_7fh
     jmp     @@done
 
@@ -2571,7 +2729,7 @@ OPCODE_7fh PROC
     mov     bl, al
     xor     bl, 7fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_80h
     jmp     @@done
 
@@ -2591,7 +2749,7 @@ OPCODE_80h PROC
     mov     bl, al
     xor     bl, 80h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_81h
     jmp     @@done
 
@@ -2611,7 +2769,7 @@ OPCODE_81h PROC
     mov     bl, al
     xor     bl, 81h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_82h
     jmp     @@done
 
@@ -2631,7 +2789,7 @@ OPCODE_82h PROC
     mov     bl, al
     xor     bl, 82h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_83h
     jmp     @@done
 
@@ -2651,7 +2809,7 @@ OPCODE_83h PROC
     mov     bl, al
     xor     bl, 83h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_84h
     jmp     @@done
 
@@ -2671,7 +2829,7 @@ OPCODE_84h PROC
     mov     bl, al
     xor     bl, 84h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_85h
     jmp     @@done
 
@@ -2691,7 +2849,7 @@ OPCODE_85h PROC
     mov     bl, al
     xor     bl, 85h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_86h
     jmp     @@done
 
@@ -2711,7 +2869,7 @@ OPCODE_86h PROC
     mov     bl, al
     xor     bl, 86h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_87h
     jmp     @@done
 
@@ -2731,7 +2889,7 @@ OPCODE_87h PROC
     mov     bl, al
     xor     bl, 87h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_88h
     jmp     @@done
 
@@ -2751,7 +2909,7 @@ OPCODE_88h PROC
     mov     bl, al
     xor     bl, 88h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_89h
     jmp     @@done
 
@@ -2771,7 +2929,7 @@ OPCODE_89h PROC
     mov     bl, al
     xor     bl, 89h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_8ah
     jmp     @@done
 
@@ -2791,7 +2949,7 @@ OPCODE_8ah PROC
     mov     bl, al
     xor     bl, 8ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_8bh
     jmp     @@done
 
@@ -2811,7 +2969,7 @@ OPCODE_8bh PROC
     mov     bl, al
     xor     bl, 8bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_8ch
     jmp     @@done
 
@@ -2831,7 +2989,7 @@ OPCODE_8ch PROC
     mov     bl, al
     xor     bl, 8ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_8dh
     jmp     @@done
 
@@ -2851,7 +3009,7 @@ OPCODE_8dh PROC
     mov     bl, al
     xor     bl, 8dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_8eh
     jmp     @@done
 
@@ -2871,7 +3029,7 @@ OPCODE_8eh PROC
     mov     bl, al
     xor     bl, 8eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_8fh
     jmp     @@done
 
@@ -2891,7 +3049,7 @@ OPCODE_8fh PROC
     mov     bl, al
     xor     bl, 8fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_90h
     jmp     @@done
 
@@ -2911,7 +3069,7 @@ OPCODE_90h PROC
     mov     bl, al
     xor     bl, 90h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_91h
     jmp     @@done
 
@@ -2931,7 +3089,7 @@ OPCODE_91h PROC
     mov     bl, al
     xor     bl, 91h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_92h
     jmp     @@done
 
@@ -2951,7 +3109,7 @@ OPCODE_92h PROC
     mov     bl, al
     xor     bl, 92h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_93h
     jmp     @@done
 
@@ -2971,7 +3129,7 @@ OPCODE_93h PROC
     mov     bl, al
     xor     bl, 93h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_94h
     jmp     @@done
 
@@ -2991,7 +3149,7 @@ OPCODE_94h PROC
     mov     bl, al
     xor     bl, 94h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_95h
     jmp     @@done
 
@@ -3011,7 +3169,7 @@ OPCODE_95h PROC
     mov     bl, al
     xor     bl, 95h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_96h
     jmp     @@done
 
@@ -3031,7 +3189,7 @@ OPCODE_96h PROC
     mov     bl, al
     xor     bl, 96h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_97h
     jmp     @@done
 
@@ -3051,7 +3209,7 @@ OPCODE_97h PROC
     mov     bl, al
     xor     bl, 97h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_98h
     jmp     @@done
 
@@ -3071,7 +3229,7 @@ OPCODE_98h PROC
     mov     bl, al
     xor     bl, 98h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_99h
     jmp     @@done
 
@@ -3091,7 +3249,7 @@ OPCODE_99h PROC
     mov     bl, al
     xor     bl, 99h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_9ah
     jmp     @@done
 
@@ -3111,7 +3269,7 @@ OPCODE_9ah PROC
     mov     bl, al
     xor     bl, 9ah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_9bh
     jmp     @@done
 
@@ -3131,7 +3289,7 @@ OPCODE_9bh PROC
     mov     bl, al
     xor     bl, 9bh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_9ch
     jmp     @@done
 
@@ -3151,7 +3309,7 @@ OPCODE_9ch PROC
     mov     bl, al
     xor     bl, 9ch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_9dh
     jmp     @@done
 
@@ -3171,7 +3329,7 @@ OPCODE_9dh PROC
     mov     bl, al
     xor     bl, 9dh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_9eh
     jmp     @@done
 
@@ -3191,7 +3349,7 @@ OPCODE_9eh PROC
     mov     bl, al
     xor     bl, 9eh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_9fh
     jmp     @@done
 
@@ -3211,7 +3369,7 @@ OPCODE_9fh PROC
     mov     bl, al
     xor     bl, 9fh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a0h
     jmp     @@done
 
@@ -3231,7 +3389,7 @@ OPCODE_a0h PROC
     mov     bl, al
     xor     bl, 0a0h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a1h
     jmp     @@done
 
@@ -3251,7 +3409,7 @@ OPCODE_a1h PROC
     mov     bl, al
     xor     bl, 0a1h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a2h
     jmp     @@done
 
@@ -3271,7 +3429,7 @@ OPCODE_a2h PROC
     mov     bl, al
     xor     bl, 0a2h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a3h
     jmp     @@done
 
@@ -3291,7 +3449,7 @@ OPCODE_a3h PROC
     mov     bl, al
     xor     bl, 0a3h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a4h
     jmp     @@done
 
@@ -3311,7 +3469,7 @@ OPCODE_a4h PROC
     mov     bl, al
     xor     bl, 0a4h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a5h
     jmp     @@done
 
@@ -3331,7 +3489,7 @@ OPCODE_a5h PROC
     mov     bl, al
     xor     bl, 0a5h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a6h
     jmp     @@done
 
@@ -3351,7 +3509,7 @@ OPCODE_a6h PROC
     mov     bl, al
     xor     bl, 0a6h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a7h
     jmp     @@done
 
@@ -3371,7 +3529,7 @@ OPCODE_a7h PROC
     mov     bl, al
     xor     bl, 0a7h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a8h
     jmp     @@done
 
@@ -3391,7 +3549,7 @@ OPCODE_a8h PROC
     mov     bl, al
     xor     bl, 0a8h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_a9h
     jmp     @@done
 
@@ -3411,7 +3569,7 @@ OPCODE_a9h PROC
     mov     bl, al
     xor     bl, 0a9h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_aah
     jmp     @@done
 
@@ -3431,7 +3589,7 @@ OPCODE_aah PROC
     mov     bl, al
     xor     bl, 0aah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_abh
     jmp     @@done
 
@@ -3451,7 +3609,7 @@ OPCODE_abh PROC
     mov     bl, al
     xor     bl, 0abh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_ach
     jmp     @@done
 
@@ -3471,7 +3629,7 @@ OPCODE_ach PROC
     mov     bl, al
     xor     bl, 0ach
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_adh
     jmp     @@done
 
@@ -3491,7 +3649,7 @@ OPCODE_adh PROC
     mov     bl, al
     xor     bl, 0adh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_aeh
     jmp     @@done
 
@@ -3511,7 +3669,7 @@ OPCODE_aeh PROC
     mov     bl, al
     xor     bl, 0aeh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_afh
     jmp     @@done
 
@@ -3531,7 +3689,7 @@ OPCODE_afh PROC
     mov     bl, al
     xor     bl, 0afh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b0h
     jmp     @@done
 
@@ -3551,7 +3709,7 @@ OPCODE_b0h PROC
     mov     bl, al
     xor     bl, 0b0h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b1h
     jmp     @@done
 
@@ -3571,7 +3729,7 @@ OPCODE_b1h PROC
     mov     bl, al
     xor     bl, 0b1h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b2h
     jmp     @@done
 
@@ -3591,7 +3749,7 @@ OPCODE_b2h PROC
     mov     bl, al
     xor     bl, 0b2h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b3h
     jmp     @@done
 
@@ -3611,7 +3769,7 @@ OPCODE_b3h PROC
     mov     bl, al
     xor     bl, 0b3h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b4h
     jmp     @@done
 
@@ -3631,7 +3789,7 @@ OPCODE_b4h PROC
     mov     bl, al
     xor     bl, 0b4h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b5h
     jmp     @@done
 
@@ -3651,7 +3809,7 @@ OPCODE_b5h PROC
     mov     bl, al
     xor     bl, 0b5h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b6h
     jmp     @@done
 
@@ -3671,7 +3829,7 @@ OPCODE_b6h PROC
     mov     bl, al
     xor     bl, 0b6h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b7h
     jmp     @@done
 
@@ -3691,7 +3849,7 @@ OPCODE_b7h PROC
     mov     bl, al
     xor     bl, 0b7h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b8h
     jmp     @@done
 
@@ -3711,7 +3869,7 @@ OPCODE_b8h PROC
     mov     bl, al
     xor     bl, 0b8h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_b9h
     jmp     @@done
 
@@ -3731,7 +3889,7 @@ OPCODE_b9h PROC
     mov     bl, al
     xor     bl, 0b9h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_bah
     jmp     @@done
 
@@ -3751,7 +3909,7 @@ OPCODE_bah PROC
     mov     bl, al
     xor     bl, 0bah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_bbh
     jmp     @@done
 
@@ -3771,7 +3929,7 @@ OPCODE_bbh PROC
     mov     bl, al
     xor     bl, 0bbh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_bch
     jmp     @@done
 
@@ -3791,7 +3949,7 @@ OPCODE_bch PROC
     mov     bl, al
     xor     bl, 0bch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_bdh
     jmp     @@done
 
@@ -3811,7 +3969,7 @@ OPCODE_bdh PROC
     mov     bl, al
     xor     bl, 0bdh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_beh
     jmp     @@done
 
@@ -3831,7 +3989,7 @@ OPCODE_beh PROC
     mov     bl, al
     xor     bl, 0beh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_bfh
     jmp     @@done
 
@@ -3851,7 +4009,7 @@ OPCODE_bfh PROC
     mov     bl, al
     xor     bl, 0bfh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c0h
     jmp     @@done
 
@@ -3871,7 +4029,7 @@ OPCODE_c0h PROC
     mov     bl, al
     xor     bl, 0c0h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c1h
     jmp     @@done
 
@@ -3891,7 +4049,7 @@ OPCODE_c1h PROC
     mov     bl, al
     xor     bl, 0c1h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c2h
     jmp     @@done
 
@@ -3911,7 +4069,7 @@ OPCODE_c2h PROC
     mov     bl, al
     xor     bl, 0c2h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c3h
     jmp     @@done
 
@@ -3931,7 +4089,7 @@ OPCODE_c3h PROC
     mov     bl, al
     xor     bl, 0c3h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c4h
     jmp     @@done
 
@@ -3951,7 +4109,7 @@ OPCODE_c4h PROC
     mov     bl, al
     xor     bl, 0c4h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c5h
     jmp     @@done
 
@@ -3971,7 +4129,7 @@ OPCODE_c5h PROC
     mov     bl, al
     xor     bl, 0c5h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c6h
     jmp     @@done
 
@@ -3991,7 +4149,7 @@ OPCODE_c6h PROC
     mov     bl, al
     xor     bl, 0c6h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c7h
     jmp     @@done
 
@@ -4011,7 +4169,7 @@ OPCODE_c7h PROC
     mov     bl, al
     xor     bl, 0c7h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c8h
     jmp     @@done
 
@@ -4031,7 +4189,7 @@ OPCODE_c8h PROC
     mov     bl, al
     xor     bl, 0c8h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_c9h
     jmp     @@done
 
@@ -4051,7 +4209,7 @@ OPCODE_c9h PROC
     mov     bl, al
     xor     bl, 0c9h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_cah
     jmp     @@done
 
@@ -4071,7 +4229,7 @@ OPCODE_cah PROC
     mov     bl, al
     xor     bl, 0cah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_cbh
     jmp     @@done
 
@@ -4091,7 +4249,7 @@ OPCODE_cbh PROC
     mov     bl, al
     xor     bl, 0cbh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_cch
     jmp     @@done
 
@@ -4111,7 +4269,7 @@ OPCODE_cch PROC
     mov     bl, al
     xor     bl, 0cch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_cdh
     jmp     @@done
 
@@ -4131,7 +4289,7 @@ OPCODE_cdh PROC
     mov     bl, al
     xor     bl, 0cdh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_ceh
     jmp     @@done
 
@@ -4151,7 +4309,7 @@ OPCODE_ceh PROC
     mov     bl, al
     xor     bl, 0ceh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_cfh
     jmp     @@done
 
@@ -4171,7 +4329,7 @@ OPCODE_cfh PROC
     mov     bl, al
     xor     bl, 0cfh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d0h
     jmp     @@done
 
@@ -4191,7 +4349,7 @@ OPCODE_d0h PROC
     mov     bl, al
     xor     bl, 0d0h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d1h
     jmp     @@done
 
@@ -4211,7 +4369,7 @@ OPCODE_d1h PROC
     mov     bl, al
     xor     bl, 0d1h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d2h
     jmp     @@done
 
@@ -4231,7 +4389,7 @@ OPCODE_d2h PROC
     mov     bl, al
     xor     bl, 0d2h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d3h
     jmp     @@done
 
@@ -4251,7 +4409,7 @@ OPCODE_d3h PROC
     mov     bl, al
     xor     bl, 0d3h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d4h
     jmp     @@done
 
@@ -4271,7 +4429,7 @@ OPCODE_d4h PROC
     mov     bl, al
     xor     bl, 0d4h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d5h
     jmp     @@done
 
@@ -4291,7 +4449,7 @@ OPCODE_d5h PROC
     mov     bl, al
     xor     bl, 0d5h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d6h
     jmp     @@done
 
@@ -4311,7 +4469,7 @@ OPCODE_d6h PROC
     mov     bl, al
     xor     bl, 0d6h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d7h
     jmp     @@done
 
@@ -4331,7 +4489,7 @@ OPCODE_d7h PROC
     mov     bl, al
     xor     bl, 0d7h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d8h
     jmp     @@done
 
@@ -4351,7 +4509,7 @@ OPCODE_d8h PROC
     mov     bl, al
     xor     bl, 0d8h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_d9h
     jmp     @@done
 
@@ -4371,7 +4529,7 @@ OPCODE_d9h PROC
     mov     bl, al
     xor     bl, 0d9h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_dah
     jmp     @@done
 
@@ -4391,7 +4549,7 @@ OPCODE_dah PROC
     mov     bl, al
     xor     bl, 0dah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_dbh
     jmp     @@done
 
@@ -4411,7 +4569,7 @@ OPCODE_dbh PROC
     mov     bl, al
     xor     bl, 0dbh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_dch
     jmp     @@done
 
@@ -4431,7 +4589,7 @@ OPCODE_dch PROC
     mov     bl, al
     xor     bl, 0dch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_ddh
     jmp     @@done
 
@@ -4451,7 +4609,7 @@ OPCODE_ddh PROC
     mov     bl, al
     xor     bl, 0ddh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_deh
     jmp     @@done
 
@@ -4471,7 +4629,7 @@ OPCODE_deh PROC
     mov     bl, al
     xor     bl, 0deh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_dfh
     jmp     @@done
 
@@ -4491,7 +4649,7 @@ OPCODE_dfh PROC
     mov     bl, al
     xor     bl, 0dfh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e0h
     jmp     @@done
 
@@ -4511,7 +4669,7 @@ OPCODE_e0h PROC
     mov     bl, al
     xor     bl, 0e0h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e1h
     jmp     @@done
 
@@ -4531,7 +4689,7 @@ OPCODE_e1h PROC
     mov     bl, al
     xor     bl, 0e1h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e2h
     jmp     @@done
 
@@ -4551,7 +4709,7 @@ OPCODE_e2h PROC
     mov     bl, al
     xor     bl, 0e2h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e3h
     jmp     @@done
 
@@ -4571,7 +4729,7 @@ OPCODE_e3h PROC
     mov     bl, al
     xor     bl, 0e3h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e4h
     jmp     @@done
 
@@ -4591,7 +4749,7 @@ OPCODE_e4h PROC
     mov     bl, al
     xor     bl, 0e4h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e5h
     jmp     @@done
 
@@ -4611,7 +4769,7 @@ OPCODE_e5h PROC
     mov     bl, al
     xor     bl, 0e5h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e6h
     jmp     @@done
 
@@ -4631,7 +4789,7 @@ OPCODE_e6h PROC
     mov     bl, al
     xor     bl, 0e6h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e7h
     jmp     @@done
 
@@ -4651,7 +4809,7 @@ OPCODE_e7h PROC
     mov     bl, al
     xor     bl, 0e7h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e8h
     jmp     @@done
 
@@ -4671,7 +4829,7 @@ OPCODE_e8h PROC
     mov     bl, al
     xor     bl, 0e8h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_e9h
     jmp     @@done
 
@@ -4691,7 +4849,7 @@ OPCODE_e9h PROC
     mov     bl, al
     xor     bl, 0e9h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_eah
     jmp     @@done
 
@@ -4711,7 +4869,7 @@ OPCODE_eah PROC
     mov     bl, al
     xor     bl, 0eah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_ebh
     jmp     @@done
 
@@ -4731,7 +4889,7 @@ OPCODE_ebh PROC
     mov     bl, al
     xor     bl, 0ebh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_ech
     jmp     @@done
 
@@ -4751,7 +4909,7 @@ OPCODE_ech PROC
     mov     bl, al
     xor     bl, 0ech
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_edh
     jmp     @@done
 
@@ -4771,7 +4929,7 @@ OPCODE_edh PROC
     mov     bl, al
     xor     bl, 0edh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_eeh
     jmp     @@done
 
@@ -4791,7 +4949,7 @@ OPCODE_eeh PROC
     mov     bl, al
     xor     bl, 0eeh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_efh
     jmp     @@done
 
@@ -4811,7 +4969,7 @@ OPCODE_efh PROC
     mov     bl, al
     xor     bl, 0efh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f0h
     jmp     @@done
 
@@ -4831,7 +4989,7 @@ OPCODE_f0h PROC
     mov     bl, al
     xor     bl, 0f0h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f1h
     jmp     @@done
 
@@ -4851,7 +5009,7 @@ OPCODE_f1h PROC
     mov     bl, al
     xor     bl, 0f1h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f2h
     jmp     @@done
 
@@ -4871,7 +5029,7 @@ OPCODE_f2h PROC
     mov     bl, al
     xor     bl, 0f2h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f3h
     jmp     @@done
 
@@ -4891,7 +5049,7 @@ OPCODE_f3h PROC
     mov     bl, al
     xor     bl, 0f3h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f4h
     jmp     @@done
 
@@ -4911,7 +5069,7 @@ OPCODE_f4h PROC
     mov     bl, al
     xor     bl, 0f4h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f5h
     jmp     @@done
 
@@ -4931,7 +5089,7 @@ OPCODE_f5h PROC
     mov     bl, al
     xor     bl, 0f5h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f6h
     jmp     @@done
 
@@ -4951,7 +5109,7 @@ OPCODE_f6h PROC
     mov     bl, al
     xor     bl, 0f6h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f7h
     jmp     @@done
 
@@ -4971,7 +5129,7 @@ OPCODE_f7h PROC
     mov     bl, al
     xor     bl, 0f7h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f8h
     jmp     @@done
 
@@ -4991,7 +5149,7 @@ OPCODE_f8h PROC
     mov     bl, al
     xor     bl, 0f8h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_f9h
     jmp     @@done
 
@@ -5011,7 +5169,7 @@ OPCODE_f9h PROC
     mov     bl, al
     xor     bl, 0f9h
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_fah
     jmp     @@done
 
@@ -5031,7 +5189,7 @@ OPCODE_fah PROC
     mov     bl, al
     xor     bl, 0fah
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_fbh
     jmp     @@done
 
@@ -5051,7 +5209,7 @@ OPCODE_fbh PROC
     mov     bl, al
     xor     bl, 0fbh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_fch
     jmp     @@done
 
@@ -5071,7 +5229,7 @@ OPCODE_fch PROC
     mov     bl, al
     xor     bl, 0fch
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_fdh
     jmp     @@done
 
@@ -5091,7 +5249,7 @@ OPCODE_fdh PROC
     mov     bl, al
     xor     bl, 0fdh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_feh
     jmp     @@done
 
@@ -5111,7 +5269,7 @@ OPCODE_feh PROC
     mov     bl, al
     xor     bl, 0feh
     cmp     bl, 00h
-    jne     @@continue
+    je      @@continue
     call    OPCODE_ffh
     jmp     @@done
 

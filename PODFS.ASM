@@ -229,3 +229,23 @@
     db  00ah, 020h, 020h, 020h, 020h, 020h, 020h, 020h, 043h, 06fh, 070h, 079h, 072h, 069h, 067h, 068h
     db  074h, 020h, 032h, 030h, 032h, 034h, 020h, 056h, 055h, 02eh, 00dh, 00ah, 024h
 .CODE
+
+; 0000h0200h
+; 0000h05b0h
+; 03bh
+; UNKNOWN instruction
+
+; 0000h0201h
+; 0000h05b0h
+; 020h
+; UNKNOWN instruction
+
+; 0000h0202h
+; 0000h05b0h
+; 000h
+ADD byte ptr [ LT\dlorsvÅåó¢®Æ¥∏ ], al
+
+; 0000h0204h
+; 0000h05b0h
+; 02ch
+; UNKNOWN instruction

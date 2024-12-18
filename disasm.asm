@@ -8,10 +8,12 @@ LOCALS @@
     inputHandle     dw  0
     outputHandle    dw  0
     inputBuffer     db  300 dup(0)
-    newline         db  0dh, 0ah, 0
     outputBuffer    db  300 dup(0)
     outputLength    dw  0
-    filePointer     dw  2   dup(0)
+    newline         db  0dh, 0ah, 0
+    komment         db  "; ", 0     ; I can not use comment, because maybe it is reserved word
+    commaSpace      db  ", ", 0
+    usedBytes       dw  0
     
     headerSize              dw  0
     stackSize               dw  0
@@ -19,14 +21,14 @@ LOCALS @@
     relocationTableOffset   dw  0
 
     dataTagByte             dd  0
-    byteInFile              dd  0 ;current
+    byteInFile              dd  0   ; current
     dataSegmentStart        dd  0
 
     opcodeMod   db  0
     opcodeReg   db  0
     opcodeRM    db  0
 
-    prefix      db  0ffh
+    prefix      db  0ffh    ; 0ffh = no prefix
 
     tagDB       db  "    db  ", 0
     tagData     db  "@data", 0
@@ -38,6 +40,7 @@ LOCALS @@
     tagSegCS    db  "cs:[ ", 0
     tagStart    db  "[ ", 0
     tagClose    db  " ]", 0
+    tagSegOFF   dw  offset tagSegES, offset tagSegDS, offset tagSegSS, offset tagSegCS
     ; tagDWord    db  "dword ptr ", 0
 
     segModel    db  ".MODEL SMALL", 0
@@ -48,6 +51,7 @@ LOCALS @@
 
     include     dmessage.inc
     include     dhelp.inc
+    include     dopcodes.inc
 
 .CODE
     include     ufile.inc

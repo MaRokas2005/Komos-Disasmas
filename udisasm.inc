@@ -13,6 +13,9 @@ printOutputBuffer PROC
     lea     dx, outputBuffer
     int     21h
 
+    lea     di, outputBuffer
+    mov     word ptr outputLength, 0
+
     pop     dx
     pop     cx
     pop     bx
@@ -21,11 +24,34 @@ printOutputBuffer PROC
 printOutputBuffer ENDP
 
 ;***************************************************;
+;    getting byte to al and incrementing pointers   ;
+;***************************************************;
+getByte PROC
+    lodsb
+    add     word ptr usedBytes, 1
+    add     word ptr byteInFile, 1
+    adc     word ptr byteInFile + 2, 0
+    ret
+getByte ENDP
+
+;***************************************************;
+;    getting word to ax and incrementing pointers   ;
+;***************************************************;
+getWord PROC
+    lodsw
+    add     word ptr usedBytes, 2
+    add     word ptr byteInFile, 2
+    adc     word ptr byteInFile + 2, 0
+    ret
+getWord ENDP
+
+;***************************************************;
 ;                 load text to buffer               ;
 ;             si - pointer to input text            ;
 ;           di - pointer to output buffer           ;
 ;***************************************************;
 loadTextToBuffer PROC
+    push    ax
     @@copy_start:
         lodsb
         cmp     al, 0
@@ -35,9 +61,42 @@ loadTextToBuffer PROC
         jmp     @@copy_start
     
     @@done:
-
+    pop     ax
     ret
 loadTextToBuffer ENDP
+
+;***************************************************;
+;               load newline to buffer              ;
+;***************************************************;
+loadNewline PROC
+    push    si
+    lea     si, newline
+    call    loadTextToBuffer
+    pop     si
+    ret
+loadNewline ENDP
+
+;***************************************************;
+;               load comment to buffer              ;
+;***************************************************;
+loadComment PROC
+    push    si
+    lea     si, komment
+    call    loadTextToBuffer
+    pop     si
+    ret
+loadComment ENDP
+
+;***************************************************;
+;           load comma and space to buffer          ;
+;***************************************************;
+loadCommaSpace PROC
+    push    si
+    lea     si, commaSpace
+    call    loadTextToBuffer
+    pop     si
+    ret
+loadCommaSpace ENDP
 
 ;***************************************************;
 ;                print byte to buffer               ;
@@ -65,7 +124,6 @@ fixScanPointer ENDP
 ;           scan 300 bytes of code segment          ;
 ;***************************************************;
 scanCodeSegment PROC
-    push    ax
     push    bx
     push    cx
     push    dx
@@ -76,11 +134,17 @@ scanCodeSegment PROC
     lea     dx, inputBuffer
     int     21h
 
+    jc      @@error
+
+    mov     word ptr usedBytes, 0
+
     pop     dx
     pop     cx
     pop     bx
-    pop     ax
     ret
+    @@error:
+    call    unsuccesfulFileRead
+    call    endProgram
 scanCodeSegment ENDP
 
 ;***************************************************;
@@ -276,7 +340,7 @@ printCodeSegment PROC
     push    di
     push    es
 
-    ; call debug
+    call debug
 
     mov     ax, seg outputBuffer
     mov     es, ax
@@ -287,35 +351,71 @@ printCodeSegment PROC
     call    loadTextToBuffer
     lea     si, newline
     call    loadTextToBuffer
+
     call    printOutputBuffer
+
 
     mov     ax, word ptr codeSegmentOffset
     mov     word ptr byteInFile, ax
     call    fixScanPointer
  
     @@read_and_print:
+        cmp     word ptr usedBytes, 0FFh
+        jb      @@loop_write
         ; scan 300 bytes of code segment
+        call    fixScanPointer
         call    scanCodeSegment
+        cmp     ax, 0
+        je      @@done
+        lea     si, inputBuffer
 
         ; write to buffer
         @@loop_write:
+            ; check if I am not in data segment
             mov     ax, word ptr byteInFile
             cmp     ax, word ptr dataSegmentStart
             jne     @@loop_continue
             mov     ax, word ptr byteInFile + 2
             cmp     ax, word ptr dataSegmentStart + 2
             je      @@done
+            
+
 
             @@loop_continue:
-            lodsb
-            call    OPCODE_00h
+            ;; testing
+            call loadNewline
+            call loadComment
+            mov dx, word ptr byteInFile+2
+            call printWord
+            mov dx, word ptr byteInFile
+            call printWord
+            call loadNewline
+            call loadComment
+            mov dx, word ptr dataSegmentStart+2
+            call printWord
+            mov dx, word ptr dataSegmentStart
+            call printWord
+            call loadNewline
+            ;; end testing
 
-            cmp     outputLength, 0FFh
-            ; jb      @@loop_write
+            call    getByte
+
+            ;; more testing
+            call loadComment
+            mov  dl, al
+            call printByte
+            call loadNewline
+            ;; end more testing
+
+            call    OPCODE_00h
+            call    loadNewline
+
+            cmp     outputLength, 0eFh
+            jbe      @@loop_write
         
         ; print to output
         call    printOutputBuffer
-        
+
         jmp     @@read_and_print
 
     @@error_temp:

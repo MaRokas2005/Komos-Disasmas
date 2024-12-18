@@ -14,12 +14,12 @@ debug PROC
     int     21h
     call    askForMore
 
-    ; mov     ax, 0FFFFh
-    ; mov     bx, 0FFFFh
-    ; mov     cx, 0FFFFh
-    ; mov     dx, 0FFFFh
-    ; mov     si, 0FFFFh
-    ; mov     di, 0FFFFh
+    mov     ax, 0FFFFh
+    mov     bx, 0FFFFh
+    mov     cx, 0FFFFh
+    mov     dx, 0FFFFh
+    mov     si, 0FFFFh
+    mov     di, 0FFFFh
 
     
     pop     di
