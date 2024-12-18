@@ -175,6 +175,7 @@ OPCODE_00h PROC
     cmp     bl, 00h
     je      @@continue
         push    si
+        call    loadNewline
         lea     si, ins_unknown
         call    loadTextToBuffer
         pop     si
@@ -187,13 +188,17 @@ OPCODE_00h PROC
     push    bx
     push    si
 
+    call    getByte
+    mov     dl, al
+    call    printByte
+    call    loadNewline
     lea     si, ins_add
     call    loadTextToBuffer
-    call    getByte
     call    getModRegRM
-    call    loadModRM
-    call    loadCommaSpace
     call    loadReg
+    call    loadCommaSpace
+    ;call    loadModRM
+    call    loadNewline
 
     @@done:
     pop     si

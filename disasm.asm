@@ -13,7 +13,7 @@ LOCALS @@
     newline         db  0dh, 0ah, 0
     komment         db  "; ", 0     ; I can not use comment, because maybe it is reserved word
     commaSpace      db  ", ", 0
-    usedBytes       dw  0
+    usedBytes       dw  0ffh
     
     headerSize              dw  0
     stackSize               dw  0
@@ -48,6 +48,9 @@ LOCALS @@
     segData     db  ".DATA", 0 
     segCode     db  ".CODE", 0
     segEnd      db  "END", 0
+
+    ;;testing variables
+    scannning   db  ";;  SCANNING...", 0
 
     include     dmessage.inc
     include     dhelp.inc

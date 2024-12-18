@@ -98,6 +98,15 @@ loadCommaSpace PROC
     ret
 loadCommaSpace ENDP
 
+;;testing
+loadScanning PROC
+    push    si
+    lea     si, scannning
+    call    loadTextToBuffer
+    pop     si
+    ret
+loadScanning ENDP
+
 ;***************************************************;
 ;                print byte to buffer               ;
 ;***************************************************;
@@ -137,6 +146,10 @@ scanCodeSegment PROC
     jc      @@error
 
     mov     word ptr usedBytes, 0
+
+    call    loadScanning
+    call    loadNewline
+    call    printOutputBuffer
 
     pop     dx
     pop     cx
@@ -383,7 +396,6 @@ printCodeSegment PROC
 
             @@loop_continue:
             ;; testing
-            call loadNewline
             call loadComment
             mov dx, word ptr byteInFile+2
             call printWord
@@ -404,10 +416,11 @@ printCodeSegment PROC
             call loadComment
             mov  dl, al
             call printByte
-            call loadNewline
+            ;call loadNewline
             ;; end more testing
 
             call    OPCODE_00h
+            call    loadNewline
             call    loadNewline
 
             cmp     outputLength, 0eFh
