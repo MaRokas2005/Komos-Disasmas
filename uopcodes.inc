@@ -319,12 +319,6 @@ OPCODE_03h PROC
     xor     bl, 03h
     cmp     bl, 00h
     je      @@continue
-        push    si
-        call    loadNewline
-        lea     si, ins_unknown
-        call    loadTextToBuffer
-        pop     si
-        ret
         call    OPCODE_04h
         ret
     
@@ -364,18 +358,38 @@ OPCODE_03h PROC
 OPCODE_03h ENDP
 
 OPCODE_04h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 04h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_05h
-    jmp     @@done
-
-    @@continue:
+        call    OPCODE_05h
+        ret
     
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_add
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    getByte
+    call    printByte
+    call    loadNewline
 
     @@done:
     pop     bx
@@ -384,18 +398,44 @@ OPCODE_04h PROC
 OPCODE_04h ENDP
 
 OPCODE_05h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 05h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_06h
-    jmp     @@done
-
-    @@continue:
+        call loadComment
+        push si
+        lea si, ins_unknown
+        call loadTextToBuffer
+        pop si
+        ret
+        call    OPCODE_06h
+        ret
     
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_add
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    getByte
+    call    printByte
+    call    loadNewline
 
     @@done:
     pop     bx

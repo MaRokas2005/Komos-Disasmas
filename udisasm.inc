@@ -427,7 +427,7 @@ printCodeSegment PROC
             call    loadNewline
             ; call    printOutputBuffer
 
-            cmp     outputLength, 0cfh
+            cmp     outputLength, 0bfh
             jbe      @@loop_write
         
         ; print to output
