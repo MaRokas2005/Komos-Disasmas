@@ -34,13 +34,13 @@ LOCALS @@
     tagData     db  "@data", 0
     tagByte     db  "byte ptr ", 0
     tagWord     db  "word ptr ", 0
-    tagSegES    db  "es:[ ", 0
-    tagSegDS    db  "ds:[ ", 0
-    tagSegSS    db  "ss:[ ", 0
-    tagSegCS    db  "cs:[ ", 0
+    tagSegES    db  "es:[ ", 0, "  "
+    tagSegDS    db  "ds:[ ", 0, "  "
+    tagSegSS    db  "ss:[ ", 0, "  "
+    tagSegCS    db  "cs:[ ", 0, "  "
     tagStart    db  "[ ", 0
     tagClose    db  " ]", 0
-    tagSegOFF   dw  offset tagSegES, offset tagSegDS, offset tagSegSS, offset tagSegCS
+    ;tagSegOFF   dw  offset tagSegES, offset tagSegDS, offset tagSegSS, offset tagSegCS
     ; tagDWord    db  "dword ptr ", 0
 
     segModel    db  ".MODEL SMALL", 0

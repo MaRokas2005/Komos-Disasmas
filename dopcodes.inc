@@ -1,142 +1,142 @@
 ins_unknown     db "; UNKNOWN instruction", 0
-ins_mov         db "    MOV ", 0
-ins_in          db "    IN ", 0
-ins_out         db "    OUT ", 0
-ins_push        db "    PUSH ", 0
-ins_pop         db "    POP ", 0
-ins_xchg        db "    XCHG ", 0
-ins_xlat        db "    XLAT ", 0
-ins_lea         db "    LEA ", 0
-ins_lds         db "    LDS ", 0
-ins_lss         db "    LSS ", 0
-ins_lahf        db "    LAHF ", 0
-ins_sahf        db "    SAHF ", 0
-ins_pushf       db "    PUSHF ", 0
-ins_popf        db "    POPF ", 0
-ins_ja          db "    JA ", 0
-ins_jae         db "    JAE ", 0
-ins_jb          db "    JB ", 0
-ins_jbe         db "    JBE ", 0
-ins_je          db "    JE ", 0
-ins_jcxz        db "    JCXZ ", 0
-ins_jg          db "    JG ", 0
-ins_jge         db "    JGE ", 0
-ins_jl          db "    JL ", 0
-ins_jle         db "    JLE ", 0
-ins_jne         db "    JNE ", 0
-ins_jno         db "    JNO ", 0
-ins_jnp         db "    JNP ", 0
-ins_jp          db "    JP ", 0
-ins_jo          db "    JO ", 0
-ins_jns         db "    JNS ", 0
-ins_js          db "    JS ", 0
-ins_add         db "    ADD ", 0
-ins_adc         db "    ADC ", 0
-ins_inc         db "    INC ", 0
-ins_aaa         db "    AAA ", 0
-ins_daa         db "    DAA ", 0
-ins_sub         db "    SUB ", 0
-ins_sbb         db "    SBB ", 0
-ins_dec         db "    DEC ", 0
-ins_neg         db "    NEG ", 0
-ins_cmp         db "    CMP ", 0
-ins_aas         db "    AAS ", 0
-ins_das         db "    DAS ", 0
-ins_mul         db "    MUL ", 0
-ins_imul        db "    IMUL ", 0
-ins_aam         db "    AAM ", 0
-ins_div         db "    DIV ", 0
-ins_idiv        db "    IDIV ", 0
-ins_aad         db "    AAD ", 0
-ins_cbw         db "    CBW ", 0
-ins_cwd         db "    CWD ", 0
-ins_not         db "    NOT ", 0
-ins_and         db "    AND ", 0
-ins_or          db "    OR ", 0
-ins_xor         db "    XOR ", 0
-ins_test        db "    TEST ", 0
-ins_shl         db "    SHL ", 0
-ins_shr         db "    SHR ", 0
-ins_sar         db "    SAR ", 0
-ins_rol         db "    ROL ", 0
-ins_ror         db "    ROR ", 0
-ins_rcl         db "    RCL ", 0
-ins_rcr         db "    RCR ", 0
-ins_rep         db "    REP ", 0
-ins_repne       db "    REPNE ", 0
-ins_movsb       db "    MOVSB ", 0
-ins_movsw       db "    MOVSW ", 0
-ins_cmpsb       db "    CMPSB ", 0
-ins_cmpsw       db "    CMPSW ", 0
-ins_scasb       db "    SCASB ", 0
-ins_scasw       db "    SCASW ", 0
-ins_stosb       db "    STOSB ", 0
-ins_stosw       db "    STOSW ", 0
-ins_lodsb       db "    LODSB ", 0
-ins_lodsw       db "    LODSW ", 0
-ins_call        db "    CALL ", 0
-ins_ret         db "    RET ", 0
-ins_retf        db "    RETF ", 0
-ins_jmp         db "    JMP ", 0
-ins_int         db "    INT ", 0
-ins_into        db "    INTO ", 0
-ins_iret        db "    IRET ", 0
-ins_stc         db "    STC ", 0
-ins_clc         db "    CLC ", 0
-ins_cmc         db "    CMC ", 0
-ins_std         db "    STD ", 0
-ins_cld         db "    CLD ", 0
-ins_sti         db "    STI ", 0
-ins_cli         db "    CLI ", 0
-ins_hlt         db "    HLT ", 0
-ins_wait        db "    WAIT ", 0
-ins_lock        db "    LOCK ", 0
-ins_nop         db "    NOP ", 0
+ins_mov         db "    MOV     ", 0
+ins_in          db "    IN      ", 0
+ins_out         db "    OUT     ", 0
+ins_push        db "    PUSH    ", 0
+ins_pop         db "    POP     ", 0
+ins_xchg        db "    XCHG    ", 0
+ins_xlat        db "    XLAT    ", 0
+ins_lea         db "    LEA     ", 0
+ins_lds         db "    LDS     ", 0
+ins_lss         db "    LSS     ", 0
+ins_lahf        db "    LAHF    ", 0
+ins_sahf        db "    SAHF    ", 0
+ins_pushf       db "    PUSHF   ", 0
+ins_popf        db "    POPF    ", 0
+ins_ja          db "    JA      ", 0
+ins_jae         db "    JAE     ", 0
+ins_jb          db "    JB      ", 0
+ins_jbe         db "    JBE     ", 0
+ins_je          db "    JE      ", 0
+ins_jcxz        db "    JCXZ    ", 0
+ins_jg          db "    JG      ", 0
+ins_jge         db "    JGE     ", 0
+ins_jl          db "    JL      ", 0
+ins_jle         db "    JLE     ", 0
+ins_jne         db "    JNE     ", 0
+ins_jno         db "    JNO     ", 0
+ins_jnp         db "    JNP     ", 0
+ins_jp          db "    JP      ", 0
+ins_jo          db "    JO      ", 0
+ins_jns         db "    JNS     ", 0
+ins_js          db "    JS      ", 0
+ins_add         db "    ADD     ", 0
+ins_adc         db "    ADC     ", 0
+ins_inc         db "    INC     ", 0
+ins_aaa         db "    AAA     ", 0
+ins_daa         db "    DAA     ", 0
+ins_sub         db "    SUB     ", 0
+ins_sbb         db "    SBB     ", 0
+ins_dec         db "    DEC     ", 0
+ins_neg         db "    NEG     ", 0
+ins_cmp         db "    CMP     ", 0
+ins_aas         db "    AAS     ", 0
+ins_das         db "    DAS     ", 0
+ins_mul         db "    MUL     ", 0
+ins_imul        db "    IMUL    ", 0
+ins_aam         db "    AAM     ", 0
+ins_div         db "    DIV     ", 0
+ins_idiv        db "    IDIV    ", 0
+ins_aad         db "    AAD     ", 0
+ins_cbw         db "    CBW     ", 0
+ins_cwd         db "    CWD     ", 0
+ins_not         db "    NOT     ", 0
+ins_and         db "    AND     ", 0
+ins_or          db "    OR      ", 0
+ins_xor         db "    XOR     ", 0
+ins_test        db "    TEST    ", 0
+ins_shl         db "    SHL     ", 0
+ins_shr         db "    SHR     ", 0
+ins_sar         db "    SAR     ", 0
+ins_rol         db "    ROL     ", 0
+ins_ror         db "    ROR     ", 0
+ins_rcl         db "    RCL     ", 0
+ins_rcr         db "    RCR     ", 0
+ins_rep         db "    REP     ", 0
+ins_repne       db "    REPNE   ", 0
+ins_movsb       db "    MOVSB   ", 0
+ins_movsw       db "    MOVSW   ", 0
+ins_cmpsb       db "    CMPSB   ", 0
+ins_cmpsw       db "    CMPSW   ", 0
+ins_scasb       db "    SCASB   ", 0
+ins_scasw       db "    SCASW   ", 0
+ins_stosb       db "    STOSB   ", 0
+ins_stosw       db "    STOSW   ", 0
+ins_lodsb       db "    LODSB   ", 0
+ins_lodsw       db "    LODSW   ", 0
+ins_call        db "    CALL    ", 0
+ins_ret         db "    RET     ", 0
+ins_retf        db "    RETF    ", 0
+ins_jmp         db "    JMP     ", 0
+ins_int         db "    INT     ", 0
+ins_into        db "    INTO    ", 0
+ins_iret        db "    IRET    ", 0
+ins_stc         db "    STC     ", 0
+ins_clc         db "    CLC     ", 0
+ins_cmc         db "    CMC     ", 0
+ins_std         db "    STD     ", 0
+ins_cld         db "    CLD     ", 0
+ins_sti         db "    STI     ", 0
+ins_cli         db "    CLI     ", 0
+ins_hlt         db "    HLT     ", 0
+ins_wait        db "    WAIT    ", 0
+ins_lock        db "    LOCK    ", 0
+ins_nop         db "    NOP     ", 0
 
-reg_al          db "al", 0
-reg_cl          db "cl", 0
-reg_dl          db "dl", 0
-reg_bl          db "bl", 0
-reg_ah          db "ah", 0
-reg_ch          db "ch", 0
-reg_dh          db "dh", 0
-reg_bh          db "bh", 0
+reg_al          db "al", 0, " "
+reg_cl          db "cl", 0, " "
+reg_dl          db "dl", 0, " "
+reg_bl          db "bl", 0, " "
+reg_ah          db "ah", 0, " "
+reg_ch          db "ch", 0, " "
+reg_dh          db "dh", 0, " "
+reg_bh          db "bh", 0, " "
 
-reg_ax          db "ax", 0
-reg_cx          db "cx", 0
-reg_dx          db "dx", 0
-reg_bx          db "bx", 0
-reg_sp          db "sp", 0
-reg_bp          db "bp", 0
-reg_si          db "si", 0
-reg_di          db "di", 0
+reg_ax          db "ax", 0, " "
+reg_cx          db "cx", 0, " "
+reg_dx          db "dx", 0, " "
+reg_bx          db "bx", 0, " "
+reg_sp          db "sp", 0, " "
+reg_bp          db "bp", 0, " "
+reg_si          db "si", 0, " "
+reg_di          db "di", 0, " "
 
-reg_es          db "es", 0
-reg_cs          db "cs", 0
-reg_ss          db "ss", 0
-reg_ds          db "ds", 0
+reg_es          db "es", 0, " "
+reg_cs          db "cs", 0, " "
+reg_ss          db "ss", 0, " "
+reg_ds          db "ds", 0, " "
 
 reg_small       dw offset reg_al, offset reg_cl, offset reg_dl, offset reg_bl, offset reg_ah, offset reg_ch, offset reg_dh, offset reg_bh
 reg_large       dw offset reg_ax, offset reg_cx, offset reg_dx, offset reg_bx, offset reg_sp, offset reg_bp, offset reg_si, offset reg_di
 reg_segment     dw offset reg_es, offset reg_cs, offset reg_ss, offset reg_ds
 
-mod_00_000      db "bx + si", 0
-mod_00_001      db "bx + di", 0
-mod_00_010      db "bp + si", 0
-mod_00_011      db "bp + di", 0
-mod_00_100      db "si", 0
-mod_00_101      db "di", 0
-mod_00_110      db 0
-mod_00_111      db "bx", 0
+mod_00_000         db "bx + si", 0, "        "
+mod_00_001         db "bx + di", 0, "        "
+mod_00_010         db "bp + si", 0, "        "
+mod_00_011         db "bp + di", 0, "        "
+mod_00_100         db "si", 0, "             "
+mod_00_101         db "di", 0, "             "
+mod_00_110         db "", 0, "               "
+mod_00_111         db "bx", 0, "             "
 
-mod_01_10_000      db "bx + si + ", 0
-mod_01_10_001      db "bx + di + ", 0
-mod_01_10_010      db "bp + si + ", 0
-mod_01_10_011      db "bp + di + ", 0
-mod_01_10_100      db "si + ", 0
-mod_01_10_101      db "di + ", 0
-mod_01_10_110      db "bp + ", 0
-mod_01_10_111      db "bx + ", 0
+mod_01_10_000      db "bx + si + ", 0, "     "
+mod_01_10_001      db "bx + di + ", 0, "     "
+mod_01_10_010      db "bp + si + ", 0, "     "
+mod_01_10_011      db "bp + di + ", 0, "     "
+mod_01_10_100      db "si + ", 0, "          "
+mod_01_10_101      db "di + ", 0, "          "
+mod_01_10_110      db "bp + ", 0, "          "
+mod_01_10_111      db "bx + ", 0, "          "
 
 mod_00_offset       dw  offset mod_00_000, offset mod_00_001
                     dw  offset mod_00_010, offset mod_00_011

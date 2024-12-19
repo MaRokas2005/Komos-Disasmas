@@ -37,6 +37,7 @@ loadModRM PROC
     cmp     byte ptr opcodeMod, 3h
     je      @@mod_11_temp
 
+    push    si
     cmp     dl, 0
     jne     @@16bits
     lea     si, tagByte
@@ -54,20 +55,20 @@ loadModRM PROC
     shl     al, 3
     shr     al, 6
     
-    lea     si, tagSegOFF
-    shl     ax, 1
+    lea     si, tagSegES
+    shl     ax, 3
     add     si, ax
-    call    loadTextToBuffer
     jmp     @@continue_2
 
     @@dont_have_prefix:
     lea     si, tagStart
-    call    loadTextToBuffer
 
     @@continue_2:
+    call    loadTextToBuffer
+    pop     si
     xor     ax, ax
     mov     al, byte ptr opcodeRM
-    shl     al, 1
+    shl     ax, 4
     cmp     byte ptr opcodeMod, 0h
     jne     @@continue_3
 
@@ -75,12 +76,16 @@ loadModRM PROC
     cmp     byte ptr opcodeRM, 6h
     je      @@mod_00_110
 
-    lea     si, mod_00_offset
+    push    si
+    lea     si, mod_00_000
     add     si, ax
     call    loadTextToBuffer
+    pop     si
     jmp     @@continue_4
 
     @@mod_00_110:
+    ; pop     si
+    ; push    si
     call    getWord
     call    printWord
     jmp     @@continue_4
@@ -89,10 +94,14 @@ loadModRM PROC
     jmp     @@mod_11
 
     @@continue_3:
-    lea     si, mod_01_10_offset
+    push    si
+    lea     si, mod_01_10_000
     add     si, ax
     call    loadTextToBuffer
+    pop     si
 
+    ; pop     si
+    ; push    si
     cmp     byte ptr opcodeMod, 1h
     jne     @@mod_10
 
@@ -106,19 +115,22 @@ loadModRM PROC
     call    getWord
     mov     dx, ax
     call    printWord
-    jmp     @@continue_4
     @@continue_4:
+    push    si
     lea     si, tagClose
     call    loadTextToBuffer
+    pop     si
 
     @@reset_prefix:
     mov     byte ptr prefix, 0ffh
     jmp     @@done
 
     @@mod_11:
-    mov     al, byte ptr opcodeMod
+    mov     bl, byte ptr opcodeReg
+    mov     al, byte ptr opcodeRM
     mov     byte ptr opcodeReg, al
     call    loadReg
+    mov     byte ptr opcodeReg, bl
 
     @@done:
     pop     si
@@ -144,16 +156,17 @@ loadReg PROC
     je      @@reg_large
 
     @@reg_small:
-    mov     si, reg_small
+    lea     si, reg_al
     jmp     @@continue
 
     @@reg_large:
-    mov     si, reg_large
+    lea     si, reg_ax
 
     @@continue:
     xor     bx, bx
     mov     bl, byte ptr opcodeReg
-    shr     bx, 1
+    shl     bx, 2
+    add     si, bx
     call    loadTextToBuffer
 
     pop     si
@@ -170,6 +183,8 @@ loadReg ENDP
 ;   add - reg to mem                                ;
 ;***************************************************;
 OPCODE_00h PROC
+    ; call debug
+    ; call debug
     mov     bl, al
     xor     bl, 00h
     cmp     bl, 00h
@@ -186,22 +201,33 @@ OPCODE_00h PROC
     @@continue:
     push    ax
     push    bx
-    push    si
 
     call    getByte
     mov     dl, al
     call    printByte
     call    loadNewline
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
     lea     si, ins_add
     call    loadTextToBuffer
-    call    getModRegRM
-    call    loadReg
+    pop     si
+    mov     dl, 0h
+    call    loadModRM
     call    loadCommaSpace
-    ;call    loadModRM
+    call    loadReg
     call    loadNewline
 
     @@done:
-    pop     si
     pop     bx
     pop     ax
     ret

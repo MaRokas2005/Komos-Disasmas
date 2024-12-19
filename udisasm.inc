@@ -353,7 +353,7 @@ printCodeSegment PROC
     push    di
     push    es
 
-    call debug
+    ;;call debug
 
     mov     ax, seg outputBuffer
     mov     es, ax
