@@ -270,13 +270,9 @@
 ; 00000h005b0h
 ; 00006h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h00207h
-; 00000h005b0h
-; 00007h
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h00208h
 ; 00000h005b0h
@@ -301,7 +297,7 @@
 ; 0000bh
 ; 000h05ah
 ; 001h003h002h
-    ADD     byte ptr [ bp + si + 058h ], bl
+    add     byte ptr [ bp + si + 058h ], bl
 
 
 ; 00000h0020eh
@@ -345,7 +341,7 @@
 ; 00014h
 ; 001h0cdh
 ; 003h001h005h
-    ADD     bp, cx
+    add     bp, cx
 
 
 ; 00000h00216h
@@ -371,7 +367,7 @@
 ; 00019h
 ; 000h002h
 ; 000h000h002h
-    ADD     byte ptr [ bp + si ], al
+    add     byte ptr [ bp + si ], al
 
 
 ; 00000h0021bh
@@ -397,7 +393,7 @@
 ; 0001eh
 ; 000h04ch
 ; 001h001h004h
-    ADD     byte ptr [ si + 0cdh ], cl
+    add     byte ptr [ si + 0cdh ], cl
 
 
 ; 00000h00221h
@@ -446,13 +442,9 @@
 ; 00000h005b0h
 ; 00028h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h00229h
-; 00000h005b0h
-; 00029h
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h0022ah
 ; 00000h005b0h
@@ -476,13 +468,9 @@
 ; 00000h005b0h
 ; 0002dh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h0022eh
-; 00000h005b0h
-; 0002eh
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h0022fh
 ; 00000h005b0h
@@ -548,13 +536,9 @@
 ; 00000h005b0h
 ; 00039h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h0023ah
-; 00000h005b0h
-; 0003ah
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h0023bh
 ; 00000h005b0h
@@ -578,13 +562,9 @@
 ; 00000h005b0h
 ; 0003eh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h0023fh
-; 00000h005b0h
-; 0003fh
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h00240h
 ; 00000h005b0h
@@ -650,13 +630,9 @@
 ; 00000h005b0h
 ; 0004ah
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h0024bh
-; 00000h005b0h
-; 0004bh
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h0024ch
 ; 00000h005b0h
@@ -675,7 +651,7 @@
 ; 0004eh
 ; 001h005h
 ; 000h000h005h
-    ADD     word ptr [ di ], ax
+    add     word ptr [ di ], ax
 
 
 ; 00000h00250h
@@ -748,13 +724,9 @@
 ; 00000h005b0h
 ; 0005bh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h0025ch
-; 00000h005b0h
-; 0005ch
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h0025dh
 ; 00000h005b0h
@@ -778,19 +750,9 @@
 ; 00000h005b0h
 ; 00060h
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 021cdh
 
-; 00000h00261h
-; 00000h005b0h
-; 00061h
-; 0cdh
-; UNKNOWN instruction
-
-; 00000h00262h
-; 00000h005b0h
-; 00062h
-; 021h
-; UNKNOWN instruction
 
 ; 00000h00263h
 ; 00000h005b0h
@@ -850,13 +812,9 @@
 ; 00000h005b0h
 ; 0006ch
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h0026dh
-; 00000h005b0h
-; 0006dh
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h0026eh
 ; 00000h005b0h
@@ -880,19 +838,9 @@
 ; 00000h005b0h
 ; 00071h
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 021cdh
 
-; 00000h00272h
-; 00000h005b0h
-; 00072h
-; 0cdh
-; UNKNOWN instruction
-
-; 00000h00273h
-; 00000h005b0h
-; 00073h
-; 021h
-; UNKNOWN instruction
 
 ; 00000h00274h
 ; 00000h005b0h
@@ -952,13 +900,9 @@
 ; 00000h005b0h
 ; 0007dh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h0027eh
-; 00000h005b0h
-; 0007eh
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h0027fh
 ; 00000h005b0h
@@ -982,19 +926,9 @@
 ; 00000h005b0h
 ; 00082h
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 021cdh
 
-; 00000h00283h
-; 00000h005b0h
-; 00083h
-; 0cdh
-; UNKNOWN instruction
-
-; 00000h00284h
-; 00000h005b0h
-; 00084h
-; 021h
-; UNKNOWN instruction
 
 ; 00000h00285h
 ; 00000h005b0h
@@ -1054,13 +988,9 @@
 ; 00000h005b0h
 ; 0008eh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h0028fh
-; 00000h005b0h
-; 0008fh
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h00290h
 ; 00000h005b0h
@@ -1084,19 +1014,9 @@
 ; 00000h005b0h
 ; 00093h
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 021cdh
 
-; 00000h00294h
-; 00000h005b0h
-; 00094h
-; 0cdh
-; UNKNOWN instruction
-
-; 00000h00295h
-; 00000h005b0h
-; 00095h
-; 021h
-; UNKNOWN instruction
 
 ; 00000h00296h
 ; 00000h005b0h
@@ -1156,13 +1076,9 @@
 ; 00000h005b0h
 ; 0009fh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h002a0h
-; 00000h005b0h
-; 000a0h
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h002a1h
 ; 00000h005b0h
@@ -1186,19 +1102,9 @@
 ; 00000h005b0h
 ; 000a4h
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 021cdh
 
-; 00000h002a5h
-; 00000h005b0h
-; 000a5h
-; 0cdh
-; UNKNOWN instruction
-
-; 00000h002a6h
-; 00000h005b0h
-; 000a6h
-; 021h
-; UNKNOWN instruction
 
 ; 00000h002a7h
 ; 00000h005b0h
@@ -1258,13 +1164,9 @@
 ; 00000h005b0h
 ; 000b0h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h002b1h
-; 00000h005b0h
-; 000b1h
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h002b2h
 ; 00000h005b0h
@@ -1324,13 +1226,9 @@
 ; 00000h005b0h
 ; 000bbh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0cdh
 
-; 00000h002bch
-; 00000h005b0h
-; 000bch
-; 0cdh
-; UNKNOWN instruction
 
 ; 00000h002bdh
 ; 00000h005b0h
@@ -1396,19 +1294,9 @@
 ; 00000h005b0h
 ; 000c7h
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 021cdh
 
-; 00000h002c8h
-; 00000h005b0h
-; 000c8h
-; 0cdh
-; UNKNOWN instruction
-
-; 00000h002c9h
-; 00000h005b0h
-; 000c9h
-; 021h
-; UNKNOWN instruction
 
 ; 00000h002cah
 ; 00000h005b0h
@@ -1877,19 +1765,9 @@
 ; 00000h005b0h
 ; 00017h
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 0043ah
 
-; 00000h00318h
-; 00000h005b0h
-; 00018h
-; 03ah
-; UNKNOWN instruction
-
-; 00000h00319h
-; 00000h005b0h
-; 00019h
-; 004h
-; UNKNOWN instruction
 
 ; 00000h0031ah
 ; 00000h005b0h
@@ -1932,7 +1810,7 @@
 ; 00020h
 ; 000h074h
 ; 001h006h004h
-    ADD     byte ptr [ si + 008h ], dh
+    add     byte ptr [ si + 008h ], dh
 
 
 ; 00000h00323h
@@ -1958,7 +1836,7 @@
 ; 00026h
 ; 000h074h
 ; 001h006h004h
-    ADD     byte ptr [ si + 01ah ], dh
+    add     byte ptr [ si + 01ah ], dh
 
 
 ; 00000h00329h
@@ -1996,7 +1874,7 @@
 ; 0002eh
 ; 000h074h
 ; 001h006h004h
-    ADD     byte ptr [ si + 00fh ], dh
+    add     byte ptr [ si + 00fh ], dh
 
 
 ; 00000h00331h
@@ -2070,20 +1948,16 @@
 ; 0003ch
 ; 003h0ebh
 ; 003h005h003h
-    ADD     bp, bx
+    add     bp, bx
 
 
 ; 00000h0033eh
 ; 00000h005b0h
 ; 0003eh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 090h
 
-; 00000h0033fh
-; 00000h005b0h
-; 0003fh
-; 090h
-; UNKNOWN instruction
 
 ; 00000h00340h
 ; 00000h005b0h
@@ -2096,7 +1970,7 @@
 ; 00041h
 ; 001h000h
 ; 000h000h000h
-    ADD     word ptr [ bx + si ], ax
+    add     word ptr [ bx + si ], ax
 
 
 ; 00000h00343h
@@ -2151,13 +2025,9 @@
 ; 00000h005b0h
 ; 0004bh
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0e8h
 
-; 00000h0034ch
-; 00000h005b0h
-; 0004ch
-; 0e8h
-; UNKNOWN instruction
 
 ; 00000h0034dh
 ; 00000h005b0h
@@ -2188,7 +2058,7 @@
 ; 00051h
 ; 001h074h
 ; 001h006h004h
-    ADD     word ptr [ si + 035h ], si
+    add     word ptr [ si + 035h ], si
 
 
 ; 00000h00354h
@@ -2207,13 +2077,9 @@
 ; 00000h005b0h
 ; 00056h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0e8h
 
-; 00000h00357h
-; 00000h005b0h
-; 00057h
-; 0e8h
-; UNKNOWN instruction
 
 ; 00000h00358h
 ; 00000h005b0h
@@ -2244,7 +2110,7 @@
 ; 0005ch
 ; 001h074h
 ; 001h006h004h
-    ADD     word ptr [ si + 02ah ], si
+    add     word ptr [ si + 02ah ], si
 
 
 ; 00000h0035fh
@@ -2263,13 +2129,9 @@
 ; 00000h005b0h
 ; 00061h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0e8h
 
-; 00000h00362h
-; 00000h005b0h
-; 00062h
-; 0e8h
-; UNKNOWN instruction
 
 ; 00000h00363h
 ; 00000h005b0h
@@ -2300,7 +2162,7 @@
 ; 00067h
 ; 001h074h
 ; 001h006h004h
-    ADD     word ptr [ si + 01fh ], si
+    add     word ptr [ si + 01fh ], si
 
 
 ; 00000h0036ah
@@ -2319,13 +2181,9 @@
 ; 00000h005b0h
 ; 0006ch
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0e8h
 
-; 00000h0036dh
-; 00000h005b0h
-; 0006dh
-; 0e8h
-; UNKNOWN instruction
 
 ; 00000h0036eh
 ; 00000h005b0h
@@ -2356,7 +2214,7 @@
 ; 00072h
 ; 001h074h
 ; 001h006h004h
-    ADD     word ptr [ si + 014h ], si
+    add     word ptr [ si + 014h ], si
 
 
 ; 00000h00375h
@@ -2375,13 +2233,9 @@
 ; 00000h005b0h
 ; 00077h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0e8h
 
-; 00000h00378h
-; 00000h005b0h
-; 00078h
-; 0e8h
-; UNKNOWN instruction
 
 ; 00000h00379h
 ; 00000h005b0h
@@ -2412,7 +2266,7 @@
 ; 0007dh
 ; 001h074h
 ; 001h006h004h
-    ADD     word ptr [ si + 009h ], si
+    add     word ptr [ si + 009h ], si
 
 
 ; 00000h00380h
@@ -2431,13 +2285,9 @@
 ; 00000h005b0h
 ; 00082h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0e8h
 
-; 00000h00383h
-; 00000h005b0h
-; 00083h
-; 0e8h
-; UNKNOWN instruction
 
 ; 00000h00384h
 ; 00000h005b0h
@@ -2468,7 +2318,7 @@
 ; 00088h
 ; 001h05fh
 ; 001h003h007h
-    ADD     word ptr [ bx + 05eh ], bx
+    add     word ptr [ bx + 05eh ], bx
 
 
 ; 00000h0038bh
@@ -2536,7 +2386,7 @@
 ; 00095h
 ; 000h0cdh
 ; 003h001h005h
-    ADD     ch, cl
+    add     ch, cl
 
 
 ; 00000h00397h
@@ -2622,7 +2472,7 @@
 ; 000a4h
 ; 000h002h
 ; 000h000h002h
-    ADD     byte ptr [ bp + si ], al
+    add     byte ptr [ bp + si ], al
 
 
 ; 00000h003a6h
@@ -2665,19 +2515,9 @@
 ; 00000h005b0h
 ; 000ach
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 0203ch
 
-; 00000h003adh
-; 00000h005b0h
-; 000adh
-; 03ch
-; UNKNOWN instruction
-
-; 00000h003aeh
-; 00000h005b0h
-; 000aeh
-; 020h
-; UNKNOWN instruction
 
 ; 00000h003afh
 ; 00000h005b0h
@@ -2690,7 +2530,7 @@
 ; 000b0h
 ; 001h0c3h
 ; 003h000h003h
-    ADD     bx, ax
+    add     bx, ax
 
 
 ; 00000h003b2h
@@ -2740,7 +2580,7 @@
 ; 000b9h
 ; 000h03dh
 ; 000h007h005h
-    ADD     byte ptr [ di ], bh
+    add     byte ptr [ di ], bh
 
 
 ; 00000h003bbh
@@ -2754,7 +2594,7 @@
 ; 000bch
 ; 000h000h
 ; 000h000h000h
-    ADD     byte ptr [ bx + si ], al
+    add     byte ptr [ bx + si ], al
 
 
 ; 00000h003beh
@@ -2852,7 +2692,7 @@
 ; 000cdh
 ; 001h05ah
 ; 001h003h002h
-    ADD     word ptr [ bp + si + 058h ], bx
+    add     word ptr [ bp + si + 058h ], bx
 
 
 ; 00000h003d0h
@@ -2931,19 +2771,9 @@
 ; 00000h005b0h
 ; 000dch
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 0223ch
 
-; 00000h003ddh
-; 00000h005b0h
-; 000ddh
-; 03ch
-; UNKNOWN instruction
-
-; 00000h003deh
-; 00000h005b0h
-; 000deh
-; 022h
-; UNKNOWN instruction
 
 ; 00000h003dfh
 ; 00000h005b0h
@@ -2968,7 +2798,7 @@
 ; 000e2h
 ; 001h000h
 ; 000h000h000h
-    ADD     word ptr [ bx + si ], ax
+    add     word ptr [ bx + si ], ax
 
 
 ; 00000h003e4h
@@ -2981,13 +2811,9 @@
 ; 00000h005b0h
 ; 000e5h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 046h
 
-; 00000h003e6h
-; 00000h005b0h
-; 000e6h
-; 046h
-; UNKNOWN instruction
 
 ; 00000h003e7h
 ; 00000h005b0h
@@ -3011,21 +2837,21 @@
 ; 00000h005b0h
 ; 000eah
 ; 005h
+; 000h000h005h
+    add     ax, 0003ch
+
+
+; 00000h003edh
+; 00000h005b0h
+; 000edh
+; 074h
 ; UNKNOWN instruction
 
-; 00000h003ebh
+; 00000h003eeh
 ; 00000h005b0h
-; 000ebh
-; 03ch
+; 000eeh
+; 01ah
 ; UNKNOWN instruction
-
-; 00000h003ech
-; 00000h005b0h
-; 000ech
-; 000h074h
-; 001h006h004h
-    ADD     byte ptr [ si + 01ah ], dh
-
 
 ; 00000h003efh
 ; 00000h005b0h
@@ -3097,26 +2923,16 @@
 ; 00000h005b0h
 ; 000fah
 ; 005h
-; UNKNOWN instruction
+; 000h000h005h
+    add     ax, 0fb83h
 
-; 00000h003fbh
-; 00000h005b0h
-; 000fbh
-; 083h
-; UNKNOWN instruction
-
-; 00000h003fch
-; 00000h005b0h
-; 000fch
-; 0fbh
-; UNKNOWN instruction
 
 ; 00000h003fdh
 ; 00000h005b0h
 ; 000fdh
 ; 001h075h
 ; 001h006h005h
-    ADD     word ptr [ di + 009h ], si
+    add     word ptr [ di + 009h ], si
 
 
 ;;  SCANNING...
@@ -3130,13 +2946,9 @@
 ; 00000h005b0h
 ; 00001h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 047h
 
-; 00000h00402h
-; 00000h005b0h
-; 00002h
-; 047h
-; UNKNOWN instruction
 
 ; 00000h00403h
 ; 00000h005b0h
@@ -3172,13 +2984,9 @@
 ; 00000h005b0h
 ; 00008h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 046h
 
-; 00000h00409h
-; 00000h005b0h
-; 00009h
-; 046h
-; UNKNOWN instruction
 
 ; 00000h0040ah
 ; 00000h005b0h
@@ -3190,15 +2998,21 @@
 ; 00000h005b0h
 ; 0000bh
 ; 004h
+; 000h000h004h
+    add     al, 000h
+
+
+; 00000h0040dh
+; 00000h005b0h
+; 0000dh
+; 058h
 ; UNKNOWN instruction
 
-; 00000h0040ch
+; 00000h0040eh
 ; 00000h005b0h
-; 0000ch
-; 000h058h
-; 001h003h000h
-    ADD     byte ptr [ bx + si + 0c3h ], bl
-
+; 0000eh
+; 0c3h
+; UNKNOWN instruction
 
 ; 00000h0040fh
 ; 00000h005b0h
@@ -3253,7 +3067,7 @@
 ; 00017h
 ; 000h033h
 ; 000h006h003h
-    ADD     byte ptr [ bp + di ], dh
+    add     byte ptr [ bp + di ], dh
 
 
 ; 00000h00419h
@@ -3303,7 +3117,7 @@
 ; 00020h
 ; 000h074h
 ; 001h006h004h
-    ADD     byte ptr [ si + 039h ], dh
+    add     byte ptr [ si + 039h ], dh
 
 
 ; 00000h00423h
@@ -3455,7 +3269,7 @@
 ; 0003bh
 ; 000h077h
 ; 001h006h007h
-    ADD     byte ptr [ bx + 015h ], dh
+    add     byte ptr [ bx + 015h ], dh
 
 
 ; 00000h0043eh
@@ -3481,7 +3295,7 @@
 ; 00041h
 ; 003h0c1h
 ; 003h000h001h
-    ADD     ax, cx
+    add     ax, cx
 
 
 ; 00000h00443h
@@ -3501,7 +3315,7 @@
 ; 00045h
 ; 000h077h
 ; 001h006h007h
-    ADD     byte ptr [ bx + 00bh ], dh
+    add     byte ptr [ bx + 00bh ], dh
 
 
 ; 00000h00448h
@@ -3635,7 +3449,7 @@
 ; 0005dh
 ; 000h075h
 ; 001h006h005h
-    ADD     byte ptr [ di + 003h ], dh
+    add     byte ptr [ di + 003h ], dh
 
 
 ; 00000h00460h
@@ -3672,13 +3486,9 @@
 ; 00000h005b0h
 ; 00065h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 05ah
 
-; 00000h00466h
-; 00000h005b0h
-; 00066h
-; 05ah
-; UNKNOWN instruction
 
 ; 00000h00467h
 ; 00000h005b0h
@@ -3763,7 +3573,7 @@
 ; 00074h
 ; 000h03ch
 ; 000h007h004h
-    ADD     byte ptr [ si ], bh
+    add     byte ptr [ si ], bh
 
 
 ; 00000h00476h
@@ -3771,7 +3581,7 @@
 ; 00076h
 ; 000h075h
 ; 001h006h005h
-    ADD     byte ptr [ di + 009h ], dh
+    add     byte ptr [ di + 009h ], dh
 
 
 ; 00000h00479h
@@ -3845,7 +3655,7 @@
 ; 00084h
 ; 000h0e8h
 ; 003h005h000h
-    ADD     al, ch
+    add     al, ch
 
 
 ; 00000h00486h
@@ -3895,7 +3705,7 @@
 ; 0008dh
 ; 001h075h
 ; 001h006h005h
-    ADD     word ptr [ di + 006h ], si
+    add     word ptr [ di + 006h ], si
 
 
 ; 00000h00490h
@@ -3945,7 +3755,7 @@
 ; 00097h
 ; 000h000h
 ; 000h000h000h
-    ADD     byte ptr [ bx + si ], al
+    add     byte ptr [ bx + si ], al
 
 
 ; 00000h00499h
@@ -4000,13 +3810,9 @@
 ; 00000h005b0h
 ; 000a1h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 0e8h
 
-; 00000h004a2h
-; 00000h005b0h
-; 000a2h
-; 0e8h
-; UNKNOWN instruction
 
 ; 00000h004a3h
 ; 00000h005b0h
@@ -4031,7 +3837,7 @@
 ; 000a6h
 ; 002h0ffh
 ; 003h007h007h
-    ADD     bh, bh
+    add     bh, bh
 
 
 ; 00000h004a8h
@@ -4051,7 +3857,7 @@
 ; 000aah
 ; 000h0e8h
 ; 003h005h000h
-    ADD     al, ch
+    add     al, ch
 
 
 ; 00000h004ach
@@ -4119,7 +3925,7 @@
 ; 000b6h
 ; 000h005h
 ; 000h000h005h
-    ADD     byte ptr [ di ], al
+    add     byte ptr [ di ], al
 
 
 ; 00000h004b8h
@@ -4133,7 +3939,7 @@
 ; 000b9h
 ; 000h03bh
 ; 000h007h003h
-    ADD     byte ptr [ bp + di ], bh
+    add     byte ptr [ bp + di ], bh
 
 
 ; 00000h004bbh
@@ -4296,13 +4102,9 @@
 ; 00000h005b0h
 ; 000d5h
 ; 004h
-; UNKNOWN instruction
+; 000h000h004h
+    add     al, 08bh
 
-; 00000h004d6h
-; 00000h005b0h
-; 000d6h
-; 08bh
-; UNKNOWN instruction
 
 ; 00000h004d7h
 ; 00000h005b0h
@@ -4327,7 +4129,7 @@
 ; 000dah
 ; 002h002h
 ; 000h000h002h
-    ADD     al, byte ptr [ bp + si ]
+    add     al, byte ptr [ bp + si ]
 
 
 ; 00000h004dch
@@ -4353,7 +4155,7 @@
 ; 000dfh
 ; 000h083h
 ; 002h000h003h
-    ADD     byte ptr [ bp + di + 000d1h ], al
+    add     byte ptr [ bp + di + 000d1h ], al
 
 
 ; 00000h004e3h
@@ -4367,7 +4169,7 @@
 ; 000e4h
 ; 000h042h
 ; 001h000h002h
-    ADD     byte ptr [ bp + si + 08bh ], al
+    add     byte ptr [ bp + si + 08bh ], al
 
 
 ; 00000h004e7h
@@ -4387,7 +4189,7 @@
 ; 000e9h
 ; 001h0cdh
 ; 003h001h005h
-    ADD     bp, cx
+    add     bp, cx
 
 
 ; 00000h004ebh
@@ -4425,7 +4227,7 @@
 ; 000f0h
 ; 002h05eh
 ; 001h003h006h
-    ADD     bl, byte ptr [ bp + 05ah ]
+    add     bl, byte ptr [ bp + 05ah ]
 
 
 ; 00000h004f3h
@@ -4500,907 +4302,889 @@
 ; 08ah
 ; UNKNOWN instruction
 
+;;  SCANNING...
 ; 00000h004ffh
 ; 00000h005b0h
-; 000ffh
+; 00000h
 ; 0cch
 ; UNKNOWN instruction
 
-;;  SCANNING...
 ; 00000h00500h
 ; 00000h005b0h
-; 00000h
+; 00001h
 ; 0bah
 ; UNKNOWN instruction
 
 ; 00000h00501h
 ; 00000h005b0h
-; 00001h
+; 00002h
 ; 030h
 ; UNKNOWN instruction
 
 ; 00000h00502h
 ; 00000h005b0h
-; 00002h
+; 00003h
 ; 003h0b4h
 ; 002h006h004h
-    ADD     si, word ptr [ si + 08040h ]
+    add     si, word ptr [ si + 08040h ]
 
 
 ; 00000h00506h
 ; 00000h005b0h
-; 00006h
+; 00007h
 ; 0ffh
 ; UNKNOWN instruction
 
 ; 00000h00507h
 ; 00000h005b0h
-; 00007h
+; 00008h
 ; 000h074h
 ; 001h006h004h
-    ADD     byte ptr [ si + 006h ], dh
+    add     byte ptr [ si + 006h ], dh
 
 
 ; 00000h0050ah
 ; 00000h005b0h
-; 0000ah
+; 0000bh
 ; 083h
 ; UNKNOWN instruction
 
 ; 00000h0050bh
 ; 00000h005b0h
-; 0000bh
+; 0000ch
 ; 0c1h
 ; UNKNOWN instruction
 
 ; 00000h0050ch
 ; 00000h005b0h
-; 0000ch
+; 0000dh
 ; 002h083h
 ; 002h000h003h
-    ADD     al, byte ptr [ bp + di + 002eah ]
+    add     al, byte ptr [ bp + di + 002eah ]
 
 
 ; 00000h00510h
 ; 00000h005b0h
-; 00010h
+; 00011h
 ; 08bh
 ; UNKNOWN instruction
 
 ; 00000h00511h
 ; 00000h005b0h
-; 00011h
+; 00012h
 ; 01eh
 ; UNKNOWN instruction
 
 ; 00000h00512h
 ; 00000h005b0h
-; 00012h
+; 00013h
 ; 000h002h
 ; 000h000h002h
-    ADD     byte ptr [ bp + si ], al
+    add     byte ptr [ bp + si ], al
 
 
 ; 00000h00514h
 ; 00000h005b0h
-; 00014h
+; 00015h
 ; 0cdh
 ; UNKNOWN instruction
 
 ; 00000h00515h
 ; 00000h005b0h
-; 00015h
+; 00016h
 ; 021h
 ; UNKNOWN instruction
 
 ; 00000h00516h
 ; 00000h005b0h
-; 00016h
+; 00017h
 ; 072h
 ; UNKNOWN instruction
 
 ; 00000h00517h
 ; 00000h005b0h
-; 00017h
+; 00018h
 ; 003h0ebh
 ; 003h005h003h
-    ADD     bp, bx
+    add     bp, bx
 
 
 ; 00000h00519h
 ; 00000h005b0h
-; 00019h
+; 0001ah
 ; 007h
 ; UNKNOWN instruction
 
 ; 00000h0051ah
 ; 00000h005b0h
-; 0001ah
+; 0001bh
 ; 090h
 ; UNKNOWN instruction
 
 ; 00000h0051bh
 ; 00000h005b0h
-; 0001bh
+; 0001ch
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h0051ch
 ; 00000h005b0h
-; 0001ch
+; 0001dh
 ; 037h
 ; UNKNOWN instruction
 
 ; 00000h0051dh
 ; 00000h005b0h
-; 0001dh
+; 0001eh
 ; 0fdh
 ; UNKNOWN instruction
 
 ; 00000h0051eh
 ; 00000h005b0h
-; 0001eh
+; 0001fh
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h0051fh
 ; 00000h005b0h
-; 0001fh
+; 00020h
 ; 0eeh
 ; UNKNOWN instruction
 
 ; 00000h00520h
 ; 00000h005b0h
-; 00020h
+; 00021h
 ; 0fch
 ; UNKNOWN instruction
 
 ; 00000h00521h
 ; 00000h005b0h
-; 00021h
+; 00022h
 ; 05fh
 ; UNKNOWN instruction
 
 ; 00000h00522h
 ; 00000h005b0h
-; 00022h
+; 00023h
 ; 05ah
 ; UNKNOWN instruction
 
 ; 00000h00523h
 ; 00000h005b0h
-; 00023h
+; 00024h
 ; 059h
 ; UNKNOWN instruction
 
 ; 00000h00524h
 ; 00000h005b0h
-; 00024h
+; 00025h
 ; 05bh
 ; UNKNOWN instruction
 
 ; 00000h00525h
 ; 00000h005b0h
-; 00025h
+; 00026h
 ; 058h
 ; UNKNOWN instruction
 
 ; 00000h00526h
 ; 00000h005b0h
-; 00026h
+; 00027h
 ; 0c3h
 ; UNKNOWN instruction
 
 ; 00000h00527h
 ; 00000h005b0h
-; 00027h
+; 00028h
 ; 050h
 ; UNKNOWN instruction
 
 ; 00000h00528h
 ; 00000h005b0h
-; 00028h
+; 00029h
 ; 053h
 ; UNKNOWN instruction
 
 ; 00000h00529h
 ; 00000h005b0h
-; 00029h
+; 0002ah
 ; 051h
 ; UNKNOWN instruction
 
 ; 00000h0052ah
 ; 00000h005b0h
-; 0002ah
+; 0002bh
 ; 052h
 ; UNKNOWN instruction
 
 ; 00000h0052bh
 ; 00000h005b0h
-; 0002bh
+; 0002ch
 ; 056h
 ; UNKNOWN instruction
 
 ; 00000h0052ch
 ; 00000h005b0h
-; 0002ch
+; 0002dh
 ; 057h
 ; UNKNOWN instruction
 
 ; 00000h0052dh
 ; 00000h005b0h
-; 0002dh
+; 0002eh
 ; 0b4h
 ; UNKNOWN instruction
 
 ; 00000h0052eh
 ; 00000h005b0h
-; 0002eh
+; 0002fh
 ; 03fh
 ; UNKNOWN instruction
 
 ; 00000h0052fh
 ; 00000h005b0h
-; 0002fh
+; 00030h
 ; 053h
 ; UNKNOWN instruction
 
 ; 00000h00530h
 ; 00000h005b0h
-; 00030h
+; 00031h
 ; 08bh
 ; UNKNOWN instruction
 
 ; 00000h00531h
 ; 00000h005b0h
-; 00031h
+; 00032h
 ; 01eh
 ; UNKNOWN instruction
 
 ; 00000h00532h
 ; 00000h005b0h
-; 00032h
+; 00033h
 ; 0feh
 ; UNKNOWN instruction
 
 ; 00000h00533h
 ; 00000h005b0h
-; 00033h
+; 00034h
 ; 001h0bah
 ; 002h007h002h
-    ADD     word ptr [ bp + si + 00202h ], di
+    add     word ptr [ bp + si + 00202h ], di
 
 
 ; 00000h00537h
 ; 00000h005b0h
-; 00037h
+; 00038h
 ; 033h
 ; UNKNOWN instruction
 
 ; 00000h00538h
 ; 00000h005b0h
-; 00038h
+; 00039h
 ; 0c9h
 ; UNKNOWN instruction
 
 ; 00000h00539h
 ; 00000h005b0h
-; 00039h
+; 0003ah
 ; 08ah
 ; UNKNOWN instruction
 
 ; 00000h0053ah
 ; 00000h005b0h
-; 0003ah
+; 0003bh
 ; 00eh
 ; UNKNOWN instruction
 
 ; 00000h0053bh
 ; 00000h005b0h
-; 0003bh
+; 0003ch
 ; 05ch
 ; UNKNOWN instruction
 
 ; 00000h0053ch
 ; 00000h005b0h
-; 0003ch
-; 004h
-; UNKNOWN instruction
-
-; 00000h0053dh
-; 00000h005b0h
 ; 0003dh
-; 0cdh
-; UNKNOWN instruction
+; 004h
+; 000h000h004h
+    add     al, 0cdh
+
 
 ; 00000h0053eh
 ; 00000h005b0h
-; 0003eh
+; 0003fh
 ; 021h
 ; UNKNOWN instruction
 
 ; 00000h0053fh
 ; 00000h005b0h
-; 0003fh
+; 00040h
 ; 05bh
 ; UNKNOWN instruction
 
 ; 00000h00540h
 ; 00000h005b0h
-; 00040h
+; 00041h
 ; 072h
 ; UNKNOWN instruction
 
 ; 00000h00541h
 ; 00000h005b0h
-; 00041h
+; 00042h
 ; 049h
 ; UNKNOWN instruction
 
 ; 00000h00542h
 ; 00000h005b0h
-; 00042h
+; 00043h
 ; 03dh
 ; UNKNOWN instruction
 
 ; 00000h00543h
 ; 00000h005b0h
-; 00043h
+; 00044h
 ; 000h000h
 ; 000h000h000h
-    ADD     byte ptr [ bx + si ], al
+    add     byte ptr [ bx + si ], al
 
 
 ; 00000h00545h
 ; 00000h005b0h
-; 00045h
+; 00046h
 ; 074h
 ; UNKNOWN instruction
 
 ; 00000h00546h
 ; 00000h005b0h
-; 00046h
+; 00047h
 ; 03dh
 ; UNKNOWN instruction
 
 ; 00000h00547h
 ; 00000h005b0h
-; 00047h
+; 00048h
 ; 0beh
 ; UNKNOWN instruction
 
 ; 00000h00548h
 ; 00000h005b0h
-; 00048h
+; 00049h
 ; 002h002h
 ; 000h000h002h
-    ADD     al, byte ptr [ bp + si ]
+    add     al, byte ptr [ bp + si ]
 
 
 ; 00000h0054ah
 ; 00000h005b0h
-; 0004ah
+; 0004bh
 ; 0bfh
 ; UNKNOWN instruction
 
 ; 00000h0054bh
 ; 00000h005b0h
-; 0004bh
+; 0004ch
 ; 030h
 ; UNKNOWN instruction
 
 ; 00000h0054ch
 ; 00000h005b0h
-; 0004ch
+; 0004dh
 ; 003h08ah
 ; 002h001h002h
-    ADD     cx, word ptr [ bp + si + 08ad8h ]
+    add     cx, word ptr [ bp + si + 08ad8h ]
 
 
 ; 00000h00550h
 ; 00000h005b0h
-; 00050h
-; 004h
-; UNKNOWN instruction
-
-; 00000h00551h
-; 00000h005b0h
 ; 00051h
-; 03ch
-; UNKNOWN instruction
+; 004h
+; 000h000h004h
+    add     al, 03ch
+
 
 ; 00000h00552h
 ; 00000h005b0h
-; 00052h
+; 00053h
 ; 000h075h
 ; 001h006h005h
-    ADD     byte ptr [ di + 008h ], dh
+    add     byte ptr [ di + 008h ], dh
 
 
 ; 00000h00555h
 ; 00000h005b0h
-; 00055h
+; 00056h
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h00556h
 ; 00000h005b0h
-; 00056h
+; 00057h
 ; 09fh
 ; UNKNOWN instruction
 
 ; 00000h00557h
 ; 00000h005b0h
-; 00057h
+; 00058h
 ; 0ffh
 ; UNKNOWN instruction
 
 ; 00000h00558h
 ; 00000h005b0h
-; 00058h
+; 00059h
 ; 0b7h
 ; UNKNOWN instruction
 
 ; 00000h00559h
 ; 00000h005b0h
-; 00059h
+; 0005ah
 ; 001h0ebh
 ; 003h005h003h
-    ADD     bx, bp
+    add     bx, bp
 
 
 ; 00000h0055bh
 ; 00000h005b0h
-; 0005bh
+; 0005ch
 ; 028h
 ; UNKNOWN instruction
 
 ; 00000h0055ch
 ; 00000h005b0h
-; 0005ch
+; 0005dh
 ; 090h
 ; UNKNOWN instruction
 
 ; 00000h0055dh
 ; 00000h005b0h
-; 0005dh
+; 0005eh
 ; 03ch
 ; UNKNOWN instruction
 
 ; 00000h0055eh
 ; 00000h005b0h
-; 0005eh
+; 0005fh
 ; 00dh
 ; UNKNOWN instruction
 
 ; 00000h0055fh
 ; 00000h005b0h
-; 0005fh
+; 00060h
 ; 075h
 ; UNKNOWN instruction
 
 ; 00000h00560h
 ; 00000h005b0h
-; 00060h
+; 00061h
 ; 00dh
 ; UNKNOWN instruction
 
 ; 00000h00561h
 ; 00000h005b0h
-; 00061h
+; 00062h
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h00562h
 ; 00000h005b0h
-; 00062h
+; 00063h
 ; 093h
 ; UNKNOWN instruction
 
 ; 00000h00563h
 ; 00000h005b0h
-; 00063h
+; 00064h
 ; 0ffh
 ; UNKNOWN instruction
 
 ; 00000h00564h
 ; 00000h005b0h
-; 00064h
+; 00065h
 ; 080h
 ; UNKNOWN instruction
 
 ; 00000h00565h
 ; 00000h005b0h
-; 00065h
+; 00066h
 ; 0c4h
 ; UNKNOWN instruction
 
 ; 00000h00566h
 ; 00000h005b0h
-; 00066h
+; 00067h
 ; 002h0e8h
 ; 003h005h000h
-    ADD     ch, al
+    add     ch, al
 
 
 ; 00000h00568h
 ; 00000h005b0h
-; 00068h
+; 00069h
 ; 064h
 ; UNKNOWN instruction
 
 ; 00000h00569h
 ; 00000h005b0h
-; 00069h
+; 0006ah
 ; 0ffh
 ; UNKNOWN instruction
 
 ; 00000h0056ah
 ; 00000h005b0h
-; 0006ah
+; 0006bh
 ; 0b7h
 ; UNKNOWN instruction
 
 ; 00000h0056bh
 ; 00000h005b0h
-; 0006bh
+; 0006ch
 ; 001h0ebh
 ; 003h005h003h
-    ADD     bx, bp
+    add     bx, bp
 
 
 ; 00000h0056dh
 ; 00000h005b0h
-; 0006dh
+; 0006eh
 ; 0bfh
 ; UNKNOWN instruction
 
 ; 00000h0056eh
 ; 00000h005b0h
-; 0006eh
+; 0006fh
 ; 088h
 ; UNKNOWN instruction
 
 ; 00000h0056fh
 ; 00000h005b0h
-; 0006fh
-; 005h
-; UNKNOWN instruction
-
-; 00000h00570h
-; 00000h005b0h
 ; 00070h
-; 046h
-; UNKNOWN instruction
+; 005h
+; 000h000h005h
+    add     ax, 04746h
 
-; 00000h00571h
-; 00000h005b0h
-; 00071h
-; 047h
-; UNKNOWN instruction
 
 ; 00000h00572h
 ; 00000h005b0h
-; 00072h
+; 00073h
 ; 0feh
 ; UNKNOWN instruction
 
 ; 00000h00573h
 ; 00000h005b0h
-; 00073h
+; 00074h
 ; 0c4h
 ; UNKNOWN instruction
 
 ; 00000h00574h
 ; 00000h005b0h
-; 00074h
+; 00075h
 ; 03ah
 ; UNKNOWN instruction
 
 ; 00000h00575h
 ; 00000h005b0h
-; 00075h
+; 00076h
 ; 0e3h
 ; UNKNOWN instruction
 
 ; 00000h00576h
 ; 00000h005b0h
-; 00076h
+; 00077h
 ; 075h
 ; UNKNOWN instruction
 
 ; 00000h00577h
 ; 00000h005b0h
-; 00077h
+; 00078h
 ; 00ah
 ; UNKNOWN instruction
 
 ; 00000h00578h
 ; 00000h005b0h
-; 00078h
+; 00079h
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h00579h
 ; 00000h005b0h
-; 00079h
+; 0007ah
 ; 07ch
 ; UNKNOWN instruction
 
 ; 00000h0057ah
 ; 00000h005b0h
-; 0007ah
+; 0007bh
 ; 0ffh
 ; UNKNOWN instruction
 
 ; 00000h0057bh
 ; 00000h005b0h
-; 0007bh
+; 0007ch
 ; 0b7h
 ; UNKNOWN instruction
 
 ; 00000h0057ch
 ; 00000h005b0h
-; 0007ch
+; 0007dh
 ; 001h0e8h
 ; 003h005h000h
-    ADD     ax, bp
+    add     ax, bp
 
 
 ; 00000h0057eh
 ; 00000h005b0h
-; 0007eh
+; 0007fh
 ; 04eh
 ; UNKNOWN instruction
 
 ; 00000h0057fh
 ; 00000h005b0h
-; 0007fh
+; 00080h
 ; 0ffh
 ; UNKNOWN instruction
 
 ; 00000h00580h
 ; 00000h005b0h
-; 00080h
+; 00081h
 ; 0ebh
 ; UNKNOWN instruction
 
 ; 00000h00581h
 ; 00000h005b0h
-; 00081h
+; 00082h
 ; 0abh
 ; UNKNOWN instruction
 
 ; 00000h00582h
 ; 00000h005b0h
-; 00082h
+; 00083h
 ; 0e2h
 ; UNKNOWN instruction
 
 ; 00000h00583h
 ; 00000h005b0h
-; 00083h
+; 00084h
 ; 0cbh
 ; UNKNOWN instruction
 
 ; 00000h00584h
 ; 00000h005b0h
-; 00084h
+; 00085h
 ; 05fh
 ; UNKNOWN instruction
 
 ; 00000h00585h
 ; 00000h005b0h
-; 00085h
+; 00086h
 ; 05eh
 ; UNKNOWN instruction
 
 ; 00000h00586h
 ; 00000h005b0h
-; 00086h
+; 00087h
 ; 05ah
 ; UNKNOWN instruction
 
 ; 00000h00587h
 ; 00000h005b0h
-; 00087h
+; 00088h
 ; 059h
 ; UNKNOWN instruction
 
 ; 00000h00588h
 ; 00000h005b0h
-; 00088h
+; 00089h
 ; 05bh
 ; UNKNOWN instruction
 
 ; 00000h00589h
 ; 00000h005b0h
-; 00089h
+; 0008ah
 ; 058h
 ; UNKNOWN instruction
 
 ; 00000h0058ah
 ; 00000h005b0h
-; 0008ah
+; 0008bh
 ; 0c3h
 ; UNKNOWN instruction
 
 ; 00000h0058bh
 ; 00000h005b0h
-; 0008bh
+; 0008ch
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h0058ch
 ; 00000h005b0h
-; 0008ch
+; 0008dh
 ; 0b6h
 ; UNKNOWN instruction
 
 ; 00000h0058dh
 ; 00000h005b0h
-; 0008dh
+; 0008eh
 ; 0fch
 ; UNKNOWN instruction
 
 ; 00000h0058eh
 ; 00000h005b0h
-; 0008eh
+; 0008fh
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h0058fh
 ; 00000h005b0h
-; 0008fh
+; 00090h
 ; 07eh
 ; UNKNOWN instruction
 
 ; 00000h00590h
 ; 00000h005b0h
-; 00090h
+; 00091h
 ; 0fch
 ; UNKNOWN instruction
 
 ; 00000h00591h
 ; 00000h005b0h
-; 00091h
+; 00092h
 ; 0b8h
 ; UNKNOWN instruction
 
 ; 00000h00592h
 ; 00000h005b0h
-; 00092h
+; 00093h
 ; 03bh
 ; UNKNOWN instruction
 
 ; 00000h00593h
 ; 00000h005b0h
-; 00093h
+; 00094h
 ; 000h08eh
 ; 002h001h006h
-    ADD     byte ptr [ bp + 0bfd8h ], cl
+    add     byte ptr [ bp + 0bfd8h ], cl
 
 
 ; 00000h00597h
 ; 00000h005b0h
-; 00097h
+; 00098h
 ; 081h
 ; UNKNOWN instruction
 
 ; 00000h00598h
 ; 00000h005b0h
-; 00098h
+; 00099h
 ; 000h0e8h
 ; 003h005h000h
-    ADD     al, ch
+    add     al, ch
 
 
 ; 00000h0059ah
 ; 00000h005b0h
-; 0009ah
+; 0009bh
 ; 0cfh
 ; UNKNOWN instruction
 
 ; 00000h0059bh
 ; 00000h005b0h
-; 0009bh
+; 0009ch
 ; 0feh
 ; UNKNOWN instruction
 
 ; 00000h0059ch
 ; 00000h005b0h
-; 0009ch
+; 0009dh
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h0059dh
 ; 00000h005b0h
-; 0009dh
+; 0009eh
 ; 017h
 ; UNKNOWN instruction
 
 ; 00000h0059eh
 ; 00000h005b0h
-; 0009eh
+; 0009fh
 ; 0feh
 ; UNKNOWN instruction
 
 ; 00000h0059fh
 ; 00000h005b0h
-; 0009fh
+; 000a0h
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h005a0h
 ; 00000h005b0h
-; 000a0h
+; 000a1h
 ; 02fh
 ; UNKNOWN instruction
 
 ; 00000h005a1h
 ; 00000h005b0h
-; 000a1h
+; 000a2h
 ; 0feh
 ; UNKNOWN instruction
 
 ; 00000h005a2h
 ; 00000h005b0h
-; 000a2h
+; 000a3h
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h005a3h
 ; 00000h005b0h
-; 000a3h
+; 000a4h
 ; 082h
 ; UNKNOWN instruction
 
 ; 00000h005a4h
 ; 00000h005b0h
-; 000a4h
+; 000a5h
 ; 0ffh
 ; UNKNOWN instruction
 
 ; 00000h005a5h
 ; 00000h005b0h
-; 000a5h
+; 000a6h
 ; 0e8h
 ; UNKNOWN instruction
 
 ; 00000h005a6h
 ; 00000h005b0h
-; 000a6h
+; 000a7h
 ; 067h
 ; UNKNOWN instruction
 
 ; 00000h005a7h
 ; 00000h005b0h
-; 000a7h
+; 000a8h
 ; 0fch
 ; UNKNOWN instruction
 
 ; 00000h005a8h
 ; 00000h005b0h
-; 000a8h
+; 000a9h
 ; 000h000h
 ; 000h000h000h
-    ADD     byte ptr [ bx + si ], al
+    add     byte ptr [ bx + si ], al
 
 
 ; 00000h005aah
 ; 00000h005b0h
-; 000aah
+; 000abh
 ; 000h000h
 ; 000h000h000h
-    ADD     byte ptr [ bx + si ], al
+    add     byte ptr [ bx + si ], al
 
 
 ; 00000h005ach
 ; 00000h005b0h
-; 000ach
+; 000adh
 ; 000h000h
 ; 000h000h000h
-    ADD     byte ptr [ bx + si ], al
+    add     byte ptr [ bx + si ], al
 
 
 END

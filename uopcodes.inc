@@ -371,6 +371,7 @@ OPCODE_04h PROC
 
     call    getModRegRM
     ;;test
+    call loadNewline
     call loadComment
     mov dl, byte ptr opcodeMod
     call printByte
@@ -388,6 +389,7 @@ OPCODE_04h PROC
     call    loadReg
     call    loadCommaSpace
     call    getByte
+    mov     dl, al
     call    printByte
     call    loadNewline
 
@@ -402,7 +404,7 @@ OPCODE_05h PROC
     xor     bl, 05h
     cmp     bl, 00h
     je      @@continue
-        call loadComment
+        call loadNewline
         push si
         lea si, ins_unknown
         call loadTextToBuffer
@@ -417,6 +419,7 @@ OPCODE_05h PROC
 
     call    getModRegRM
     ;;test
+    call loadNewline
     call loadComment
     mov dl, byte ptr opcodeMod
     call printByte
@@ -430,11 +433,12 @@ OPCODE_05h PROC
     lea     si, ins_add
     call    loadTextToBuffer
     pop     si
-    mov     dl, 0h
+    mov     dl, 1h
     call    loadReg
     call    loadCommaSpace
-    call    getByte
-    call    printByte
+    call    getWord
+    mov     dx, ax
+    call    printWord
     call    loadNewline
 
     @@done:

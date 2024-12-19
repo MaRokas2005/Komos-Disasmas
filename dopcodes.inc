@@ -1,97 +1,97 @@
 ins_unknown     db "; UNKNOWN instruction", 0
-ins_mov         db "    MOV     ", 0
-ins_in          db "    IN      ", 0
-ins_out         db "    OUT     ", 0
-ins_push        db "    PUSH    ", 0
-ins_pop         db "    POP     ", 0
-ins_xchg        db "    XCHG    ", 0
-ins_xlat        db "    XLAT    ", 0
-ins_lea         db "    LEA     ", 0
-ins_lds         db "    LDS     ", 0
-ins_lss         db "    LSS     ", 0
-ins_lahf        db "    LAHF    ", 0
-ins_sahf        db "    SAHF    ", 0
-ins_pushf       db "    PUSHF   ", 0
-ins_popf        db "    POPF    ", 0
-ins_ja          db "    JA      ", 0
-ins_jae         db "    JAE     ", 0
-ins_jb          db "    JB      ", 0
-ins_jbe         db "    JBE     ", 0
-ins_je          db "    JE      ", 0
-ins_jcxz        db "    JCXZ    ", 0
-ins_jg          db "    JG      ", 0
-ins_jge         db "    JGE     ", 0
-ins_jl          db "    JL      ", 0
-ins_jle         db "    JLE     ", 0
-ins_jne         db "    JNE     ", 0
-ins_jno         db "    JNO     ", 0
-ins_jnp         db "    JNP     ", 0
-ins_jp          db "    JP      ", 0
-ins_jo          db "    JO      ", 0
-ins_jns         db "    JNS     ", 0
-ins_js          db "    JS      ", 0
-ins_add         db "    ADD     ", 0
-ins_adc         db "    ADC     ", 0
-ins_inc         db "    INC     ", 0
-ins_aaa         db "    AAA     ", 0
-ins_daa         db "    DAA     ", 0
-ins_sub         db "    SUB     ", 0
-ins_sbb         db "    SBB     ", 0
-ins_dec         db "    DEC     ", 0
-ins_neg         db "    NEG     ", 0
-ins_cmp         db "    CMP     ", 0
-ins_aas         db "    AAS     ", 0
-ins_das         db "    DAS     ", 0
-ins_mul         db "    MUL     ", 0
-ins_imul        db "    IMUL    ", 0
-ins_aam         db "    AAM     ", 0
-ins_div         db "    DIV     ", 0
-ins_idiv        db "    IDIV    ", 0
-ins_aad         db "    AAD     ", 0
-ins_cbw         db "    CBW     ", 0
-ins_cwd         db "    CWD     ", 0
-ins_not         db "    NOT     ", 0
-ins_and         db "    AND     ", 0
-ins_or          db "    OR      ", 0
-ins_xor         db "    XOR     ", 0
-ins_test        db "    TEST    ", 0
-ins_shl         db "    SHL     ", 0
-ins_shr         db "    SHR     ", 0
-ins_sar         db "    SAR     ", 0
-ins_rol         db "    ROL     ", 0
-ins_ror         db "    ROR     ", 0
-ins_rcl         db "    RCL     ", 0
-ins_rcr         db "    RCR     ", 0
-ins_rep         db "    REP     ", 0
-ins_repne       db "    REPNE   ", 0
-ins_movsb       db "    MOVSB   ", 0
-ins_movsw       db "    MOVSW   ", 0
-ins_cmpsb       db "    CMPSB   ", 0
-ins_cmpsw       db "    CMPSW   ", 0
-ins_scasb       db "    SCASB   ", 0
-ins_scasw       db "    SCASW   ", 0
-ins_stosb       db "    STOSB   ", 0
-ins_stosw       db "    STOSW   ", 0
-ins_lodsb       db "    LODSB   ", 0
-ins_lodsw       db "    LODSW   ", 0
-ins_call        db "    CALL    ", 0
-ins_ret         db "    RET     ", 0
-ins_retf        db "    RETF    ", 0
-ins_jmp         db "    JMP     ", 0
-ins_int         db "    INT     ", 0
-ins_into        db "    INTO    ", 0
-ins_iret        db "    IRET    ", 0
-ins_stc         db "    STC     ", 0
-ins_clc         db "    CLC     ", 0
-ins_cmc         db "    CMC     ", 0
-ins_std         db "    STD     ", 0
-ins_cld         db "    CLD     ", 0
-ins_sti         db "    STI     ", 0
-ins_cli         db "    CLI     ", 0
-ins_hlt         db "    HLT     ", 0
-ins_wait        db "    WAIT    ", 0
-ins_lock        db "    LOCK    ", 0
-ins_nop         db "    NOP     ", 0
+ins_mov         db "    mov     ", 0
+ins_in          db "    in      ", 0
+ins_out         db "    out     ", 0
+ins_push        db "    push    ", 0
+ins_pop         db "    pop     ", 0
+ins_xchg        db "    xchg    ", 0
+ins_xlat        db "    xlat    ", 0
+ins_lea         db "    lea     ", 0
+ins_lds         db "    lds     ", 0
+ins_lss         db "    lss     ", 0
+ins_lahf        db "    lahf    ", 0
+ins_sahf        db "    sahf    ", 0
+ins_pushf       db "    pushf   ", 0
+ins_popf        db "    popf    ", 0
+ins_ja          db "    ja      ", 0
+ins_jae         db "    jae     ", 0
+ins_jb          db "    jb      ", 0
+ins_jbe         db "    jbe     ", 0
+ins_je          db "    je      ", 0
+ins_jcxz        db "    jcxz    ", 0
+ins_jg          db "    jg      ", 0
+ins_jge         db "    jge     ", 0
+ins_jl          db "    jl      ", 0
+ins_jle         db "    jle     ", 0
+ins_jne         db "    jne     ", 0
+ins_jno         db "    jno     ", 0
+ins_jnp         db "    jnp     ", 0
+ins_jp          db "    jp      ", 0
+ins_jo          db "    jo      ", 0
+ins_jns         db "    jns     ", 0
+ins_js          db "    js      ", 0
+ins_add         db "    add     ", 0
+ins_adc         db "    adc     ", 0
+ins_inc         db "    inc     ", 0
+ins_aaa         db "    aaa     ", 0
+ins_daa         db "    daa     ", 0
+ins_sub         db "    sub     ", 0
+ins_sbb         db "    sbb     ", 0
+ins_dec         db "    dec     ", 0
+ins_neg         db "    neg     ", 0
+ins_cmp         db "    cmp     ", 0
+ins_aas         db "    aas     ", 0
+ins_das         db "    das     ", 0
+ins_mul         db "    mul     ", 0
+ins_imul        db "    imul    ", 0
+ins_aam         db "    aam     ", 0
+ins_div         db "    div     ", 0
+ins_idiv        db "    idiv    ", 0
+ins_aad         db "    aad     ", 0
+ins_cbw         db "    cbw     ", 0
+ins_cwd         db "    cwd     ", 0
+ins_not         db "    not     ", 0
+ins_and         db "    and     ", 0
+ins_or          db "    or      ", 0
+ins_xor         db "    xor     ", 0
+ins_test        db "    test    ", 0
+ins_shl         db "    shl     ", 0
+ins_shr         db "    shr     ", 0
+ins_sar         db "    sar     ", 0
+ins_rol         db "    rol     ", 0
+ins_ror         db "    ror     ", 0
+ins_rcl         db "    rcl     ", 0
+ins_rcr         db "    rcr     ", 0
+ins_rep         db "    rep     ", 0
+ins_repne       db "    repne   ", 0
+ins_movsb       db "    movsb   ", 0
+ins_movsw       db "    movsw   ", 0
+ins_cmpsb       db "    cmpsb   ", 0
+ins_cmpsw       db "    cmpsw   ", 0
+ins_scasb       db "    scasb   ", 0
+ins_scasw       db "    scasw   ", 0
+ins_stosb       db "    stosb   ", 0
+ins_stosw       db "    stosw   ", 0
+ins_lodsb       db "    lodsb   ", 0
+ins_lodsw       db "    lodsw   ", 0
+ins_call        db "    call    ", 0
+ins_ret         db "    ret     ", 0
+ins_retf        db "    retf    ", 0
+ins_jmp         db "    jmp     ", 0
+ins_int         db "    int     ", 0
+ins_into        db "    into    ", 0
+ins_iret        db "    iret    ", 0
+ins_stc         db "    stc     ", 0
+ins_clc         db "    clc     ", 0
+ins_cmc         db "    cmc     ", 0
+ins_std         db "    std     ", 0
+ins_cld         db "    cld     ", 0
+ins_sti         db "    sti     ", 0
+ins_cli         db "    cli     ", 0
+ins_hlt         db "    hlt     ", 0
+ins_wait        db "    wait    ", 0
+ins_lock        db "    lock    ", 0
+ins_nop         db "    nop     ", 0
 
 reg_al          db "al", 0, " "
 reg_cl          db "cl", 0, " "
@@ -116,10 +116,6 @@ reg_cs          db "cs", 0, " "
 reg_ss          db "ss", 0, " "
 reg_ds          db "ds", 0, " "
 
-reg_small       dw offset reg_al, offset reg_cl, offset reg_dl, offset reg_bl, offset reg_ah, offset reg_ch, offset reg_dh, offset reg_bh
-reg_large       dw offset reg_ax, offset reg_cx, offset reg_dx, offset reg_bx, offset reg_sp, offset reg_bp, offset reg_si, offset reg_di
-reg_segment     dw offset reg_es, offset reg_cs, offset reg_ss, offset reg_ds
-
 mod_00_000         db "bx + si", 0, "        "
 mod_00_001         db "bx + di", 0, "        "
 mod_00_010         db "bp + si", 0, "        "
@@ -138,65 +134,7 @@ mod_01_10_101      db "di + ", 0, "          "
 mod_01_10_110      db "bp + ", 0, "          "
 mod_01_10_111      db "bx + ", 0, "          "
 
-mod_00_offset       dw  offset mod_00_000, offset mod_00_001
-                    dw  offset mod_00_010, offset mod_00_011
-                    dw  offset mod_00_100, offset mod_00_101
-                    dw  offset mod_00_110, offset mod_00_111
-
-mod_01_10_offset    dw  offset mod_01_10_000, offset mod_01_10_001
-                    dw  offset mod_01_10_010, offset mod_01_10_011
-                    dw  offset mod_01_10_100, offset mod_01_10_101
-                    dw  offset mod_01_10_110, offset mod_01_10_111
-
-
-; ins_types ENUM {
-;     ins_type_unknown,
-;     ins_type_normal,
-;     ins_type_extented,
-;     ins_type_seg_ovr,
-;     ins_type_prefix,
-;     ins_type_custom
-; }
-
-; ins_operands ENUM {
-;     op_void,
-;     op_al,
-;     op_cl,
-;     op_dl,
-;     op_bl,
-;     op_ah,
-;     op_ch,
-;     op_dh,
-;     op_bh,
-;     op_ax,
-;     op_cx,
-;     op_dx,
-;     op_bx,
-;     op_sp,
-;     op_bp,
-;     op_si,
-;     op_di,
-;     op_es,
-;     op_cs,
-;     op_ss,
-;     op_ds,
-;     op_const1,
-;     op_const3,
-;     op_imm8,
-;     op_eimm8,
-;     op_short,
-;     op_imm16,
-;     op_near,
-;     op_mem,
-;     op_far,
-;     op_reg8,
-;     op_reg16,
-;     op_segreg,
-;     op_regmem8,
-;     op_regmem16,
-; }
-
-; LABEL instruction_list
+; label instruction_list
 ;     instruction<ins_add,        ins_type_normal,    op_regmem8,     op_reg8>        ; 0000 0000
 ;     instruction<ins_add,        ins_type_normal,    op_regmem16,    op_reg16>       ; 0000 0001
 ;     instruction<ins_add,        ins_type_normal,    op_reg8,        op_regmem8>     ; 0000 0010
@@ -321,7 +259,7 @@ mod_01_10_offset    dw  offset mod_01_10_000, offset mod_01_10_001
 ;     instruction<ins_jns,        ins_type_normal,    op_short,       op_void>        ; 0111 1001
 ;     instruction<ins_jp,         ins_type_normal,    op_short,       op_void>        ; 0111 1010
 ;     instruction<ins_jnp,        ins_type_normal,    op_short,       op_void>        ; 0111 1011
-;     instruction<INS_JL,         ins_type_normal,    op_short,       op_void>        ; 0111 1100
+;     instruction<ins_jl,         ins_type_normal,    op_short,       op_void>        ; 0111 1100
 ;     instruction<ins_jge,        ins_type_normal,    op_short,       op_void>        ; 0111 1101
 ;     instruction<ins_jle,        ins_type_normal,    op_short,       op_void>        ; 0111 1110
 ;     instruction<ins_jg,         ins_type_normal,    op_short,       op_void>        ; 0111 1111
@@ -393,7 +331,7 @@ mod_01_10_offset    dw  offset mod_01_10_000, offset mod_01_10_001
 ;     instruction<ins_unknown,    ins_type_unknown,   op_void,        op_void>        ; 1100 0001
 ;     instruction<ins_ret,        ins_type_normal,    op_imm16,       op_void>        ; 1100 0010
 ;     instruction<ins_ret,        ins_type_normal,    op_void,        op_void>        ; 1100 0011
-;     instruction<INS_LES,        ins_type_normal,    op_reg16,       op_regmem16>    ; 1100 0100
+;     instruction<ins_les,        ins_type_normal,    op_reg16,       op_regmem16>    ; 1100 0100
 ;     instruction<ins_lds,        ins_type_normal,    op_reg16,       op_regmem16>    ; 1100 0101
 ;     instruction<ins_mov,        ins_type_normal,    op_regmem8,     op_imm8>        ; 1100 0110
 ;     instruction<ins_mov,        ins_type_normal,    op_regmem16,    op_imm16>       ; 1100 0111
@@ -421,9 +359,9 @@ mod_01_10_offset    dw  offset mod_01_10_000, offset mod_01_10_001
 ;     instruction<ins_unknown,    ins_type_unknown,   op_void,        op_void>        ; 1101 1101
 ;     instruction<ins_unknown,    ins_type_unknown,   op_void,        op_void>        ; 1101 1110
 ;     instruction<ins_unknown,    ins_type_unknown,   op_void,        op_void>        ; 1101 1111
-;     instruction<INS_LOOPNE,     ins_type_normal,    op_short,       op_void>        ; 1110 0000
-;     instruction<INS_LOOPE,      ins_type_normal,    op_short,       op_void>        ; 1110 0001
-;     instruction<INS_LOOP,       ins_type_normal,    op_short,       op_void>        ; 1110 0010
+;     instruction<ins_loopne,     ins_type_normal,    op_short,       op_void>        ; 1110 0000
+;     instruction<ins_loope,      ins_type_normal,    op_short,       op_void>        ; 1110 0001
+;     instruction<ins_loop,       ins_type_normal,    op_short,       op_void>        ; 1110 0010
 ;     instruction<ins_jcxz,       ins_type_normal,    op_short,       op_void>        ; 1110 0011
 ;     instruction<ins_in,         ins_type_normal,    op_al,          op_imm8>        ; 1110 0100
 ;     instruction<ins_in,         ins_type_normal,    op_ax,          op_imm16>       ; 1110 0101
