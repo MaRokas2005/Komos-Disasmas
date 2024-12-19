@@ -53,10 +53,10 @@ printWord PROC
     jmp     @@word_done_1
     @@word_a_f_1:
     add     bx, 57h
+    @@word_done_1:
     mov     al, 30h
     stosb
     inc     word ptr outputLength
-    @@word_done_1:
     mov     al, bl
     stosb
     inc     word ptr outputLength

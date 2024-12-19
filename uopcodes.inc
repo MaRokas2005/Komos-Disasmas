@@ -32,7 +32,6 @@ loadModRM PROC
     push    bx
     push    cx
     push    dx
-    push    si
 
     cmp     byte ptr opcodeMod, 3h
     je      @@mod_11_temp
@@ -133,7 +132,6 @@ loadModRM PROC
     mov     byte ptr opcodeReg, bl
 
     @@done:
-    pop     si
     pop     dx
     pop     cx
     pop     bx

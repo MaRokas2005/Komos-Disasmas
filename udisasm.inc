@@ -370,10 +370,9 @@ printCodeSegment PROC
 
     mov     ax, word ptr codeSegmentOffset
     mov     word ptr byteInFile, ax
-    call    fixScanPointer
  
     @@read_and_print:
-        cmp     word ptr usedBytes, 0FFh
+        cmp     word ptr usedBytes, 0ffh
         jb      @@loop_write
         ; scan 300 bytes of code segment
         call    fixScanPointer
@@ -408,6 +407,10 @@ printCodeSegment PROC
             mov dx, word ptr dataSegmentStart
             call printWord
             call loadNewline
+            call loadComment
+            mov dx, word ptr usedBytes
+            call printWord
+            call loadNewline
             ;; end testing
 
             call    getByte
@@ -422,8 +425,9 @@ printCodeSegment PROC
             call    OPCODE_00h
             call    loadNewline
             call    loadNewline
+            ; call    printOutputBuffer
 
-            cmp     outputLength, 0eFh
+            cmp     outputLength, 0cfh
             jbe      @@loop_write
         
         ; print to output
@@ -435,7 +439,7 @@ printCodeSegment PROC
     jmp     @@error
 
     @@done:
-
+    ;call    printOutputBuffer
 
     pop     es
     pop     di
@@ -449,3 +453,34 @@ printCodeSegment PROC
     call    unsuccesfulFileRead
     call    endProgram
 printCodeSegment ENDP
+
+printEnd PROC
+    push    ax
+    push    bx
+    push    cx
+    push    dx
+    push    si
+    push    di
+    push    es
+
+    mov     ax, seg outputBuffer
+    mov     es, ax
+
+    lea     di, outputBuffer
+    mov     word ptr outputLength, 0
+
+    lea     si, segEnd
+    call    loadTextToBuffer
+
+    lea     si, newline
+    call    printOutputBuffer
+
+    pop     es
+    pop     di
+    pop     si
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+    ret
+printEnd ENDP

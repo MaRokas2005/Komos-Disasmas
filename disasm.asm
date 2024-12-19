@@ -89,6 +89,7 @@ LOCALS @@
         call    printStart
         call    printDataSegment
         call    printCodeSegment
+        call    printEnd
 
         call    endProgram
         
