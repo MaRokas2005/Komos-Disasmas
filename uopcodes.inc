@@ -1,20 +1,20 @@
 ;***************************************************;
 ;                  get mod reg r/m                  ;
-;                 dl = mod reg r/m                  ;
+;                 al = mod reg r/m                  ;
 ;***************************************************;
 getModRegRM PROC
     push    bx
 
-    mov     bl, dl
+    mov     bl, al
     and     bl, 7h
     mov     opcodeRM, bl
 
-    mov     bl, dl
+    mov     bl, al
     shr     bl, 3
     and     bl, 7h
     mov     opcodeReg, bl
 
-    mov     bl, dl
+    mov     bl, al
     shr     bl, 6
     and     bl, 3h
     mov     opcodeMod, bl
@@ -193,9 +193,6 @@ OPCODE_00h PROC
     push    bx
 
     call    getByte
-    mov     dl, al
-    call    printByte
-    call    loadNewline
     call    getModRegRM
     ;;test
     call loadComment
@@ -215,7 +212,6 @@ OPCODE_00h PROC
     call    loadModRM
     call    loadCommaSpace
     call    loadReg
-    call    loadNewline
 
     @@done:
     pop     bx
@@ -241,9 +237,6 @@ OPCODE_01h PROC
     push    bx
 
     call    getByte
-    mov     dl, al
-    call    printByte
-    call    loadNewline
     call    getModRegRM
     ;;test
     call loadComment
@@ -263,7 +256,6 @@ OPCODE_01h PROC
     call    loadModRM
     call    loadCommaSpace
     call    loadReg
-    call    loadNewline
 
     @@done:
     pop     bx
@@ -306,7 +298,6 @@ OPCODE_02h PROC
     call    loadReg
     call    loadCommaSpace
     call    loadModRM
-    call    loadNewline
 
     @@done:
     pop     bx
@@ -327,9 +318,6 @@ OPCODE_03h PROC
     push    bx
 
     call    getByte
-    mov     dl, al
-    call    printByte
-    call    loadNewline
     call    getModRegRM
     ;;test
     call loadComment
@@ -349,7 +337,6 @@ OPCODE_03h PROC
     call    loadReg
     call    loadCommaSpace
     call    loadModRM
-    call    loadNewline
 
     @@done:
     pop     bx
@@ -369,29 +356,17 @@ OPCODE_04h PROC
     push    ax
     push    bx
 
-    call    getModRegRM
-    ;;test
-    call loadNewline
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
     push    si
     lea     si, ins_add
     call    loadTextToBuffer
-    pop     si
-    mov     dl, 0h
-    call    loadReg
+
+    lea     si, reg_al
+    call    loadTextToBuffer
     call    loadCommaSpace
+    pop     si
+
     call    getByte
-    mov     dl, al
     call    printByte
-    call    loadNewline
 
     @@done:
     pop     bx
@@ -404,12 +379,6 @@ OPCODE_05h PROC
     xor     bl, 05h
     cmp     bl, 00h
     je      @@continue
-        call loadNewline
-        push si
-        lea si, ins_unknown
-        call loadTextToBuffer
-        pop si
-        ret
         call    OPCODE_06h
         ret
     
@@ -417,9 +386,1451 @@ OPCODE_05h PROC
     push    ax
     push    bx
 
+    push    si
+    lea     si, ins_add
+    call    loadTextToBuffer
+
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getWord
+    call    printWord
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_05h ENDP
+
+OPCODE_06h PROC
+    mov     bl, al
+    xor     bl, 06h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_07h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+    push    si
+
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_es
+    call    loadTextToBuffer
+
+    @@done:
+    pop     si
+    pop     bx
+    pop     ax
+    ret
+OPCODE_06h ENDP
+
+OPCODE_07h PROC
+    mov     bl, al
+    xor     bl, 07h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_08h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+    push    si
+
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_es
+    call    loadTextToBuffer
+    
+    @@done:
+    pop     si
+    pop     bx
+    pop     ax
+    ret
+OPCODE_07h ENDP
+
+OPCODE_08h PROC
+    mov     bl, al
+    xor     bl, 08h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_09h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
     call    getModRegRM
     ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
     call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_or
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_08h ENDP
+
+OPCODE_09h PROC
+    mov     bl, al
+    xor     bl, 09h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_0ah
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_or
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_09h ENDP
+
+OPCODE_0ah PROC
+    mov     bl, al
+    xor     bl, 0ah
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_0bh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_or
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_0ah ENDP
+
+OPCODE_0bh PROC
+    mov     bl, al
+    xor     bl, 0bh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_0ch
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_or
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_0bh ENDP
+
+OPCODE_0ch PROC
+    mov     bl, al
+    xor     bl, 0ch
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_0dh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_or
+    call    loadTextToBuffer
+
+    lea     si, reg_al
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getByte
+    call    printByte
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_0ch ENDP
+
+OPCODE_0dh PROC
+    mov     bl, al
+    xor     bl, 0dh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_0eh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_or
+    call    loadTextToBuffer
+
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getWord
+    call    printWord
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_0dh ENDP
+
+OPCODE_0eh PROC
+    mov     bl, al
+    xor     bl, 0eh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_0fh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+    push    si
+
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_cs
+    call    loadTextToBuffer
+
+    @@done:
+    pop     si
+    pop     bx
+    pop     ax
+    ret
+OPCODE_0eh ENDP
+
+OPCODE_0fh PROC
+    mov     bl, al
+    xor     bl, 0fh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_10h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+    push    si
+
+    call loadNewline
+    push si
+    lea si, ins_unknown
+    call loadTextToBuffer
+    pop si
+    ret
+
+    @@done:
+    pop     si
+    pop     bx
+    pop     ax
+    ret
+OPCODE_0fh ENDP
+
+OPCODE_10h PROC
+    mov     bl, al
+    xor     bl, 10h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_11h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_adc
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_10h ENDP
+
+OPCODE_11h PROC
+    mov     bl, al
+    xor     bl, 11h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_12h
+        ret
+
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_adc
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_11h ENDP
+
+OPCODE_12h PROC
+    mov     bl, al
+    xor     bl, 12h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_13h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_adc
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_12h ENDP
+
+OPCODE_13h PROC
+    mov     bl, al
+    xor     bl, 13h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_14h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_adc
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_13h ENDP
+
+OPCODE_14h PROC
+    mov     bl, al
+    xor     bl, 14h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_15h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_adc
+    call    loadTextToBuffer
+
+    lea     si, reg_al
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getByte
+    call    printByte
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_14h ENDP
+
+OPCODE_15h PROC
+    mov     bl, al
+    xor     bl, 15h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_16h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_adc
+    call    loadTextToBuffer
+
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getWord
+    call    printWord
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_15h ENDP
+
+OPCODE_16h PROC
+    mov     bl, al
+    xor     bl, 16h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_17h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+    push    si
+
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_ss
+    call    loadTextToBuffer
+
+    @@done:
+    pop     si
+    pop     bx
+    pop     ax
+    ret
+OPCODE_16h ENDP
+
+OPCODE_17h PROC
+    mov     bl, al
+    xor     bl, 17h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_18h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+    push    si
+
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_ss
+    call    loadTextToBuffer
+
+    @@done:
+    pop     si
+    pop     bx
+    pop     ax
+    ret
+OPCODE_17h ENDP
+
+OPCODE_18h PROC
+    mov     bl, al
+    xor     bl, 18h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_19h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_sbb
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_18h ENDP
+
+OPCODE_19h PROC
+    mov     bl, al
+    xor     bl, 19h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_1ah
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_sbb
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_19h ENDP
+
+OPCODE_1ah PROC
+    mov     bl, al
+    xor     bl, 1ah
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_1bh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_sbb
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_1ah ENDP
+
+OPCODE_1bh PROC
+    mov     bl, al
+    xor     bl, 1bh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_1ch
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_sbb
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_1bh ENDP
+
+OPCODE_1ch PROC
+    mov     bl, al
+    xor     bl, 1ch
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_1dh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_sbb
+    call    loadTextToBuffer
+
+    lea     si, reg_al
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getByte
+    call    printByte
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_1ch ENDP
+
+OPCODE_1dh PROC
+    mov     bl, al
+    xor     bl, 1dh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_1eh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_sbb
+    call    loadTextToBuffer
+
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getWord
+    call    printWord
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_1dh ENDP
+
+OPCODE_1eh PROC
+    mov     bl, al
+    xor     bl, 1eh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_1fh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+    push    si
+
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_ds
+    call    loadTextToBuffer
+
+    @@done:
+    pop     si
+    pop     bx
+    pop     ax
+    ret
+OPCODE_1eh ENDP
+
+OPCODE_1fh PROC
+    mov     bl, al
+    xor     bl, 1fh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_20h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+    push    si
+
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_ds
+    call    loadTextToBuffer
+
+    @@done:
+    pop     si
+    pop     bx
+    pop     ax
+    ret
+OPCODE_1fh ENDP
+
+OPCODE_20h PROC
+    mov     bl, al
+    xor     bl, 20h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_21h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_and
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_20h ENDP
+
+OPCODE_21h PROC
+    mov     bl, al
+    xor     bl, 21h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_22h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_and
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_21h ENDP
+
+OPCODE_22h PROC
+    mov     bl, al
+    xor     bl, 22h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_23h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_and
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_22h ENDP
+
+OPCODE_23h PROC
+    mov     bl, al
+    xor     bl, 23h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_24h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_and
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_23h ENDP
+
+OPCODE_24h PROC
+    mov     bl, al
+    xor     bl, 24h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_25h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_and
+    call    loadTextToBuffer
+
+    lea     si, reg_al
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getByte
+    call    printByte
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_24h ENDP
+
+OPCODE_25h PROC
+    mov     bl, al
+    xor     bl, 25h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_26h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_and
+    call    loadTextToBuffer
+
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getWord
+    call    printWord
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_25h ENDP
+
+OPCODE_26h PROC
+    mov     bl, al
+    xor     bl, 26h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_27h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    mov     byte ptr prefix, al
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_26h ENDP
+
+OPCODE_27h PROC
+    mov     bl, al
+    xor     bl, 27h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_28h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_daa
+    call    loadTextToBuffer
+    pop     si
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_27h ENDP
+
+OPCODE_28h PROC
+    mov     bl, al
+    xor     bl, 28h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_29h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_sub
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_28h ENDP
+
+OPCODE_29h PROC
+    mov     bl, al
+    xor     bl, 29h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_2ah
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_sub
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_29h ENDP
+
+OPCODE_2ah PROC
+    mov     bl, al
+    xor     bl, 2ah
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_2bh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_sub
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_2ah ENDP
+
+OPCODE_2bh PROC
+    mov     bl, al
+    xor     bl, 2bh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_2ch
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_sub
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_2bh ENDP
+
+OPCODE_2ch PROC
+    mov     bl, al
+    xor     bl, 2ch
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_2dh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_sub
+    call    loadTextToBuffer
+
+    lea     si, reg_al
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getByte
+    call    printByte
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_2ch ENDP
+
+OPCODE_2dh PROC
+    mov     bl, al
+    xor     bl, 2dh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_2eh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_sub
+    call    loadTextToBuffer
+
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getWord
+    call    printWord
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_2dh ENDP
+
+OPCODE_2eh PROC
+    mov     bl, al
+    xor     bl, 2eh
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_2fh
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    mov     byte ptr prefix, al
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_2eh ENDP
+
+OPCODE_2fh PROC
+    mov     bl, al
+    xor     bl, 2fh
+    cmp     bl, 00h
+    je      @@continue
+        push si
+        lea si, ins_unknown
+        call loadTextToBuffer
+        pop si
+        ret
+        call    OPCODE_30h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    push    si
+    lea     si, ins_das
+    call    loadTextToBuffer
+    pop     si
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_2fh ENDP
+
+OPCODE_30h PROC
+    mov     bl, al
+    xor     bl, 30h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_31h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_xor
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
+
+    @@done:
+    pop     bx
+    pop     ax
+    ret
+OPCODE_30h ENDP
+
+OPCODE_31h PROC
+    mov     bl, al
+    xor     bl, 31h
+    cmp     bl, 00h
+    je      @@continue
+        call    OPCODE_32h
+        ret
+    
+    @@continue:
+    push    ax
+    push    bx
+
+    call    getByte
+    call    getModRegRM
+    ;;test
     call loadComment
     mov dl, byte ptr opcodeMod
     call printByte
@@ -434,892 +1845,9 @@ OPCODE_05h PROC
     call    loadTextToBuffer
     pop     si
     mov     dl, 1h
-    call    loadReg
+    call    loadModRM
     call    loadCommaSpace
-    call    getWord
-    mov     dx, ax
-    call    printWord
-    call    loadNewline
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_05h ENDP
-
-OPCODE_06h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 06h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_07h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_06h ENDP
-
-OPCODE_07h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 07h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_08h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_07h ENDP
-
-OPCODE_08h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 08h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_09h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_08h ENDP
-
-OPCODE_09h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 09h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_0ah
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_09h ENDP
-
-OPCODE_0ah PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 0ah
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_0bh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_0ah ENDP
-
-OPCODE_0bh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 0bh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_0ch
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_0bh ENDP
-
-OPCODE_0ch PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 0ch
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_0dh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_0ch ENDP
-
-OPCODE_0dh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 0dh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_0eh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_0dh ENDP
-
-OPCODE_0eh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 0eh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_0fh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_0eh ENDP
-
-OPCODE_0fh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 0fh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_10h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_0fh ENDP
-
-OPCODE_10h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 10h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_11h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_10h ENDP
-
-OPCODE_11h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 11h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_12h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_11h ENDP
-
-OPCODE_12h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 12h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_13h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_12h ENDP
-
-OPCODE_13h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 13h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_14h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_13h ENDP
-
-OPCODE_14h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 14h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_15h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_14h ENDP
-
-OPCODE_15h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 15h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_16h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_15h ENDP
-
-OPCODE_16h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 16h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_17h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_16h ENDP
-
-OPCODE_17h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 17h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_18h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_17h ENDP
-
-OPCODE_18h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 18h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_19h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_18h ENDP
-
-OPCODE_19h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 19h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_1ah
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_19h ENDP
-
-OPCODE_1ah PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 1ah
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_1bh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_1ah ENDP
-
-OPCODE_1bh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 1bh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_1ch
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_1bh ENDP
-
-OPCODE_1ch PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 1ch
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_1dh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_1ch ENDP
-
-OPCODE_1dh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 1dh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_1eh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_1dh ENDP
-
-OPCODE_1eh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 1eh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_1fh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_1eh ENDP
-
-OPCODE_1fh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 1fh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_20h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_1fh ENDP
-
-OPCODE_20h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 20h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_21h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_20h ENDP
-
-OPCODE_21h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 21h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_22h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_21h ENDP
-
-OPCODE_22h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 22h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_23h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_22h ENDP
-
-OPCODE_23h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 23h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_24h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_23h ENDP
-
-OPCODE_24h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 24h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_25h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_24h ENDP
-
-OPCODE_25h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 25h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_26h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_25h ENDP
-
-OPCODE_26h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 26h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_27h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_26h ENDP
-
-OPCODE_27h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 27h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_28h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_27h ENDP
-
-OPCODE_28h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 28h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_29h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_28h ENDP
-
-OPCODE_29h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 29h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_2ah
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_29h ENDP
-
-OPCODE_2ah PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 2ah
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_2bh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_2ah ENDP
-
-OPCODE_2bh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 2bh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_2ch
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_2bh ENDP
-
-OPCODE_2ch PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 2ch
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_2dh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_2ch ENDP
-
-OPCODE_2dh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 2dh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_2eh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_2dh ENDP
-
-OPCODE_2eh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 2eh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_2fh
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_2eh ENDP
-
-OPCODE_2fh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 2fh
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_30h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_2fh ENDP
-
-OPCODE_30h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 30h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_31h
-    jmp     @@done
-
-    @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
-    ret
-OPCODE_30h ENDP
-
-OPCODE_31h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    xor     bl, 31h
-    cmp     bl, 00h
-    je      @@continue
-    call    OPCODE_32h
-    jmp     @@done
-
-    @@continue:
-
+    call    loadReg
 
     @@done:
     pop     bx
@@ -1328,18 +1856,40 @@ OPCODE_31h PROC
 OPCODE_31h ENDP
 
 OPCODE_32h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 32h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_33h
-    jmp     @@done
-
+        call    OPCODE_33h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    call    getByte
+    mov     dl, al
+    call    printByte
+    call    loadNewline
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_xor
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
 
     @@done:
     pop     bx
@@ -1348,18 +1898,40 @@ OPCODE_32h PROC
 OPCODE_32h ENDP
 
 OPCODE_33h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 33h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_34h
-    jmp     @@done
-
+        call    OPCODE_34h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    call    getByte
+    mov     dl, al
+    call    printByte
+    call    loadNewline
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_xor
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
 
     @@done:
     pop     bx
@@ -1368,18 +1940,28 @@ OPCODE_33h PROC
 OPCODE_33h ENDP
 
 OPCODE_34h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 34h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_35h
-    jmp     @@done
-
+        call    OPCODE_35h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_xor
+    call    loadTextToBuffer
+
+    lea     si, reg_al
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getByte
+    call    printByte
 
     @@done:
     pop     bx
@@ -1388,18 +1970,28 @@ OPCODE_34h PROC
 OPCODE_34h ENDP
 
 OPCODE_35h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 35h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_36h
-    jmp     @@done
-
+        call    OPCODE_36h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_xor
+    call    loadTextToBuffer
+
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getWord
+    call    printWord
 
     @@done:
     pop     bx
@@ -1408,18 +2000,18 @@ OPCODE_35h PROC
 OPCODE_35h ENDP
 
 OPCODE_36h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 36h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_37h
-    jmp     @@done
-
+        call    OPCODE_37h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    mov     byte ptr prefix, al
 
     @@done:
     pop     bx
@@ -1428,18 +2020,21 @@ OPCODE_36h PROC
 OPCODE_36h ENDP
 
 OPCODE_37h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 37h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_38h
-    jmp     @@done
-
+        call    OPCODE_38h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_aaa
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1448,18 +2043,37 @@ OPCODE_37h PROC
 OPCODE_37h ENDP
 
 OPCODE_38h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 38h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_39h
-    jmp     @@done
-
+        call    OPCODE_39h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_cmp
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
 
     @@done:
     pop     bx
@@ -1468,18 +2082,37 @@ OPCODE_38h PROC
 OPCODE_38h ENDP
 
 OPCODE_39h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 39h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_3ah
-    jmp     @@done
-
+        call    OPCODE_3ah
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    call    getByte
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_cmp
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
 
     @@done:
     pop     bx
@@ -1488,18 +2121,40 @@ OPCODE_39h PROC
 OPCODE_39h ENDP
 
 OPCODE_3ah PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 3ah
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_3bh
-    jmp     @@done
-
+        call    OPCODE_3bh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    call    getByte
+    mov     dl, al
+    call    printByte
+    call    loadNewline
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_cmp
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 0h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
 
     @@done:
     pop     bx
@@ -1508,18 +2163,40 @@ OPCODE_3ah PROC
 OPCODE_3ah ENDP
 
 OPCODE_3bh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 3bh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_3ch
-    jmp     @@done
-
+        call    OPCODE_3ch
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    call    getByte
+    mov     dl, al
+    call    printByte
+    call    loadNewline
+    call    getModRegRM
+    ;;test
+    call loadComment
+    mov dl, byte ptr opcodeMod
+    call printByte
+    mov dl, byte ptr opcodeReg
+    call printByte
+    mov dl, byte ptr opcodeRM
+    call printByte
+    call loadNewline
+    ;;end
+    push    si
+    lea     si, ins_cmp
+    call    loadTextToBuffer
+    pop     si
+    mov     dl, 1h
+    call    loadReg
+    call    loadCommaSpace
+    call    loadModRM
 
     @@done:
     pop     bx
@@ -1528,18 +2205,28 @@ OPCODE_3bh PROC
 OPCODE_3bh ENDP
 
 OPCODE_3ch PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 3ch
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_3dh
-    jmp     @@done
-
+        call    OPCODE_3dh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_cmp
+    call    loadTextToBuffer
+
+    lea     si, reg_al
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getByte
+    call    printByte
 
     @@done:
     pop     bx
@@ -1548,18 +2235,28 @@ OPCODE_3ch PROC
 OPCODE_3ch ENDP
 
 OPCODE_3dh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 3dh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_3eh
-    jmp     @@done
-
+        call    OPCODE_3eh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_cmp
+    call    loadTextToBuffer
+
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    pop     si
+
+    call    getWord
+    call    printWord
 
     @@done:
     pop     bx
@@ -1568,18 +2265,18 @@ OPCODE_3dh PROC
 OPCODE_3dh ENDP
 
 OPCODE_3eh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 3eh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_3fh
-    jmp     @@done
-
+        call    OPCODE_3fh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    mov     byte ptr prefix, al
 
     @@done:
     pop     bx
@@ -1588,18 +2285,21 @@ OPCODE_3eh PROC
 OPCODE_3eh ENDP
 
 OPCODE_3fh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 3fh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_40h
-    jmp     @@done
-
+        call    OPCODE_40h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_aas
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1608,18 +2308,23 @@ OPCODE_3fh PROC
 OPCODE_3fh ENDP
 
 OPCODE_40h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 40h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_41h
-    jmp     @@done
-
+        call    OPCODE_41h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1628,18 +2333,23 @@ OPCODE_40h PROC
 OPCODE_40h ENDP
 
 OPCODE_41h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 41h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_42h
-    jmp     @@done
-
+        call    OPCODE_42h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    lea     si, reg_cx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1648,18 +2358,23 @@ OPCODE_41h PROC
 OPCODE_41h ENDP
 
 OPCODE_42h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 42h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_43h
-    jmp     @@done
-
+        call    OPCODE_43h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    lea     si, reg_dx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1668,18 +2383,23 @@ OPCODE_42h PROC
 OPCODE_42h ENDP
 
 OPCODE_43h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 43h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_44h
-    jmp     @@done
-
+        call    OPCODE_44h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    lea     si, reg_bx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1688,18 +2408,23 @@ OPCODE_43h PROC
 OPCODE_43h ENDP
 
 OPCODE_44h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 44h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_45h
-    jmp     @@done
-
+        call    OPCODE_45h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    lea     si, reg_sp
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1708,18 +2433,23 @@ OPCODE_44h PROC
 OPCODE_44h ENDP
 
 OPCODE_45h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 45h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_46h
-    jmp     @@done
-
+        call    OPCODE_46h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    lea     si, reg_bp
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1728,18 +2458,23 @@ OPCODE_45h PROC
 OPCODE_45h ENDP
 
 OPCODE_46h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 46h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_47h
-    jmp     @@done
-
+        call    OPCODE_47h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    lea     si, reg_si
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1748,18 +2483,23 @@ OPCODE_46h PROC
 OPCODE_46h ENDP
 
 OPCODE_47h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 47h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_48h
-    jmp     @@done
-
+        call    OPCODE_48h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    lea     si, reg_di
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1768,18 +2508,23 @@ OPCODE_47h PROC
 OPCODE_47h ENDP
 
 OPCODE_48h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 48h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_49h
-    jmp     @@done
-
+        call    OPCODE_49h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1788,18 +2533,23 @@ OPCODE_48h PROC
 OPCODE_48h ENDP
 
 OPCODE_49h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 49h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_4ah
-    jmp     @@done
-
+        call    OPCODE_4ah
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    lea     si, reg_cx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1808,18 +2558,23 @@ OPCODE_49h PROC
 OPCODE_49h ENDP
 
 OPCODE_4ah PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 4ah
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_4bh
-    jmp     @@done
-
+        call    OPCODE_4bh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    lea     si, reg_dx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1828,18 +2583,23 @@ OPCODE_4ah PROC
 OPCODE_4ah ENDP
 
 OPCODE_4bh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 4bh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_4ch
-    jmp     @@done
-
+        call    OPCODE_4ch
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    lea     si, reg_bx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1848,18 +2608,23 @@ OPCODE_4bh PROC
 OPCODE_4bh ENDP
 
 OPCODE_4ch PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 4ch
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_4dh
-    jmp     @@done
-
+        call    OPCODE_4dh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    lea     si, reg_sp
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1868,18 +2633,23 @@ OPCODE_4ch PROC
 OPCODE_4ch ENDP
 
 OPCODE_4dh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 4dh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_4eh
-    jmp     @@done
-
+        call    OPCODE_4eh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    lea     si, reg_bp
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1888,18 +2658,23 @@ OPCODE_4dh PROC
 OPCODE_4dh ENDP
 
 OPCODE_4eh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 4eh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_4fh
-    jmp     @@done
-
+        call    OPCODE_4fh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    lea     si, reg_si
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1908,18 +2683,23 @@ OPCODE_4eh PROC
 OPCODE_4eh ENDP
 
 OPCODE_4fh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 4fh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_50h
-    jmp     @@done
-
+        call    OPCODE_50h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    lea     si, reg_di
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1928,18 +2708,23 @@ OPCODE_4fh PROC
 OPCODE_4fh ENDP
 
 OPCODE_50h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 50h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_51h
-    jmp     @@done
-
+        call    OPCODE_51h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1948,18 +2733,23 @@ OPCODE_50h PROC
 OPCODE_50h ENDP
 
 OPCODE_51h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 51h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_52h
-    jmp     @@done
-
+        call    OPCODE_52h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_cx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1968,18 +2758,23 @@ OPCODE_51h PROC
 OPCODE_51h ENDP
 
 OPCODE_52h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 52h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_53h
-    jmp     @@done
-
+        call    OPCODE_53h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_dx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -1988,18 +2783,23 @@ OPCODE_52h PROC
 OPCODE_52h ENDP
 
 OPCODE_53h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 53h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_54h
-    jmp     @@done
-
+        call    OPCODE_54h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_bx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2008,18 +2808,23 @@ OPCODE_53h PROC
 OPCODE_53h ENDP
 
 OPCODE_54h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 54h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_55h
-    jmp     @@done
-
+        call    OPCODE_55h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_sp
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2028,18 +2833,23 @@ OPCODE_54h PROC
 OPCODE_54h ENDP
 
 OPCODE_55h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 55h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_56h
-    jmp     @@done
-
+        call    OPCODE_56h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_bp
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2048,18 +2858,23 @@ OPCODE_55h PROC
 OPCODE_55h ENDP
 
 OPCODE_56h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 56h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_57h
-    jmp     @@done
-
+        call    OPCODE_57h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_si
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2068,18 +2883,23 @@ OPCODE_56h PROC
 OPCODE_56h ENDP
 
 OPCODE_57h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 57h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_58h
-    jmp     @@done
-
+        call    OPCODE_58h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    lea     si, reg_di
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2088,18 +2908,23 @@ OPCODE_57h PROC
 OPCODE_57h ENDP
 
 OPCODE_58h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 58h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_59h
-    jmp     @@done
-
+        call    OPCODE_59h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2108,18 +2933,23 @@ OPCODE_58h PROC
 OPCODE_58h ENDP
 
 OPCODE_59h PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 59h
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_5ah
-    jmp     @@done
-
+        call    OPCODE_5ah
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_cx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2128,18 +2958,23 @@ OPCODE_59h PROC
 OPCODE_59h ENDP
 
 OPCODE_5ah PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 5ah
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_5bh
-    jmp     @@done
-
+        call    OPCODE_5bh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_dx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2148,18 +2983,23 @@ OPCODE_5ah PROC
 OPCODE_5ah ENDP
 
 OPCODE_5bh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 5bh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_5ch
-    jmp     @@done
-
+        call    OPCODE_5ch
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_bx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2168,18 +3008,23 @@ OPCODE_5bh PROC
 OPCODE_5bh ENDP
 
 OPCODE_5ch PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 5ch
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_5dh
-    jmp     @@done
-
+        call    OPCODE_5dh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_sp
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2188,18 +3033,23 @@ OPCODE_5ch PROC
 OPCODE_5ch ENDP
 
 OPCODE_5dh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 5dh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_5eh
-    jmp     @@done
-
+        call    OPCODE_5eh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_bp
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2208,18 +3058,23 @@ OPCODE_5dh PROC
 OPCODE_5dh ENDP
 
 OPCODE_5eh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 5eh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_5fh
-    jmp     @@done
-
+        call    OPCODE_5fh
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_si
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx
@@ -2228,18 +3083,28 @@ OPCODE_5eh PROC
 OPCODE_5eh ENDP
 
 OPCODE_5fh PROC
-    push    ax
-    push    bx
-
     mov     bl, al
     xor     bl, 5fh
     cmp     bl, 00h
     je      @@continue
-    call    OPCODE_60h
-    jmp     @@done
-
+        push si
+        lea si, ins_unknown
+        call loadTextToBuffer
+        pop si
+        ret
+        call    OPCODE_60h
+        ret
+    
     @@continue:
+    push    ax
+    push    bx
 
+    push    si
+    lea     si, ins_pop
+    call    loadTextToBuffer
+    lea     si, reg_di
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
     pop     bx

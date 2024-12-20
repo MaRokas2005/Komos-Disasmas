@@ -414,13 +414,11 @@ printCodeSegment PROC
             ;; end testing
 
             call    getByte
+            call    loadComment
+            mov     dl, al
+            call    printByte
+            call    loadNewline
 
-            ;; more testing
-            call loadComment
-            mov  dl, al
-            call printByte
-            ;call loadNewline
-            ;; end more testing
 
             call    OPCODE_00h
             call    loadNewline
