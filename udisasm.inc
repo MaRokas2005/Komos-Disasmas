@@ -373,7 +373,7 @@ printCodeSegment PROC
  
     @@read_and_print:
         cmp     word ptr usedBytes, 0ffh
-        jb      @@loop_write
+        jb      @@write
         ; scan 300 bytes of code segment
         call    fixScanPointer
         call    scanCodeSegment
@@ -382,53 +382,48 @@ printCodeSegment PROC
         lea     si, inputBuffer
 
         ; write to buffer
-        @@loop_write:
-            ; check if I am not in data segment
-            mov     ax, word ptr byteInFile
-            cmp     ax, word ptr dataSegmentStart
-            jne     @@loop_continue
-            mov     ax, word ptr byteInFile + 2
-            cmp     ax, word ptr dataSegmentStart + 2
-            je      @@done
-            
+        @@write:
+        ; ; what if used my input bytes
+        ; cmp     word ptr usedBytes, 0ffh
+        ; jae     @@scanning
+        ; check if I am not in data segment
+        mov     ax, word ptr byteInFile
+        cmp     ax, word ptr dataSegmentStart
+        jne     @@continue
+        mov     ax, word ptr byteInFile + 2
+        cmp     ax, word ptr dataSegmentStart + 2
+        jae      @@done
+
+        @@continue:
+        ;; testing
+        call loadComment
+        mov dx, word ptr byteInFile+2
+        call printWord
+        mov dx, word ptr byteInFile
+        call printWord
+        call loadNewline
+        call loadComment
+        mov dx, word ptr dataSegmentStart+2
+        call printWord
+        mov dx, word ptr dataSegmentStart
+        call printWord
+        call loadNewline
+        call loadComment
+        mov dx, word ptr usedBytes
+        call printWord
+        call loadNewline
+        ;; end testing
+
+        call    getByte
+        call    loadComment
+        mov     dl, al
+        call    printByte
+        call    loadNewline
 
 
-            @@loop_continue:
-            ;; testing
-            call loadComment
-            mov dx, word ptr byteInFile+2
-            call printWord
-            mov dx, word ptr byteInFile
-            call printWord
-            call loadNewline
-            call loadComment
-            mov dx, word ptr dataSegmentStart+2
-            call printWord
-            mov dx, word ptr dataSegmentStart
-            call printWord
-            call loadNewline
-            call loadComment
-            mov dx, word ptr usedBytes
-            call printWord
-            call loadNewline
-            ;; end testing
-
-            call    getByte
-            call    loadComment
-            mov     dl, al
-            call    printByte
-            call    loadNewline
-
-
-            call    OPCODE_00h
-            call    loadNewline
-            call    loadNewline
-            ; call    printOutputBuffer
-
-            cmp     outputLength, 0afh
-            jbe      @@loop_write
-        
-        ; print to output
+        call    OPCODE_00h
+        call    loadNewline
+        call    loadNewline
         call    printOutputBuffer
 
         jmp     @@read_and_print
