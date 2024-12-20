@@ -182,17 +182,12 @@ loadReg ENDP
 ;   add - reg to mem                                ;
 ;***************************************************;
 OPCODE_00h PROC
-    mov     bl, al
-    cmp     bl, 00h
-    cmp     bl, 00h
+    cmp     al, 00h
     je      @@continue
         call    OPCODE_01h
         ret
     
     @@continue:
-    push    ax
-    push    bx
-
     call    getByte
     call    getModRegRM
     ;;test
@@ -215,8 +210,6 @@ OPCODE_00h PROC
     call    loadReg
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_00h ENDP
 
@@ -226,7 +219,7 @@ OPCODE_00h ENDP
 ;   add - reg to mem                                ;
 ;***************************************************;
 OPCODE_01h PROC
-    cmp     bl, 01h
+    cmp     al, 01h
     je      @@continue
         call    OPCODE_02h
         ret
@@ -258,7 +251,7 @@ OPCODE_01h PROC
 OPCODE_01h ENDP
 
 OPCODE_02h PROC
-    cmp     bl, 02h
+    cmp     al, 02h
     je      @@continue
         call    OPCODE_03h
         ret
@@ -290,7 +283,7 @@ OPCODE_02h PROC
 OPCODE_02h ENDP
 
 OPCODE_03h PROC
-    cmp     bl, 03h
+    cmp     al, 03h
     je      @@continue
         call    OPCODE_04h
         ret
@@ -322,7 +315,7 @@ OPCODE_03h PROC
 OPCODE_03h ENDP
 
 OPCODE_04h PROC
-    cmp     bl, 04h
+    cmp     al, 04h
     je      @@continue
         call    OPCODE_05h
         ret
@@ -346,7 +339,7 @@ OPCODE_04h PROC
 OPCODE_04h ENDP
 
 OPCODE_05h PROC
-    cmp     bl, 05h
+    cmp     al, 05h
     je      @@continue
         call    OPCODE_06h
         ret
@@ -370,7 +363,7 @@ OPCODE_05h PROC
 OPCODE_05h ENDP
 
 OPCODE_06h PROC
-    cmp     bl, 06h
+    cmp     al, 06h
     je      @@continue
         call    OPCODE_07h
         ret
@@ -389,7 +382,7 @@ OPCODE_06h PROC
 OPCODE_06h ENDP
 
 OPCODE_07h PROC
-    cmp     bl, 07h
+    cmp     al, 07h
     je      @@continue
         call    OPCODE_08h
         ret
@@ -408,7 +401,7 @@ OPCODE_07h PROC
 OPCODE_07h ENDP
 
 OPCODE_08h PROC
-    cmp     bl, 08h
+    cmp     al, 08h
     je      @@continue
         call    OPCODE_09h
         ret
@@ -440,7 +433,7 @@ OPCODE_08h PROC
 OPCODE_08h ENDP
 
 OPCODE_09h PROC
-    cmp     bl, 09h
+    cmp     al, 09h
     je      @@continue
         call    OPCODE_0ah
         ret
@@ -472,7 +465,7 @@ OPCODE_09h PROC
 OPCODE_09h ENDP
 
 OPCODE_0ah PROC
-    cmp     bl, 0ah
+    cmp     al, 0ah
     je      @@continue
         call    OPCODE_0bh
         ret
@@ -504,7 +497,7 @@ OPCODE_0ah PROC
 OPCODE_0ah ENDP
 
 OPCODE_0bh PROC
-    cmp     bl, 0bh
+    cmp     al, 0bh
     je      @@continue
         call    OPCODE_0ch
         ret
@@ -536,7 +529,7 @@ OPCODE_0bh PROC
 OPCODE_0bh ENDP
 
 OPCODE_0ch PROC
-    cmp     bl, 0ch
+    cmp     al, 0ch
     je      @@continue
         call    OPCODE_0dh
         ret
@@ -560,7 +553,7 @@ OPCODE_0ch PROC
 OPCODE_0ch ENDP
 
 OPCODE_0dh PROC
-    cmp     bl, 0dh
+    cmp     al, 0dh
     je      @@continue
         call    OPCODE_0eh
         ret
@@ -584,7 +577,7 @@ OPCODE_0dh PROC
 OPCODE_0dh ENDP
 
 OPCODE_0eh PROC
-    cmp     bl, 0eh
+    cmp     al, 0eh
     je      @@continue
         call    OPCODE_0fh
         ret
@@ -603,7 +596,7 @@ OPCODE_0eh PROC
 OPCODE_0eh ENDP
 
 OPCODE_0fh PROC
-    cmp     bl, 0fh
+    cmp     al, 0fh
     je      @@continue
         call    OPCODE_10h
         ret
@@ -612,11 +605,8 @@ OPCODE_0fh PROC
     push    si
 
     call loadNewline
-    push si
     lea si, ins_unknown
     call loadTextToBuffer
-    pop si
-    ret
 
     @@done:
     pop     si
@@ -624,7 +614,7 @@ OPCODE_0fh PROC
 OPCODE_0fh ENDP
 
 OPCODE_10h PROC
-    cmp     bl, 10h
+    cmp     al, 10h
     je      @@continue
         call    OPCODE_11h
         ret
@@ -656,7 +646,7 @@ OPCODE_10h PROC
 OPCODE_10h ENDP
 
 OPCODE_11h PROC
-    cmp     bl, 11h
+    cmp     al, 11h
     je      @@continue
         call    OPCODE_12h
         ret
@@ -688,7 +678,7 @@ OPCODE_11h PROC
 OPCODE_11h ENDP
 
 OPCODE_12h PROC
-    cmp     bl, 12h
+    cmp     al, 12h
     je      @@continue
         call    OPCODE_13h
         ret
@@ -720,7 +710,7 @@ OPCODE_12h PROC
 OPCODE_12h ENDP
 
 OPCODE_13h PROC
-    cmp     bl, 13h
+    cmp     al, 13h
     je      @@continue
         call    OPCODE_14h
         ret
@@ -752,7 +742,7 @@ OPCODE_13h PROC
 OPCODE_13h ENDP
 
 OPCODE_14h PROC
-    cmp     bl, 14h
+    cmp     al, 14h
     je      @@continue
         call    OPCODE_15h
         ret
@@ -776,7 +766,7 @@ OPCODE_14h PROC
 OPCODE_14h ENDP
 
 OPCODE_15h PROC
-    cmp     bl, 15h
+    cmp     al, 15h
     je      @@continue
         call    OPCODE_16h
         ret
@@ -800,7 +790,7 @@ OPCODE_15h PROC
 OPCODE_15h ENDP
 
 OPCODE_16h PROC
-    cmp     bl, 16h
+    cmp     al, 16h
     je      @@continue
         call    OPCODE_17h
         ret
@@ -819,7 +809,7 @@ OPCODE_16h PROC
 OPCODE_16h ENDP
 
 OPCODE_17h PROC
-    cmp     bl, 17h
+    cmp     al, 17h
     je      @@continue
         call    OPCODE_18h
         ret
@@ -838,7 +828,7 @@ OPCODE_17h PROC
 OPCODE_17h ENDP
 
 OPCODE_18h PROC
-    cmp     bl, 18h
+    cmp     al, 18h
     je      @@continue
         call    OPCODE_19h
         ret
@@ -870,7 +860,7 @@ OPCODE_18h PROC
 OPCODE_18h ENDP
 
 OPCODE_19h PROC
-    cmp     bl, 19h
+    cmp     al, 19h
     je      @@continue
         call    OPCODE_1ah
         ret
@@ -902,7 +892,7 @@ OPCODE_19h PROC
 OPCODE_19h ENDP
 
 OPCODE_1ah PROC
-    cmp     bl, 1ah
+    cmp     al, 1ah
     je      @@continue
         call    OPCODE_1bh
         ret
@@ -934,7 +924,7 @@ OPCODE_1ah PROC
 OPCODE_1ah ENDP
 
 OPCODE_1bh PROC
-    cmp     bl, 1bh
+    cmp     al, 1bh
     je      @@continue
         call    OPCODE_1ch
         ret
@@ -966,7 +956,7 @@ OPCODE_1bh PROC
 OPCODE_1bh ENDP
 
 OPCODE_1ch PROC
-    cmp     bl, 1ch
+    cmp     al, 1ch
     je      @@continue
         call    OPCODE_1dh
         ret
@@ -990,7 +980,7 @@ OPCODE_1ch PROC
 OPCODE_1ch ENDP
 
 OPCODE_1dh PROC
-    cmp     bl, 1dh
+    cmp     al, 1dh
     je      @@continue
         call    OPCODE_1eh
         ret
@@ -1014,7 +1004,7 @@ OPCODE_1dh PROC
 OPCODE_1dh ENDP
 
 OPCODE_1eh PROC
-    cmp     bl, 1eh
+    cmp     al, 1eh
     je      @@continue
         call    OPCODE_1fh
         ret
@@ -1033,7 +1023,7 @@ OPCODE_1eh PROC
 OPCODE_1eh ENDP
 
 OPCODE_1fh PROC
-    cmp     bl, 1fh
+    cmp     al, 1fh
     je      @@continue
         call    OPCODE_20h
         ret
@@ -1052,7 +1042,7 @@ OPCODE_1fh PROC
 OPCODE_1fh ENDP
 
 OPCODE_20h PROC
-    cmp     bl, 20h
+    cmp     al, 20h
     je      @@continue
         call    OPCODE_21h
         ret
@@ -1084,7 +1074,7 @@ OPCODE_20h PROC
 OPCODE_20h ENDP
 
 OPCODE_21h PROC
-    cmp     bl, 21h
+    cmp     al, 21h
     je      @@continue
         call    OPCODE_22h
         ret
@@ -1116,7 +1106,7 @@ OPCODE_21h PROC
 OPCODE_21h ENDP
 
 OPCODE_22h PROC
-    cmp     bl, 22h
+    cmp     al, 22h
     je      @@continue
         call    OPCODE_23h
         ret
@@ -1148,7 +1138,7 @@ OPCODE_22h PROC
 OPCODE_22h ENDP
 
 OPCODE_23h PROC
-    cmp     bl, 23h
+    cmp     al, 23h
     je      @@continue
         call    OPCODE_24h
         ret
@@ -1183,7 +1173,7 @@ OPCODE_23h PROC
 OPCODE_23h ENDP
 
 OPCODE_24h PROC
-    cmp     bl, 24h
+    cmp     al, 24h
     je      @@continue
         call    OPCODE_25h
         ret
@@ -1207,7 +1197,7 @@ OPCODE_24h PROC
 OPCODE_24h ENDP
 
 OPCODE_25h PROC
-    cmp     bl, 25h
+    cmp     al, 25h
     je      @@continue
         call    OPCODE_26h
         ret
@@ -1231,7 +1221,7 @@ OPCODE_25h PROC
 OPCODE_25h ENDP
 
 OPCODE_26h PROC
-    cmp     bl, 26h
+    cmp     al, 26h
     je      @@continue
         call    OPCODE_27h
         ret
@@ -1244,7 +1234,7 @@ OPCODE_26h PROC
 OPCODE_26h ENDP
 
 OPCODE_27h PROC
-    cmp     bl, 27h
+    cmp     al, 27h
     je      @@continue
         call    OPCODE_28h
         ret
@@ -1260,7 +1250,7 @@ OPCODE_27h PROC
 OPCODE_27h ENDP
 
 OPCODE_28h PROC
-    cmp     bl, 28h
+    cmp     al, 28h
     je      @@continue
         call    OPCODE_29h
         ret
@@ -1292,7 +1282,7 @@ OPCODE_28h PROC
 OPCODE_28h ENDP
 
 OPCODE_29h PROC
-    cmp     bl, 29h
+    cmp     al, 29h
     je      @@continue
         call    OPCODE_2ah
         ret
@@ -1324,7 +1314,7 @@ OPCODE_29h PROC
 OPCODE_29h ENDP
 
 OPCODE_2ah PROC
-    cmp     bl, 2ah
+    cmp     al, 2ah
     je      @@continue
         call    OPCODE_2bh
         ret
@@ -1356,7 +1346,7 @@ OPCODE_2ah PROC
 OPCODE_2ah ENDP
 
 OPCODE_2bh PROC
-    cmp     bl, 2bh
+    cmp     al, 2bh
     je      @@continue
         call    OPCODE_2ch
         ret
@@ -1390,9 +1380,7 @@ OPCODE_2bh PROC
 OPCODE_2bh ENDP
 
 OPCODE_2ch PROC
-    mov     bl, al
     cmp     bl, 2ch
-    cmp     bl, 00h
     je      @@continue
         call    OPCODE_2dh
         ret
@@ -1416,7 +1404,7 @@ OPCODE_2ch PROC
 OPCODE_2ch ENDP
 
 OPCODE_2dh PROC
-    cmp     bl, 2dh
+    cmp     al, 2dh
     je      @@continue
         call    OPCODE_2eh
         ret
@@ -1440,7 +1428,7 @@ OPCODE_2dh PROC
 OPCODE_2dh ENDP
 
 OPCODE_2eh PROC
-    cmp     bl, 2eh
+    cmp     al, 2eh
     je      @@continue
         call    OPCODE_2fh
         ret
@@ -1453,7 +1441,7 @@ OPCODE_2eh PROC
 OPCODE_2eh ENDP
 
 OPCODE_2fh PROC
-    cmp     bl, 2fh
+    cmp     al, 2fh
     je      @@continue
         call    OPCODE_30h
         ret
@@ -1469,7 +1457,7 @@ OPCODE_2fh PROC
 OPCODE_2fh ENDP
 
 OPCODE_30h PROC
-    cmp     bl, 30h
+    cmp     al, 30h
     je      @@continue
         call    OPCODE_31h
         ret
@@ -1501,7 +1489,7 @@ OPCODE_30h PROC
 OPCODE_30h ENDP
 
 OPCODE_31h PROC
-    cmp     bl, 31h
+    cmp     al, 31h
     je      @@continue
         call    OPCODE_32h
         ret
@@ -1533,7 +1521,7 @@ OPCODE_31h PROC
 OPCODE_31h ENDP
 
 OPCODE_32h PROC
-    cmp     bl, 32h
+    cmp     al, 32h
     je      @@continue
         call    OPCODE_33h
         ret
@@ -1565,7 +1553,7 @@ OPCODE_32h PROC
 OPCODE_32h ENDP
 
 OPCODE_33h PROC
-    cmp     bl, 33h
+    cmp     al, 33h
     je      @@continue
         call    OPCODE_34h
         ret
@@ -1598,7 +1586,7 @@ OPCODE_33h PROC
 OPCODE_33h ENDP
 
 OPCODE_34h PROC
-    cmp     bl, 34h
+    cmp     al, 34h
     je      @@continue
         call    OPCODE_35h
         ret
@@ -1622,7 +1610,7 @@ OPCODE_34h PROC
 OPCODE_34h ENDP
 
 OPCODE_35h PROC
-    cmp     bl, 35h
+    cmp     al, 35h
     je      @@continue
         call    OPCODE_36h
         ret
@@ -1646,7 +1634,7 @@ OPCODE_35h PROC
 OPCODE_35h ENDP
 
 OPCODE_36h PROC
-    cmp     bl, 36h
+    cmp     al, 36h
     je      @@continue
         call    OPCODE_37h
         ret
@@ -1659,7 +1647,7 @@ OPCODE_36h PROC
 OPCODE_36h ENDP
 
 OPCODE_37h PROC
-    cmp     bl, 37h
+    cmp     al, 37h
     je      @@continue
         call    OPCODE_38h
         ret
@@ -1675,7 +1663,7 @@ OPCODE_37h PROC
 OPCODE_37h ENDP
 
 OPCODE_38h PROC
-    cmp     bl, 38h
+    cmp     al, 38h
     je      @@continue
         call    OPCODE_39h
         ret
@@ -1707,7 +1695,7 @@ OPCODE_38h PROC
 OPCODE_38h ENDP
 
 OPCODE_39h PROC
-    cmp     bl, 39h
+    cmp     al, 39h
     je      @@continue
         call    OPCODE_3ah
         ret
@@ -1739,7 +1727,7 @@ OPCODE_39h PROC
 OPCODE_39h ENDP
 
 OPCODE_3ah PROC
-    cmp     bl, 3ah
+    cmp     al, 3ah
     je      @@continue
         call    OPCODE_3bh
         ret
@@ -1772,13 +1760,13 @@ OPCODE_3ah ENDP
 
 ; what the fuck is happening here or lower????????????????????
 OPCODE_3bh PROC
-    cmp     bl, 3bh
+    cmp     al, 3bh
     je      @@continue
-        push si
-        lea si, ins_unknown
-        call loadTextToBuffer
-        pop si
-        ret
+        ; push si
+        ; lea si, ins_unknown
+        ; call loadTextToBuffer
+        ; pop si
+        ; ret
         call    OPCODE_3ch
         ret
     
@@ -1809,13 +1797,13 @@ OPCODE_3bh PROC
 OPCODE_3bh ENDP
 
 OPCODE_3ch PROC
-    cmp     bl, 3ch
+    cmp     al, 3ch
     je      @@continue
-        push si
-        lea si, ins_unknown
-        call loadTextToBuffer
-        pop si
-        ret
+        ; push si
+        ; lea si, ins_unknown
+        ; call loadTextToBuffer
+        ; pop si
+        ; ret
         call    OPCODE_3dh
         ret
     
@@ -1841,7 +1829,7 @@ OPCODE_3ch PROC
 OPCODE_3ch ENDP
 
 OPCODE_3dh PROC
-    cmp     bl, 3dh
+    cmp     al, 3dh
     je      @@continue
         call    OPCODE_3eh
         ret
@@ -1865,7 +1853,7 @@ OPCODE_3dh PROC
 OPCODE_3dh ENDP
 
 OPCODE_3eh PROC
-    cmp     bl, 3eh
+    cmp     al, 3eh
     je      @@continue
         call    OPCODE_3fh
         ret
@@ -1878,7 +1866,7 @@ OPCODE_3eh PROC
 OPCODE_3eh ENDP
 
 OPCODE_3fh PROC
-    cmp     bl, 3fh
+    cmp     al, 3fh
     je      @@continue
         call    OPCODE_40h
         ret
@@ -1894,7 +1882,7 @@ OPCODE_3fh PROC
 OPCODE_3fh ENDP
 
 OPCODE_40h PROC
-    cmp     bl, 40h
+    cmp     al, 40h
     je      @@continue
         call    OPCODE_41h
         ret
@@ -1912,7 +1900,7 @@ OPCODE_40h PROC
 OPCODE_40h ENDP
 
 OPCODE_41h PROC
-    cmp     bl, 41h
+    cmp     al, 41h
     je      @@continue
         call    OPCODE_42h
         ret
@@ -1930,7 +1918,7 @@ OPCODE_41h PROC
 OPCODE_41h ENDP
 
 OPCODE_42h PROC
-    cmp     bl, 42h
+    cmp     al, 42h
     je      @@continue
         call    OPCODE_43h
         ret
@@ -1948,7 +1936,7 @@ OPCODE_42h PROC
 OPCODE_42h ENDP
 
 OPCODE_43h PROC
-    cmp     bl, 43h
+    cmp     al, 43h
     je      @@continue
         call    OPCODE_44h
         ret
@@ -1966,7 +1954,7 @@ OPCODE_43h PROC
 OPCODE_43h ENDP
 
 OPCODE_44h PROC
-    cmp     bl, 44h
+    cmp     al, 44h
     je      @@continue
         call    OPCODE_45h
         ret
@@ -1984,7 +1972,7 @@ OPCODE_44h PROC
 OPCODE_44h ENDP
 
 OPCODE_45h PROC
-    cmp     bl, 45h
+    cmp     al, 45h
     je      @@continue
         call    OPCODE_46h
         ret
@@ -2002,7 +1990,7 @@ OPCODE_45h PROC
 OPCODE_45h ENDP
 
 OPCODE_46h PROC
-    cmp     bl, 46h
+    cmp     al, 46h
     je      @@continue
         call    OPCODE_47h
         ret
@@ -2020,7 +2008,7 @@ OPCODE_46h PROC
 OPCODE_46h ENDP
 
 OPCODE_47h PROC
-    cmp     bl, 47h
+    cmp     al, 47h
     je      @@continue
         call    OPCODE_48h
         ret
@@ -2038,7 +2026,7 @@ OPCODE_47h PROC
 OPCODE_47h ENDP
 
 OPCODE_48h PROC
-    cmp     bl, 48h
+    cmp     al, 48h
     je      @@continue
         call    OPCODE_49h
         ret
@@ -2056,7 +2044,7 @@ OPCODE_48h PROC
 OPCODE_48h ENDP
 
 OPCODE_49h PROC
-    cmp     bl, 49h
+    cmp     al, 49h
     je      @@continue
         call    OPCODE_4ah
         ret
@@ -2074,7 +2062,7 @@ OPCODE_49h PROC
 OPCODE_49h ENDP
 
 OPCODE_4ah PROC
-    cmp     bl, 4ah
+    cmp     al, 4ah
     je      @@continue
         call    OPCODE_4bh
         ret
@@ -2092,7 +2080,7 @@ OPCODE_4ah PROC
 OPCODE_4ah ENDP
 
 OPCODE_4bh PROC
-    cmp     bl, 4bh
+    cmp     al, 4bh
     je      @@continue
         call    OPCODE_4ch
         ret
@@ -2110,7 +2098,7 @@ OPCODE_4bh PROC
 OPCODE_4bh ENDP
 
 OPCODE_4ch PROC
-    cmp     bl, 4ch
+    cmp     al, 4ch
     je      @@continue
         call    OPCODE_4dh
         ret
@@ -2128,7 +2116,7 @@ OPCODE_4ch PROC
 OPCODE_4ch ENDP
 
 OPCODE_4dh PROC
-    cmp     bl, 4dh
+    cmp     al, 4dh
     je      @@continue
         call    OPCODE_4eh
         ret
@@ -2146,7 +2134,7 @@ OPCODE_4dh PROC
 OPCODE_4dh ENDP
 
 OPCODE_4eh PROC
-    cmp     bl, 4eh
+    cmp     al, 4eh
     je      @@continue
         call    OPCODE_4fh
         ret
@@ -2164,7 +2152,7 @@ OPCODE_4eh PROC
 OPCODE_4eh ENDP
 
 OPCODE_4fh PROC
-    cmp     bl, 4fh
+    cmp     al, 4fh
     je      @@continue
         call    OPCODE_50h
         ret
@@ -2182,7 +2170,7 @@ OPCODE_4fh PROC
 OPCODE_4fh ENDP
 
 OPCODE_50h PROC
-    cmp     bl, 50h
+    cmp     al, 50h
     je      @@continue
         call    OPCODE_51h
         ret
@@ -2200,7 +2188,7 @@ OPCODE_50h PROC
 OPCODE_50h ENDP
 
 OPCODE_51h PROC
-    cmp     bl, 51h
+    cmp     al, 51h
     je      @@continue
         call    OPCODE_52h
         ret
@@ -2218,7 +2206,7 @@ OPCODE_51h PROC
 OPCODE_51h ENDP
 
 OPCODE_52h PROC
-    cmp     bl, 52h
+    cmp     al, 52h
     je      @@continue
         call    OPCODE_53h
         ret
@@ -2236,7 +2224,7 @@ OPCODE_52h PROC
 OPCODE_52h ENDP
 
 OPCODE_53h PROC
-    cmp     bl, 53h
+    cmp     al, 53h
     je      @@continue
         call    OPCODE_54h
         ret
@@ -2254,7 +2242,7 @@ OPCODE_53h PROC
 OPCODE_53h ENDP
 
 OPCODE_54h PROC
-    cmp     bl, 54h
+    cmp     al, 54h
     je      @@continue
         call    OPCODE_55h
         ret
@@ -2272,7 +2260,7 @@ OPCODE_54h PROC
 OPCODE_54h ENDP
 
 OPCODE_55h PROC
-    cmp     bl, 55h
+    cmp     al, 55h
     je      @@continue
         call    OPCODE_56h
         ret
@@ -2290,7 +2278,7 @@ OPCODE_55h PROC
 OPCODE_55h ENDP
 
 OPCODE_56h PROC
-    cmp     bl, 56h
+    cmp     al, 56h
     je      @@continue
         call    OPCODE_57h
         ret
@@ -2308,7 +2296,7 @@ OPCODE_56h PROC
 OPCODE_56h ENDP
 
 OPCODE_57h PROC
-    cmp     bl, 57h
+    cmp     al, 57h
     je      @@continue
         call    OPCODE_58h
         ret
@@ -2326,7 +2314,7 @@ OPCODE_57h PROC
 OPCODE_57h ENDP
 
 OPCODE_58h PROC
-    cmp     bl, 58h
+    cmp     al, 58h
     je      @@continue
         call    OPCODE_59h
         ret
@@ -2344,7 +2332,7 @@ OPCODE_58h PROC
 OPCODE_58h ENDP
 
 OPCODE_59h PROC
-    cmp     bl, 59h
+    cmp     al, 59h
     je      @@continue
         call    OPCODE_5ah
         ret
@@ -2362,7 +2350,7 @@ OPCODE_59h PROC
 OPCODE_59h ENDP
 
 OPCODE_5ah PROC
-    cmp     bl, 5ah
+    cmp     al, 5ah
     je      @@continue
         call    OPCODE_5bh
         ret
@@ -2380,7 +2368,7 @@ OPCODE_5ah PROC
 OPCODE_5ah ENDP
 
 OPCODE_5bh PROC
-    cmp     bl, 5bh
+    cmp     al, 5bh
     je      @@continue
         call    OPCODE_5ch
         ret
@@ -2398,7 +2386,7 @@ OPCODE_5bh PROC
 OPCODE_5bh ENDP
 
 OPCODE_5ch PROC
-    cmp     bl, 5ch
+    cmp     al, 5ch
     je      @@continue
         call    OPCODE_5dh
         ret
@@ -2416,7 +2404,7 @@ OPCODE_5ch PROC
 OPCODE_5ch ENDP
 
 OPCODE_5dh PROC
-    cmp     bl, 5dh
+    cmp     al, 5dh
     je      @@continue
         call    OPCODE_5eh
         ret
@@ -2434,7 +2422,7 @@ OPCODE_5dh PROC
 OPCODE_5dh ENDP
 
 OPCODE_5eh PROC
-    cmp     bl, 5eh
+    cmp     al, 5eh
     je      @@continue
         call    OPCODE_5fh
         ret
@@ -2452,7 +2440,7 @@ OPCODE_5eh PROC
 OPCODE_5eh ENDP
 
 OPCODE_5fh PROC
-    cmp     bl, 5fh
+    cmp     al, 5fh
     je      @@continue
         push si
         lea si, ins_unknown

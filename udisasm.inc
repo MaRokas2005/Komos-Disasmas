@@ -381,11 +381,7 @@ printCodeSegment PROC
         je      @@done
         lea     si, inputBuffer
 
-        ; write to buffer
         @@write:
-        ; ; what if used my input bytes
-        ; cmp     word ptr usedBytes, 0ffh
-        ; jae     @@scanning
         ; check if I am not in data segment
         mov     ax, word ptr byteInFile
         cmp     ax, word ptr dataSegmentStart
@@ -420,7 +416,7 @@ printCodeSegment PROC
         call    printByte
         call    loadNewline
 
-
+        ; call    printOutputBuffer
         call    OPCODE_00h
         call    loadNewline
         call    loadNewline
