@@ -11,7 +11,9 @@ ins_lds         db "    lds     ", 0
 ins_lss         db "    lss     ", 0
 ins_lahf        db "    lahf    ", 0
 ins_sahf        db "    sahf    ", 0
+ins_pusha       db "    pusha   ", 0
 ins_pushf       db "    pushf   ", 0
+ins_popa        db "    popa    ", 0
 ins_popf        db "    popf    ", 0
 ins_ja          db "    ja      ", 0
 ins_jae         db "    jae     ", 0

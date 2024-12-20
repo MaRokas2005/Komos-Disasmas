@@ -1758,15 +1758,9 @@ OPCODE_3ah PROC
     ret
 OPCODE_3ah ENDP
 
-; what the fuck is happening here or lower????????????????????
 OPCODE_3bh PROC
     cmp     al, 3bh
     je      @@continue
-        ; push si
-        ; lea si, ins_unknown
-        ; call loadTextToBuffer
-        ; pop si
-        ; ret
         call    OPCODE_3ch
         ret
     
@@ -1799,18 +1793,10 @@ OPCODE_3bh ENDP
 OPCODE_3ch PROC
     cmp     al, 3ch
     je      @@continue
-        ; push si
-        ; lea si, ins_unknown
-        ; call loadTextToBuffer
-        ; pop si
-        ; ret
         call    OPCODE_3dh
         ret
     
     @@continue:
-    mov dx, 0ac97h
-    call printWord
-
     push    si
     lea     si, ins_cmp
     call    loadTextToBuffer
@@ -2442,11 +2428,6 @@ OPCODE_5eh ENDP
 OPCODE_5fh PROC
     cmp     al, 5fh
     je      @@continue
-        push si
-        lea si, ins_unknown
-        call loadTextToBuffer
-        pop si
-        ret
         call    OPCODE_60h
         ret
     
@@ -2463,642 +2444,611 @@ OPCODE_5fh PROC
 OPCODE_5fh ENDP
 
 OPCODE_60h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 60h
-    cmp     bl, 00h
+    cmp     al, 60h
     je      @@continue
-    call    OPCODE_61h
-    jmp     @@done
-
+        call    OPCODE_61h
+        ret
+    
     @@continue:
-
+    push    si
+    lea     si, ins_pusha
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_60h ENDP
 
 OPCODE_61h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 61h
-    cmp     bl, 00h
+    cmp     al, 61h
     je      @@continue
-    call    OPCODE_62h
-    jmp     @@done
-
+        call    OPCODE_62h
+        ret
+    
     @@continue:
-
+    push    si
+    lea     si, ins_popa
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_61h ENDP
 
 OPCODE_62h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 62h
-    cmp     bl, 00h
+    cmp     al, 62h
     je      @@continue
-    call    OPCODE_63h
-    jmp     @@done
-
+        call    OPCODE_63h
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_62h ENDP
 
 OPCODE_63h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 63h
-    cmp     bl, 00h
+    cmp     al, 63h
     je      @@continue
-    call    OPCODE_64h
-    jmp     @@done
-
+        call    OPCODE_64h
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_63h ENDP
 
 OPCODE_64h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 64h
-    cmp     bl, 00h
+    cmp     al, 64h
     je      @@continue
-    call    OPCODE_65h
-    jmp     @@done
-
+        call    OPCODE_65h
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_64h ENDP
 
 OPCODE_65h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 65h
-    cmp     bl, 00h
+    cmp     al, 65h
     je      @@continue
-    call    OPCODE_66h
-    jmp     @@done
-
+        call    OPCODE_66h
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_65h ENDP
 
 OPCODE_66h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 66h
-    cmp     bl, 00h
+    cmp     al, 66h
     je      @@continue
-    call    OPCODE_67h
-    jmp     @@done
-
+        call    OPCODE_67h
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_66h ENDP
 
 OPCODE_67h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 67h
-    cmp     bl, 00h
+    cmp     al, 67h
     je      @@continue
-    call    OPCODE_68h
-    jmp     @@done
-
+        call    OPCODE_68h
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_67h ENDP
 
 OPCODE_68h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 68h
-    cmp     bl, 00h
+    cmp     al, 68h
     je      @@continue
-    call    OPCODE_69h
-    jmp     @@done
-
+        call    OPCODE_69h
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_68h ENDP
 
 OPCODE_69h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 69h
-    cmp     bl, 00h
+    cmp     al, 69h
     je      @@continue
-    call    OPCODE_6ah
-    jmp     @@done
-
+        call    OPCODE_6ah
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_69h ENDP
 
 OPCODE_6ah PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 6ah
-    cmp     bl, 00h
+    cmp     al, 6ah
     je      @@continue
-    call    OPCODE_6bh
-    jmp     @@done
-
+        call    OPCODE_6bh
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_6ah ENDP
 
 OPCODE_6bh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 6bh
-    cmp     bl, 00h
+    cmp     al, 6bh
     je      @@continue
-    call    OPCODE_6ch
-    jmp     @@done
-
+        call    OPCODE_6ch
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_6bh ENDP
 
 OPCODE_6ch PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 6ch
-    cmp     bl, 00h
+    cmp     al, 6ch
     je      @@continue
-    call    OPCODE_6dh
-    jmp     @@done
-
+        call    OPCODE_6dh
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_6ch ENDP
 
 OPCODE_6dh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 6dh
-    cmp     bl, 00h
+    cmp     al, 6dh
     je      @@continue
-    call    OPCODE_6eh
-    jmp     @@done
-
+        call    OPCODE_6eh
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_6dh ENDP
 
 OPCODE_6eh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 6eh
-    cmp     bl, 00h
+    cmp     al, 6eh
     je      @@continue
-    call    OPCODE_6fh
-    jmp     @@done
-
+        call    OPCODE_6fh
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_6eh ENDP
 
 OPCODE_6fh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 6fh
-    cmp     bl, 00h
+    cmp     al, 6fh
     je      @@continue
-    call    OPCODE_70h
-    jmp     @@done
-
+        call    OPCODE_70h
+        ret
+    
     @@continue:
+    push    si
 
+    call loadNewline
+    lea si, ins_unknown
+    call loadTextToBuffer
 
     @@done:
-    pop     bx
-    pop     ax
+    pop     si
     ret
 OPCODE_6fh ENDP
 
 OPCODE_70h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 70h
-    cmp     bl, 00h
+    cmp     al, 70h
     je      @@continue
-    call    OPCODE_71h
-    jmp     @@done
-
+        call    OPCODE_71h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jo
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_70h ENDP
 
 OPCODE_71h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 71h
-    cmp     bl, 00h
+    cmp     al, 71h
     je      @@continue
-    call    OPCODE_72h
-    jmp     @@done
-
+        call    OPCODE_72h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jno
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_71h ENDP
 
 OPCODE_72h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 72h
-    cmp     bl, 00h
+    cmp     al, 72h
     je      @@continue
-    call    OPCODE_73h
-    jmp     @@done
-
+        call    OPCODE_73h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jb
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_72h ENDP
 
 OPCODE_73h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 73h
-    cmp     bl, 00h
+    cmp     al, 73h
     je      @@continue
-    call    OPCODE_74h
-    jmp     @@done
-
+        call    OPCODE_74h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jae
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_73h ENDP
 
 OPCODE_74h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 74h
-    cmp     bl, 00h
+    cmp     al, 74h
     je      @@continue
-    call    OPCODE_75h
-    jmp     @@done
-
+        call    OPCODE_75h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_je
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_74h ENDP
 
 OPCODE_75h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 75h
-    cmp     bl, 00h
+    cmp     al, 75h
     je      @@continue
-    call    OPCODE_76h
-    jmp     @@done
-
+        call    OPCODE_76h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jne
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_75h ENDP
 
 OPCODE_76h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 76h
-    cmp     bl, 00h
+    cmp     al, 76h
     je      @@continue
-    call    OPCODE_77h
-    jmp     @@done
-
+        call    OPCODE_77h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jbe
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_76h ENDP
 
 OPCODE_77h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 77h
-    cmp     bl, 00h
+    cmp     al, 77h
     je      @@continue
-    call    OPCODE_78h
-    jmp     @@done
-
+        call    OPCODE_78h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_ja
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_77h ENDP
 
 OPCODE_78h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 78h
-    cmp     bl, 00h
+    cmp     al, 78h
     je      @@continue
-    call    OPCODE_79h
-    jmp     @@done
-
+        call    OPCODE_79h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_js
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_78h ENDP
 
 OPCODE_79h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 79h
-    cmp     bl, 00h
+    cmp     al, 79h
     je      @@continue
-    call    OPCODE_7ah
-    jmp     @@done
-
+        call    OPCODE_7ah
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jns
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_79h ENDP
 
 OPCODE_7ah PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 7ah
-    cmp     bl, 00h
+    cmp     al, 7ah
     je      @@continue
-    call    OPCODE_7bh
-    jmp     @@done
-
+        call    OPCODE_7bh
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jp
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_7ah ENDP
 
 OPCODE_7bh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 7bh
-    cmp     bl, 00h
+    cmp     al, 7bh
     je      @@continue
-    call    OPCODE_7ch
-    jmp     @@done
-
+        call    OPCODE_7ch
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jnp
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_7bh ENDP
 
 OPCODE_7ch PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 7ch
-    cmp     bl, 00h
+    cmp     al, 7ch
     je      @@continue
-    call    OPCODE_7dh
-    jmp     @@done
-
+        call    OPCODE_7dh
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jl
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_7ch ENDP
 
 OPCODE_7dh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 7dh
-    cmp     bl, 00h
+    cmp     al, 7dh
     je      @@continue
-    call    OPCODE_7eh
-    jmp     @@done
-
+        call    OPCODE_7eh
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jge
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_7dh ENDP
 
 OPCODE_7eh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 7eh
-    cmp     bl, 00h
+    cmp     al, 7eh
     je      @@continue
-    call    OPCODE_7fh
-    jmp     @@done
-
+        call    OPCODE_7fh
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jle
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_7eh ENDP
 
 OPCODE_7fh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 7fh
-    cmp     bl, 00h
+    cmp     al, 7fh
     je      @@continue
-    call    OPCODE_80h
-    jmp     @@done
-
+        push si
+        lea si, ins_unknown
+        call loadTextToBuffer
+        pop si
+        ret
+        call    OPCODE_80h
+        ret
+    
     @@continue:
+    push    si
 
+    lea si, ins_jg
+    call loadTextToBuffer
+    pop     si
+    call    getByte
+    mov     dl, al
+    call    printByte
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_7fh ENDP
 

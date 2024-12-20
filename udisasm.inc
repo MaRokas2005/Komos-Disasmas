@@ -380,7 +380,6 @@ printCodeSegment PROC
         cmp     ax, 0
         je      @@done
         lea     si, inputBuffer
-
         @@write:
         ; check if I am not in data segment
         mov     ax, word ptr byteInFile
