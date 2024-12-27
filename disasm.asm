@@ -40,8 +40,6 @@ LOCALS @@
     tagSegCS    db  "cs:[ ", 0, "  "
     tagStart    db  "[ ", 0
     tagClose    db  " ]", 0
-    ;tagSegOFF   dw  offset tagSegES, offset tagSegDS, offset tagSegSS, offset tagSegCS
-    ; tagDWord    db  "dword ptr ", 0
 
     segModel    db  ".MODEL SMALL", 0
     segStack    db  ".STACK ", 0
@@ -51,6 +49,11 @@ LOCALS @@
 
     ;;testing variables
     scannning   db  ";;  SCANNING...", 0
+    test_code   db  ";;           code byte in file : ", 0
+    test_data   db  ";;     data start byte in file : ", 0
+    test_used   db  ";;  used bytes in code segment : ", 0
+    test_curr   db  ";;                      opcode : ", 0
+    test_si     db  ";;                 si register : ", 0
 
     include     dmessage.inc
     include     dhelp.inc

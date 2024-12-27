@@ -32,16 +32,11 @@ ins_jp          db "    jp      ", 0
 ins_jo          db "    jo      ", 0
 ins_jns         db "    jns     ", 0
 ins_js          db "    js      ", 0
-ins_add         db "    add     ", 0
-ins_adc         db "    adc     ", 0
 ins_inc         db "    inc     ", 0
 ins_aaa         db "    aaa     ", 0
 ins_daa         db "    daa     ", 0
-ins_sub         db "    sub     ", 0
-ins_sbb         db "    sbb     ", 0
 ins_dec         db "    dec     ", 0
 ins_neg         db "    neg     ", 0
-ins_cmp         db "    cmp     ", 0
 ins_aas         db "    aas     ", 0
 ins_das         db "    das     ", 0
 ins_mul         db "    mul     ", 0
@@ -53,17 +48,7 @@ ins_aad         db "    aad     ", 0
 ins_cbw         db "    cbw     ", 0
 ins_cwd         db "    cwd     ", 0
 ins_not         db "    not     ", 0
-ins_and         db "    and     ", 0
-ins_or          db "    or      ", 0
-ins_xor         db "    xor     ", 0
 ins_test        db "    test    ", 0
-ins_shl         db "    shl     ", 0
-ins_shr         db "    shr     ", 0
-ins_sar         db "    sar     ", 0
-ins_rol         db "    rol     ", 0
-ins_ror         db "    ror     ", 0
-ins_rcl         db "    rcl     ", 0
-ins_rcr         db "    rcr     ", 0
 ins_rep         db "    rep     ", 0
 ins_repne       db "    repne   ", 0
 ins_movsb       db "    movsb   ", 0
@@ -94,6 +79,25 @@ ins_hlt         db "    hlt     ", 0
 ins_wait        db "    wait    ", 0
 ins_lock        db "    lock    ", 0
 ins_nop         db "    nop     ", 0
+; order below is needed for opcodes 80h, 81h, 82h, 83h
+ins_add         db "    add     ", 0, "   "
+ins_or          db "    or      ", 0, "   "
+ins_adc         db "    adc     ", 0, "   "
+ins_sbb         db "    sbb     ", 0, "   "
+ins_and         db "    and     ", 0, "   "
+ins_sub         db "    sub     ", 0, "   "
+ins_xor         db "    xor     ", 0, "   "
+ins_cmp         db "    cmp     ", 0, "   "
+; order below is needed for opcodes c0h, c1h
+ins_rol         db "    rol     ", 0, "   "
+ins_ror         db "    ror     ", 0, "   "
+ins_rcl         db "    rcl     ", 0, "   "
+ins_rcr         db "    rcr     ", 0, "   "
+ins_shl         db "    shl     ", 0, "   "
+ins_shr         db "    shr     ", 0, "   "
+ins_sal         db "    sal     ", 0, "   "
+ins_sar         db "    sar     ", 0, "   "
+
 
 reg_al          db "al", 0, " "
 reg_cl          db "cl", 0, " "

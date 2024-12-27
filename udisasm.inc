@@ -106,6 +106,41 @@ loadScanning PROC
     pop     si
     ret
 loadScanning ENDP
+load_test_code PROC
+    push    si
+    lea     si, test_code
+    call    loadTextToBuffer
+    pop     si
+    ret
+load_test_code ENDP
+load_test_data PROC
+    push    si
+    lea     si, test_data
+    call    loadTextToBuffer
+    pop     si
+    ret
+load_test_data ENDP
+load_test_used PROC
+    push    si
+    lea     si, test_used
+    call    loadTextToBuffer
+    pop     si
+    ret
+load_test_used ENDP
+load_test_curr PROC
+    push    si
+    lea     si, test_curr
+    call    loadTextToBuffer
+    pop     si
+    ret
+load_test_curr ENDP
+load_test_si PROC
+    push    si
+    lea     si, test_si
+    call    loadTextToBuffer
+    pop     si
+    ret
+load_test_si ENDP
 
 ;***************************************************;
 ;                print byte to buffer               ;
@@ -385,32 +420,38 @@ printCodeSegment PROC
         mov     ax, word ptr byteInFile
         cmp     ax, word ptr dataSegmentStart
         jne     @@continue
-        mov     ax, word ptr byteInFile + 2
-        cmp     ax, word ptr dataSegmentStart + 2
+        mov     ax, word ptr [byteInFile + 2]
+        cmp     ax, word ptr [dataSegmentStart + 2]
         jae      @@done
 
         @@continue:
         ;; testing
-        call loadComment
-        mov dx, word ptr byteInFile+2
+        push dx
+        call load_test_code
+        mov dx, word ptr [byteInFile+2]
         call printWord
         mov dx, word ptr byteInFile
         call printWord
         call loadNewline
-        call loadComment
-        mov dx, word ptr dataSegmentStart+2
+        call load_test_data
+        mov dx, word ptr [dataSegmentStart+2]
         call printWord
         mov dx, word ptr dataSegmentStart
         call printWord
         call loadNewline
-        call loadComment
+        call load_test_used
         mov dx, word ptr usedBytes
         call printWord
         call loadNewline
+        mov dx, si
+        call load_test_si
+        call printWord
+        call loadNewline
+        pop dx
         ;; end testing
 
         call    getByte
-        call    loadComment
+        call    load_test_curr
         mov     dl, al
         call    printByte
         call    loadNewline
