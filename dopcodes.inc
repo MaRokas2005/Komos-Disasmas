@@ -5,10 +5,15 @@ ins_out         db "    out     ", 0
 ins_push        db "    push    ", 0
 ins_pop         db "    pop     ", 0
 ins_xchg        db "    xchg    ", 0
-ins_xlat        db "    xlat    ", 0
+ins_xlatb       db "    xlatb   ", 0
 ins_lea         db "    lea     ", 0
+ins_leave       db "    leave   ", 0
 ins_lds         db "    lds     ", 0
+ins_les         db "    les     ", 0
 ins_lss         db "    lss     ", 0
+ins_loop        db "    loop    ", 0
+ins_loope       db "    loope   ", 0
+ins_loopne      db "    loopne  ", 0
 ins_lahf        db "    lahf    ", 0
 ins_sahf        db "    sahf    ", 0
 ins_pusha       db "    pusha   ", 0
@@ -66,6 +71,7 @@ ins_ret         db "    ret     ", 0
 ins_retf        db "    retf    ", 0
 ins_jmp         db "    jmp     ", 0
 ins_int         db "    int     ", 0
+ins_int3        db "    int3    ", 0
 ins_into        db "    into    ", 0
 ins_iret        db "    iret    ", 0
 ins_stc         db "    stc     ", 0
@@ -88,7 +94,7 @@ ins_and         db "    and     ", 0, "   "
 ins_sub         db "    sub     ", 0, "   "
 ins_xor         db "    xor     ", 0, "   "
 ins_cmp         db "    cmp     ", 0, "   "
-; order below is needed for opcodes c0h, c1h
+; order below is needed for opcodes c0h, c1h, d0h, d1h, d2h, d3h
 ins_rol         db "    rol     ", 0, "   "
 ins_ror         db "    ror     ", 0, "   "
 ins_rcl         db "    rcl     ", 0, "   "

@@ -66,6 +66,25 @@ loadTextToBuffer PROC
 loadTextToBuffer ENDP
 
 ;***************************************************;
+;          get byte and display as pointer          ;
+;***************************************************;
+loadPointer PROC
+    push    ax
+    push    dx
+
+    call    getByte
+    cbw
+    mov     dx, word ptr usedBytes
+    add     dx, 2
+    add     dx, ax
+    call    printWord
+
+    pop     dx
+    pop     ax
+    ret
+loadPointer ENDP
+
+;***************************************************;
 ;               load newline to buffer              ;
 ;***************************************************;
 loadNewline PROC
@@ -97,6 +116,18 @@ loadCommaSpace PROC
     pop     si
     ret
 loadCommaSpace ENDP
+
+;***************************************************;
+;                 save '1' to buffer                ;
+;***************************************************;
+loadOne PROC
+    push    ax
+    mov     al, 31h
+    stosb
+    inc     word ptr outputLength
+    pop     ax
+    ret
+loadOne ENDP
 
 ;;testing
 loadScanning PROC
