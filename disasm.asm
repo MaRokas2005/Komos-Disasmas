@@ -1,5 +1,5 @@
 LOCALS @@
-.MODEL COMPACT
+.MODEL small
 .STACK 100h
 
 .DATA
@@ -46,6 +46,8 @@ LOCALS @@
     segData     db  ".DATA", 0 
     segCode     db  ".CODE", 0
     segEnd      db  "END", 0
+
+    place       db  "place_", 0
 
     ;;testing variables
     scannning   db  ";;  SCANNING...", 0

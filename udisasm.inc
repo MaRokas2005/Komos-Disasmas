@@ -67,15 +67,17 @@ loadTextToBuffer ENDP
 
 ;***************************************************;
 ;          get byte and display as pointer          ;
+;             dx - command length bytes             ;
 ;***************************************************;
 loadPointer PROC
     push    ax
     push    dx
 
+    call    loadPlace
+
     call    getByte
     cbw
-    mov     dx, word ptr usedBytes
-    add     dx, 2
+    add     dx, word ptr byteInFile
     add     dx, ax
     call    printWord
 
@@ -83,6 +85,17 @@ loadPointer PROC
     pop     ax
     ret
 loadPointer ENDP
+
+;***************************************************;
+;              load place tag to buffer             ;
+;***************************************************;
+loadPlace PROC
+    push    si
+    lea     si, place
+    call    loadTextToBuffer
+    pop     si
+    ret
+loadPlace ENDP
 
 ;***************************************************;
 ;               load newline to buffer              ;
@@ -444,7 +457,7 @@ printCodeSegment PROC
         call    fixScanPointer
         call    scanCodeSegment
         cmp     ax, 0
-        je      @@done
+        je      @@done_temp
         lea     si, inputBuffer
         @@write:
         ; check if I am not in data segment
@@ -453,7 +466,7 @@ printCodeSegment PROC
         jne     @@continue
         mov     ax, word ptr [byteInFile + 2]
         cmp     ax, word ptr [dataSegmentStart + 2]
-        jae      @@done
+        jae     @@done
 
         @@continue:
         ;; testing
@@ -480,12 +493,28 @@ printCodeSegment PROC
         call loadNewline
         pop dx
         ;; end testing
+        jmp     @@continue2
+        @@done_temp:
+        jmp     @@done
+        @@continue2:
 
         call    getByte
         call    load_test_curr
         mov     dl, al
         call    printByte
         call    loadNewline
+
+        push    ax
+        push    dx
+        call    loadPlace
+        mov     dx, word ptr byteInFile
+        dec     dx
+        call    printWord
+        mov     al, ":"
+        stosb
+        call    loadNewline
+        pop     dx
+        pop     ax
 
         ; call    printOutputBuffer
         call    OPCODE_00h

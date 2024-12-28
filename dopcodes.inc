@@ -2,6 +2,8 @@ ins_unknown     db "; UNKNOWN instruction", 0
 ins_mov         db "    mov     ", 0
 ins_in          db "    in      ", 0
 ins_out         db "    out     ", 0
+ins_outsb       db "    outsb   ", 0
+ins_outsw       db "    outsw   ", 0
 ins_push        db "    push    ", 0
 ins_pop         db "    pop     ", 0
 ins_xchg        db "    xchg    ", 0
