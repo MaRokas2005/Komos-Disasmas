@@ -42,6 +42,30 @@ printByte PROC
 printByte ENDP
 
 printWord PROC
+    ; checking if the word is '@data'
+    push    ax
+    push    bx ; 0 - not the '@data', 1 - is the '@data'
+    push    cx
+    push    dx
+    push    si
+
+    lea     si, relocationBuffer
+    xor     bx, bx
+    mov     cx, word ptr numberOfRelocations
+    mov     dx, 
+
+
+    pop     si
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+
+    cmp     bl, 0
+    je      @@continue
+    ret
+
+    @@continue:
     push    ax
     push    bx
 

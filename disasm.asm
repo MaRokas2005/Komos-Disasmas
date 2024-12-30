@@ -20,6 +20,8 @@ LOCALS @@
     codeSegmentOffset       dw  0
     relocationTableOffset   dw  0
     startingIPAddress       dw  0
+    numberOfRelocations     dw  0
+    relocationBuffer        dw  0ffh dup(0)
 
     dataTagByte             dd  0
     byteInFile              dd  0   ; current
@@ -29,7 +31,7 @@ LOCALS @@
     opcodeReg   db  0
     opcodeRM    db  0
 
-    prefix      db  03eh    ; 0ffh = no prefix
+    prefix      db  03eh    ; 03eh = default 'ds' data segment
 
     tagDB       db  "    db  ", 0
     tagData     db  "@data", 0
@@ -92,6 +94,7 @@ LOCALS @@
         call    getParamsFromHeader
         call    getTagDataPlace
         call    getDataSegmentStart
+        call    getRelocations
 
         call    printStart
         call    printDataSegment

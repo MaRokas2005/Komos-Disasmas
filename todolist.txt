@@ -3,3 +3,5 @@ fix @data
 add starting point using ip 14h word from data executable file and end at the end
 
 use all relocation table values
+
+fix that if data segment is first of code segment. because if not, code will read old bytes, so it is no no

@@ -41,8 +41,13 @@ getParamsFromHeader PROC
     push    bx
     push    si
 
-    ; Get header size
     lea     si, inputBuffer
+
+    ; Get number of relocations
+    mov     ax, [si + 06h]
+    mov     numberOfRelocations, ax
+
+    ; Get header size
     mov     ax, [si + 08h]
     shl     ax, 4
     mov     headerSize, ax
@@ -50,6 +55,11 @@ getParamsFromHeader PROC
     ; Get stack size
     mov     bx, [si + 10h]
     mov     stackSize, bx
+
+    ; Get starting ip adress
+    mov     bx, [si + 14h]
+    add     bx, ax
+    mov     startingIPAddress, bx
 
     ; Get code segment offset
     mov     bx, [si + 16h]
@@ -79,16 +89,14 @@ getTagDataPlace PROC
     mov     ax, 4200h
     mov     bx, inputHandle
     xor     cx, cx
-    mov     dx, word ptr [relocationTableOffset]
+    mov     dx, word ptr relocationTableOffset
     int     21h
-    
     jc      @@error
 
     mov     ah, 3Fh
     mov     cx, 4
     lea     dx, inputBuffer
     int     21h
-
     jc      @@error
 
     mov     ax, word ptr [inputBuffer]
@@ -190,3 +198,36 @@ getDataSegmentStart PROC
     call    displayHelp
     call    endProgram
 getDataSegmentStart ENDP
+
+getRelocations PROC
+    push    ax
+    push    bx
+    push    cx
+    push    dx
+
+    mov     ax, 4200h
+    mov     bx, inputHandle
+    xor     cx, cx
+    mov     dx, word ptr relocationTableOffset
+    int     21h
+    jc      @@error
+
+    mov     ah, 3Fh
+    mov     cx, word ptr numberOfRelocations
+    shl     cx, 2
+    lea     dx, relocationBuffer
+    int     21h
+    jc      @@error
+    mov     ah, 01
+    int     21h
+
+    pop     dx
+    pop     cx
+    pop     bx
+    pop     ax
+    ret
+
+    @@error:
+    call    displayHelp
+    call    endProgram
+getRelocations ENDP

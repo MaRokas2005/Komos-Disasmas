@@ -466,10 +466,10 @@ printCodeSegment PROC
         jne     @@continue
         mov     ax, word ptr [byteInFile + 2]
         cmp     ax, word ptr [dataSegmentStart + 2]
-        jae     @@done
+        jae     @@done_temp
 
         @@continue:
-        ;; testing
+        ; ; testing
         ; push dx
         ; call load_test_code
         ; mov dx, word ptr [byteInFile+2]
@@ -491,8 +491,12 @@ printCodeSegment PROC
         ; call load_test_si
         ; call printWord
         ; call loadNewline
+        ; call loadComment
+        ; mov dx, word ptr startingIPAddress
+        ; call printWord
+        ; call    loadNewline
         ; pop dx
-        ;; end testing
+        ; ; end testing
         jmp     @@continue2
         @@done_temp:
         jmp     @@done
@@ -506,7 +510,18 @@ printCodeSegment PROC
 
         push    ax
         push    dx
-        
+        push    si
+
+        mov     ax, word ptr byteInFile
+        dec     ax
+        cmp     ax, word ptr startingIPAddress
+        jne     @@continue3
+
+        lea     si, segStart
+        call    loadTextToBuffer
+        call    loadNewline
+
+        @@continue3:
         call    loadPlace
         mov     dx, word ptr byteInFile
         dec     dx
@@ -522,6 +537,7 @@ printCodeSegment PROC
         stosb
         inc     word ptr outputLength
         ; call    loadNewline
+        pop     si
         pop     dx
         pop     ax
 
