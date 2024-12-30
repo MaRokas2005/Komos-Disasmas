@@ -41,9 +41,6 @@ loadTagStart PROC
     push    ax
     push    si
 
-    @@checking_prefix:
-    cmp     byte ptr prefix, 0ffh
-    je      @@dont_have_prefix
     xor     ax, ax
     mov     al, byte ptr prefix
     shl     al, 3
@@ -52,12 +49,6 @@ loadTagStart PROC
     lea     si, tagSegES
     shl     ax, 3
     add     si, ax
-    jmp     @@continue_2
-
-    @@dont_have_prefix:
-    lea     si, tagStart
-
-    @@continue_2:
     call    loadTextToBuffer
 
     pop     si
@@ -72,7 +63,7 @@ loadTagClose PROC
     pop     si
 
     @@reset_prefix:
-    mov     byte ptr prefix, 0ffh
+    mov     byte ptr prefix, 03eh
     ret
 loadTagClose ENDP
 
@@ -213,16 +204,16 @@ OPCODE_00h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_add
     call    loadTextToBuffer
@@ -251,16 +242,16 @@ OPCODE_01h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_add
     call    loadTextToBuffer
@@ -284,16 +275,16 @@ OPCODE_02h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_add
     call    loadTextToBuffer
@@ -317,16 +308,16 @@ OPCODE_03h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_add
     call    loadTextToBuffer
@@ -436,16 +427,16 @@ OPCODE_08h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_or
     call    loadTextToBuffer
@@ -469,16 +460,16 @@ OPCODE_09h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_or
     call    loadTextToBuffer
@@ -502,16 +493,16 @@ OPCODE_0ah PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_or
     call    loadTextToBuffer
@@ -535,16 +526,16 @@ OPCODE_0bh PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_or
     call    loadTextToBuffer
@@ -653,16 +644,16 @@ OPCODE_10h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_adc
     call    loadTextToBuffer
@@ -686,16 +677,16 @@ OPCODE_11h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_adc
     call    loadTextToBuffer
@@ -719,16 +710,16 @@ OPCODE_12h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_adc
     call    loadTextToBuffer
@@ -752,16 +743,16 @@ OPCODE_13h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_adc
     call    loadTextToBuffer
@@ -871,16 +862,16 @@ OPCODE_18h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_sbb
     call    loadTextToBuffer
@@ -904,16 +895,16 @@ OPCODE_19h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_sbb
     call    loadTextToBuffer
@@ -937,16 +928,16 @@ OPCODE_1ah PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_sbb
     call    loadTextToBuffer
@@ -970,16 +961,16 @@ OPCODE_1bh PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_sbb
     call    loadTextToBuffer
@@ -1089,16 +1080,16 @@ OPCODE_20h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_and
     call    loadTextToBuffer
@@ -1122,16 +1113,16 @@ OPCODE_21h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_and
     call    loadTextToBuffer
@@ -1155,16 +1146,16 @@ OPCODE_22h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_and
     call    loadTextToBuffer
@@ -1191,16 +1182,16 @@ OPCODE_23h PROC
 
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_and
     call    loadTextToBuffer
@@ -1271,6 +1262,8 @@ OPCODE_26h PROC
     
     @@continue:
     mov     byte ptr prefix, al
+    call    getByte
+    call    OPCODE_00h
 
     @@done:
     ret
@@ -1301,16 +1294,16 @@ OPCODE_28h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_sub
     call    loadTextToBuffer
@@ -1334,16 +1327,16 @@ OPCODE_29h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_sub
     call    loadTextToBuffer
@@ -1367,16 +1360,16 @@ OPCODE_2ah PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_sub
     call    loadTextToBuffer
@@ -1400,16 +1393,16 @@ OPCODE_2bh PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_sub
     call    loadTextToBuffer
@@ -1482,6 +1475,8 @@ OPCODE_2eh PROC
     
     @@continue:
     mov     byte ptr prefix, al
+    call    getByte
+    call    OPCODE_00h
 
     @@done:
     ret
@@ -1512,16 +1507,16 @@ OPCODE_30h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_xor
     call    loadTextToBuffer
@@ -1545,16 +1540,16 @@ OPCODE_31h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_add
     call    loadTextToBuffer
@@ -1578,16 +1573,16 @@ OPCODE_32h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_xor
     call    loadTextToBuffer
@@ -1612,16 +1607,16 @@ OPCODE_33h PROC
 
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_xor
     call    loadTextToBuffer
@@ -1692,6 +1687,8 @@ OPCODE_36h PROC
     
     @@continue:
     mov     byte ptr prefix, al
+    call    getByte
+    call    OPCODE_00h
 
     @@done:
     ret
@@ -1722,16 +1719,16 @@ OPCODE_38h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_cmp
     call    loadTextToBuffer
@@ -1755,16 +1752,16 @@ OPCODE_39h PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_cmp
     call    loadTextToBuffer
@@ -1788,16 +1785,16 @@ OPCODE_3ah PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_cmp
     call    loadTextToBuffer
@@ -1821,16 +1818,16 @@ OPCODE_3bh PROC
     @@continue:
     call    getByte
     call    getModRegRM
-    ;;test
-    call loadComment
-    mov dl, byte ptr opcodeMod
-    call printByte
-    mov dl, byte ptr opcodeReg
-    call printByte
-    mov dl, byte ptr opcodeRM
-    call printByte
-    call loadNewline
-    ;;end
+    ; ;;test
+    ; call loadComment
+    ; mov dl, byte ptr opcodeMod
+    ; call printByte
+    ; mov dl, byte ptr opcodeReg
+    ; call printByte
+    ; mov dl, byte ptr opcodeRM
+    ; call printByte
+    ; call loadNewline
+    ; ;;end
     push    si
     lea     si, ins_cmp
     call    loadTextToBuffer
@@ -1901,6 +1898,8 @@ OPCODE_3eh PROC
     
     @@continue:
     mov     byte ptr prefix, al
+    call    getByte
+    call    OPCODE_00h
 
     @@done:
     ret
@@ -2538,7 +2537,6 @@ OPCODE_62h PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2555,7 +2553,6 @@ OPCODE_63h PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2572,7 +2569,6 @@ OPCODE_64h PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2589,7 +2585,6 @@ OPCODE_65h PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2606,7 +2601,6 @@ OPCODE_66h PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2623,7 +2617,6 @@ OPCODE_67h PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2640,7 +2633,6 @@ OPCODE_68h PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2657,7 +2649,6 @@ OPCODE_69h PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2674,7 +2665,6 @@ OPCODE_6ah PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2691,7 +2681,6 @@ OPCODE_6bh PROC
     
     @@continue:
     push    si
-    call    loadNewline
     lea     si, ins_unknown
     call    loadTextToBuffer
 
@@ -2708,8 +2697,7 @@ OPCODE_6ch PROC
     
     @@continue:
     push    si
-    call    loadNewline
-    lea     si, ins_unknown
+    lea     si, ins_insb
     call    loadTextToBuffer
 
     @@done:
@@ -2725,8 +2713,7 @@ OPCODE_6dh PROC
     
     @@continue:
     push    si
-    call    loadNewline
-    lea     si, ins_unknown
+    lea     si, ins_insw
     call    loadTextToBuffer
 
     @@done:
@@ -2778,7 +2765,6 @@ OPCODE_70h PROC
     call    loadTextToBuffer
     pop     si
 
-    mov     dx, 2
     call    loadPointer
 
     @@done:
@@ -2796,8 +2782,7 @@ OPCODE_71h PROC
     lea     si, ins_jno
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2815,8 +2800,7 @@ OPCODE_72h PROC
     lea     si, ins_jb
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2834,8 +2818,7 @@ OPCODE_73h PROC
     lea     si, ins_jae
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2853,8 +2836,7 @@ OPCODE_74h PROC
     lea     si, ins_je
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2872,8 +2854,7 @@ OPCODE_75h PROC
     lea     si, ins_jne
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2891,8 +2872,7 @@ OPCODE_76h PROC
     lea     si, ins_jbe
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2910,8 +2890,7 @@ OPCODE_77h PROC
     lea     si, ins_ja
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2929,8 +2908,7 @@ OPCODE_78h PROC
     lea     si, ins_js
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2948,8 +2926,7 @@ OPCODE_79h PROC
     lea     si, ins_jns
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2967,8 +2944,7 @@ OPCODE_7ah PROC
     lea     si, ins_jp
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -2986,8 +2962,7 @@ OPCODE_7bh PROC
     lea     si, ins_jnp
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -3005,8 +2980,7 @@ OPCODE_7ch PROC
     lea     si, ins_jl
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -3024,8 +2998,7 @@ OPCODE_7dh PROC
     lea     si, ins_jge
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -3043,8 +3016,7 @@ OPCODE_7eh PROC
     lea     si, ins_jle
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -3062,8 +3034,7 @@ OPCODE_7fh PROC
     lea     si, ins_jg
     call    loadTextToBuffer
     pop     si
-    
-    mov     dx, 2
+
     call    loadPointer
 
     @@done:
@@ -3710,23 +3681,16 @@ OPCODE_9ah PROC
     
     @@continue:
     push    si
-    call    loadComment
     lea     si, ins_call
     call    loadTextToBuffer
-    call    loadNewline
-    call    loadTextToBuffer
-    call    getWord
-    push    ax
-    call    getWord
-    lea     si, ins_push
-    call    loadTextToBuffer
-    call    printWord
-    pop     ax
-    call    loadTextToBuffer
-    call    printWord
-    lea     si, ins_retf
-    call    loadTextToBuffer
     pop     si
+
+    call    loadPlace
+    call    getWord
+    mov     dx, word ptr byteInFile
+    add     dx, ax
+    call    printWord
+    call    getWord
 
     @@done:
     ret
@@ -5162,7 +5126,6 @@ OPCODE_e0h PROC
     call    loadTextToBuffer
     pop     si
 
-    mov     dx, 2
     call    loadPointer
 
     @@done:
@@ -5181,7 +5144,6 @@ OPCODE_e1h PROC
     call    loadTextToBuffer
     pop     si
 
-    mov     dx, 2
     call    loadPointer
 
     @@done:
@@ -5200,7 +5162,6 @@ OPCODE_e2h PROC
     call    loadTextToBuffer
     pop     si
 
-    mov     dx, 2
     call    loadPointer
 
     @@done:
@@ -5219,7 +5180,6 @@ OPCODE_e3h PROC
     call    loadTextToBuffer
     pop     si
 
-    mov     dx, 2
     call    loadPointer
 
     @@done:
@@ -5336,7 +5296,7 @@ OPCODE_e8h PROC
     call    getWord
     mov     dx, word ptr byteInFile
     add     dx, ax
-    call printWord
+    call    printWord
 
     @@done:
     ret
@@ -5354,10 +5314,10 @@ OPCODE_e9h PROC
     call    loadTextToBuffer
     pop     si
 
+    call    loadPlace
     call    getWord
     mov     dx, word ptr byteInFile
     add     dx, ax
-    add     dx, 3
     call    printWord
 
     @@done:
@@ -5367,11 +5327,6 @@ OPCODE_e9h ENDP
 OPCODE_eah PROC
     cmp     al, 0eah
     je      @@continue
-        push si
-        lea si, ins_unknown
-        call loadTextToBuffer
-        pop si
-        ret
         call    OPCODE_ebh
         ret
     
@@ -5381,425 +5336,647 @@ OPCODE_eah PROC
     call    loadTextToBuffer
     pop     si
 
+    call    loadPlace
     call    getWord
     mov     dx, word ptr byteInFile
     add     dx, ax
-    add     dx, 3
     call    printWord
+    call    getWord
 
     @@done:
     ret
 OPCODE_eah ENDP
 
 OPCODE_ebh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0ebh
-    cmp     bl, 00h
+    cmp     al, 0ebh
     je      @@continue
-    call    OPCODE_ech
-    jmp     @@done
-
+        call    OPCODE_ech
+        ret
+    
     @@continue:
+    push    si
+    lea     si, ins_jmp
+    call    loadTextToBuffer
+    pop     si
 
+    call    loadPointer
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_ebh ENDP
 
 OPCODE_ech PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0ech
-    cmp     bl, 00h
+    cmp     al, 0ech
     je      @@continue
-    call    OPCODE_edh
-    jmp     @@done
-
+        call    OPCODE_edh
+        ret
+    
     @@continue:
-
+    push    si
+    lea     si, ins_in
+    call    loadTextToBuffer
+    lea     si, reg_al
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    lea     si, reg_dx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_ech ENDP
 
 OPCODE_edh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0edh
-    cmp     bl, 00h
+    cmp     al, 0edh
     je      @@continue
-    call    OPCODE_eeh
-    jmp     @@done
-
+        call    OPCODE_eeh
+        ret
+    
     @@continue:
-
+    push    si
+    lea     si, ins_in
+    call    loadTextToBuffer
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    lea     si, reg_dx
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_edh ENDP
 
 OPCODE_eeh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0eeh
-    cmp     bl, 00h
+    cmp     al, 0eeh
     je      @@continue
-    call    OPCODE_efh
-    jmp     @@done
-
+        call    OPCODE_efh
+        ret
+    
     @@continue:
-
+    push    si
+    lea     si, ins_out
+    call    loadTextToBuffer
+    lea     si, reg_dx
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    lea     si, reg_al
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_eeh ENDP
 
 OPCODE_efh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0efh
-    cmp     bl, 00h
+    cmp     al, 0efh
     je      @@continue
-    call    OPCODE_f0h
-    jmp     @@done
-
+        call    OPCODE_f0h
+        ret
+    
     @@continue:
-
+    push    si
+    lea     si, ins_out
+    call    loadTextToBuffer
+    lea     si, reg_dx
+    call    loadTextToBuffer
+    call    loadCommaSpace
+    lea     si, reg_ax
+    call    loadTextToBuffer
+    pop     si
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_efh ENDP
 
 OPCODE_f0h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f0h
-    cmp     bl, 00h
+    cmp     al, 0f0h
     je      @@continue
-    call    OPCODE_f1h
-    jmp     @@done
-
+        call    OPCODE_f1h
+        ret
+    
     @@continue:
+    push    si
+    lea     si, ins_lock
+    call    loadTextToBuffer
+    pop     si
 
+    call    getByte
+    call    OPCODE_00h
 
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_f0h ENDP
 
 OPCODE_f1h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f1h
-    cmp     bl, 00h
+    cmp     al, 0f1h
     je      @@continue
-    call    OPCODE_f2h
-    jmp     @@done
-
+        call    OPCODE_f2h
+        ret
+    
     @@continue:
-
-
+    push    si
+    lea     si, ins_int1
+    call    loadTextToBuffer
+    pop     si
+    
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_f1h ENDP
 
 OPCODE_f2h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f2h
-    cmp     bl, 00h
+    cmp     al, 0f2h
     je      @@continue
-    call    OPCODE_f3h
-    jmp     @@done
-
+        call    OPCODE_f3h
+        ret
+    
     @@continue:
+    call    getByte
 
+    @@try_6c:
+    cmp     al, 6ch
+    jne     @@try_6d
+    jmp     @@print_repne
+    @@try_6d:
+    cmp     al, 6dh
+    jne     @@try_6e
+    jmp     @@print_repne
+    @@try_6e:
+    cmp     al, 6eh
+    jne     @@try_6f
+    jmp     @@print_repne
+    @@try_6f:
+    cmp     al, 6fh
+    jne     @@try_a4
+    jmp     @@print_repne
+    @@try_a4:
+    cmp     al, 0a4h
+    jne     @@try_a5
+    jmp     @@print_repne
+    @@try_a5:
+    cmp     al, 0a5h
+    jne     @@try_a6
+    jmp     @@print_repne
+    @@try_a6:
+    cmp     al, 0a6h
+    jne     @@try_a7
+    jmp     @@print_repne
+    @@try_a7:
+    cmp     al, 0a7h
+    jne     @@try_aa
+    jmp     @@print_repne
+    @@try_aa:
+    cmp     al, 0aah
+    jne     @@try_ab
+    jmp     @@print_repne
+    @@try_ab:
+    cmp     al, 0abh
+    jne     @@try_ac
+    jmp     @@print_repne
+    @@try_ac:
+    cmp     al, 0ach
+    jne     @@try_ad
+    jmp     @@print_repne
+    @@try_ad:
+    cmp     al, 0adh
+    jne     @@try_ae
+    jmp     @@print_repne
+    @@try_ae:
+    cmp     al, 0aeh
+    jne     @@try_af
+    jmp     @@print_repne
+    @@try_af:
+    cmp     al, 0afh
+    jne     @@dont_print_repne
 
+    @@print_repne:
+    push    si
+    lea     si, ins_repne
+    call    loadTextToBuffer
+    pop     si
+
+    @@dont_print_repne:
+    call    OPCODE_00h
+    
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_f2h ENDP
 
 OPCODE_f3h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f3h
-    cmp     bl, 00h
+    cmp     al, 0f3h
     je      @@continue
-    call    OPCODE_f4h
-    jmp     @@done
-
+        call    OPCODE_f4h
+        ret
+    
     @@continue:
+    call    getByte
 
+    @@try_6c:
+    cmp     al, 6ch
+    jne     @@try_6d
+    jmp     @@print_rep
+    @@try_6d:
+    cmp     al, 6dh
+    jne     @@try_6e
+    jmp     @@print_rep
+    @@try_6e:
+    cmp     al, 6eh
+    jne     @@try_6f
+    jmp     @@print_rep
+    @@try_6f:
+    cmp     al, 6fh
+    jne     @@try_a4
+    jmp     @@print_rep
+    @@try_a4:
+    cmp     al, 0a4h
+    jne     @@try_a5
+    jmp     @@print_rep
+    @@try_a5:
+    cmp     al, 0a5h
+    jne     @@try_a6
+    jmp     @@print_rep
+    @@try_a6:
+    cmp     al, 0a6h
+    jne     @@try_a7
+    jmp     @@print_rep
+    @@try_a7:
+    cmp     al, 0a7h
+    jne     @@try_aa
+    jmp     @@print_rep
+    @@try_aa:
+    cmp     al, 0aah
+    jne     @@try_ab
+    jmp     @@print_rep
+    @@try_ab:
+    cmp     al, 0abh
+    jne     @@try_ac
+    jmp     @@print_rep
+    @@try_ac:
+    cmp     al, 0ach
+    jne     @@try_ad
+    jmp     @@print_rep
+    @@try_ad:
+    cmp     al, 0adh
+    jne     @@try_ae
+    jmp     @@print_rep
+    @@try_ae:
+    cmp     al, 0aeh
+    jne     @@try_af
+    jmp     @@print_rep
+    @@try_af:
+    cmp     al, 0afh
+    jne     @@dont_print_rep
 
+    @@print_rep:
+    push    si
+    lea     si, ins_rep
+    call    loadTextToBuffer
+    pop     si
+
+    @@dont_print_rep:
+    call    OPCODE_00h
+    
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_f3h ENDP
 
 OPCODE_f4h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f4h
-    cmp     bl, 00h
+    cmp     al, 0f4h
     je      @@continue
-    call    OPCODE_f5h
-    jmp     @@done
-
+        call    OPCODE_f5h
+        ret
+    
     @@continue:
-
-
+    push    si
+    lea     si, ins_hlt
+    call    loadTextToBuffer
+    pop     si
+    
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_f4h ENDP
 
 OPCODE_f5h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f5h
-    cmp     bl, 00h
+    cmp     al, 0f5h
     je      @@continue
-    call    OPCODE_f6h
-    jmp     @@done
-
+        call    OPCODE_f6h
+        ret
+    
     @@continue:
-
-
+    push    si
+    lea     si, ins_cmc
+    call    loadTextToBuffer
+    pop     si
+    
     @@done:
-    pop     bx
-    pop     ax
     ret
 OPCODE_f5h ENDP
 
 OPCODE_f6h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f6h
-    cmp     bl, 00h
+    cmp     al, 0f6h
     je      @@continue
-    call    OPCODE_f7h
-    jmp     @@done
+        call    OPCODE_f7h
+        ret
 
     @@continue:
+    mov     dl, 0
+    call    getByte
+    call    getModRegRM
+    xor     bx, bx
+    mov     bl, byte ptr opcodeReg
+    cmp     bl, 1
+    je      @@fake_fake
+    cmp     bl, 0
+    je      @@tests
 
+    shl     bx, 4
+    push    si
+    lea     si, ins_test
+    add     si, bx
+    call    loadTextToBuffer
+    pop     si
+    mov     bl, 1
+    call    loadModRM
+    ret
 
-    @@done:
-    pop     bx
-    pop     ax
+    @@fake_fake:
+    push    si
+    lea     si, ins_unknown
+    call    loadTextToBuffer
+    pop     si
+    ret
+
+    @@tests:
+    push    si
+    lea     si, ins_test
+    call    loadTextToBuffer
+    pop     si
+    mov     bl, 1
+    call    loadModRM
+    call    loadCommaSpace
+    call    getByte
+    mov     dl, al
+    call    printByte
     ret
 OPCODE_f6h ENDP
 
 OPCODE_f7h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f7h
-    cmp     bl, 00h
+    cmp     al, 0f7h
     je      @@continue
-    call    OPCODE_f8h
-    jmp     @@done
-
+        call    OPCODE_f8h
+        ret
+    
     @@continue:
+    mov     dl, 1
+    call    getByte
+    call    getModRegRM
+    xor     bx, bx
+    mov     bl, byte ptr opcodeReg
+    cmp     bl, 1
+    je      @@fake_fake
+    cmp     bl, 0
+    je      @@tests
 
+    shl     bx, 4
+    push    si
+    lea     si, ins_test
+    add     si, bx
+    call    loadTextToBuffer
+    pop     si
+    mov     bl, 1
+    call    loadModRM
+    ret
 
-    @@done:
-    pop     bx
-    pop     ax
+    @@fake_fake:
+    push    si
+    lea     si, ins_unknown
+    call    loadTextToBuffer
+    pop     si
+    ret
+
+    @@tests:
+    push    si
+    lea     si, ins_test
+    call    loadTextToBuffer
+    pop     si
+    mov     bl, 1
+    call    loadModRM
+    call    loadCommaSpace
+    call    getWord
+    mov     dx, ax
+    call    printWord
     ret
 OPCODE_f7h ENDP
 
 OPCODE_f8h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f8h
-    cmp     bl, 00h
+    cmp     al, 0f8h
     je      @@continue
-    call    OPCODE_f9h
-    jmp     @@done
-
+        call    OPCODE_f9h
+        ret
+    
     @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
+    push    si
+    lea     si, ins_clc
+    call    loadTextToBuffer
+    pop     si
     ret
 OPCODE_f8h ENDP
 
 OPCODE_f9h PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0f9h
-    cmp     bl, 00h
+    cmp     al, 0f9h
     je      @@continue
-    call    OPCODE_fah
-    jmp     @@done
-
+        call    OPCODE_fah
+        ret
+    
     @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
+    push    si
+    lea     si, ins_stc
+    call    loadTextToBuffer
+    pop     si
     ret
 OPCODE_f9h ENDP
 
 OPCODE_fah PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0fah
-    cmp     bl, 00h
+    cmp     al, 0fah
     je      @@continue
-    call    OPCODE_fbh
-    jmp     @@done
-
+        call    OPCODE_fbh
+        ret
+    
     @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
+    push    si
+    lea     si, ins_cli
+    call    loadTextToBuffer
+    pop     si
     ret
 OPCODE_fah ENDP
 
 OPCODE_fbh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0fbh
-    cmp     bl, 00h
+    cmp     al, 0fbh
     je      @@continue
-    call    OPCODE_fch
-    jmp     @@done
-
+        call    OPCODE_fch
+        ret
+    
     @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
+    push    si
+    lea     si, ins_sti
+    call    loadTextToBuffer
+    pop     si
     ret
 OPCODE_fbh ENDP
 
 OPCODE_fch PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0fch
-    cmp     bl, 00h
+    cmp     al, 0fch
     je      @@continue
-    call    OPCODE_fdh
-    jmp     @@done
-
+        call    OPCODE_fdh
+        ret
+    
     @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
+    push    si
+    lea     si, ins_cld
+    call    loadTextToBuffer
+    pop     si
     ret
 OPCODE_fch ENDP
 
 OPCODE_fdh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0fdh
-    cmp     bl, 00h
+    cmp     al, 0fdh
     je      @@continue
-    call    OPCODE_feh
-    jmp     @@done
-
+        call    OPCODE_feh
+        ret
+    
     @@continue:
-
-
-    @@done:
-    pop     bx
-    pop     ax
+    push    si
+    lea     si, ins_std
+    call    loadTextToBuffer
+    pop     si
     ret
 OPCODE_fdh ENDP
 
 OPCODE_feh PROC
-    push    ax
-    push    bx
-
-    mov     bl, al
-    cmp     bl, 0feh
-    cmp     bl, 00h
+    cmp     al, 0feh
     je      @@continue
-    call    OPCODE_ffh
-    jmp     @@done
-
+        push si
+        lea si, ins_unknown
+        call loadTextToBuffer
+        pop si
+        ret
+        call    OPCODE_ffh
+        ret
+    
     @@continue:
+    mov     dl, 0
+    call    getByte
+    call    getModRegRM
+    cmp     byte ptr opcodeReg, 0
+    je      @@increase
+    cmp     byte ptr opcodeReg, 1
+    je      @@decrease
+    jmp     @@fake_fake
 
+    @@increase:
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    pop     si
+    mov     bl, 1
+    call    loadModRM
+    ret
 
-    @@done:
-    pop     bx
-    pop     ax
+    @@decrease:
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    pop     si
+    mov     bl, 1
+    call    loadModRM
+    ret
+
+    @@fake_fake:
+    push    si
+    lea     si, ins_unknown
+    call    loadTextToBuffer
+    pop     si
     ret
 OPCODE_feh ENDP
 
 OPCODE_ffh PROC
-    push    ax
-    push    bx
+    mov     dl, 1
+    call    getByte
+    call    getModRegRM
+    cmp     byte ptr opcodeReg, 0
+    je      @@increase
+    cmp     byte ptr opcodeReg, 1
+    je      @@decrease
+    cmp     byte ptr opcodeReg, 2
+    je      @@call_inner
+    cmp     byte ptr opcodeReg, 3
+    je      @@call_outer
+    cmp     byte ptr opcodeReg, 4
+    je      @@jump_inner
+    cmp     byte ptr opcodeReg, 5
+    je      @@jump_outer
+    cmp     byte ptr opcodeReg, 6
+    je      @@pushing
+    jmp     @@fake_fake
+
+    @@increase:
+    push    si
+    lea     si, ins_inc
+    call    loadTextToBuffer
+    pop     si
+    jmp     @@printModRM
+
+    @@decrease:
+    push    si
+    lea     si, ins_dec
+    call    loadTextToBuffer
+    pop     si
+    jmp     @@printModRM
+
+    @@call_inner:
+    push    si
+    lea     si, ins_call
+    call    loadTextToBuffer
+    pop     si
+    jmp     @@printModRM
+
+    @@call_outer:
+    push    si
+    lea     si, ins_call
+    call    loadTextToBuffer
+    pop     si
+    jmp     @@printModRM
+
+    @@jump_inner:
+    push    si
+    lea     si, ins_jmp
+    call    loadTextToBuffer
+    pop     si
+    jmp     @@printModRM
+
+    @@jump_outer:
+    push    si
+    lea     si, ins_jmp
+    call    loadTextToBuffer
+    pop     si
+    jmp     @@printModRM
+
+    @@pushing:
+    push    si
+    lea     si, ins_push
+    call    loadTextToBuffer
+    pop     si
+
+    @@printModRM:
+    mov     bl, 1
+    call    loadModRM
+    ret
 
 
-
-
-    @@done:
-    pop     bx
-    pop     ax
+    @@fake_fake:
+    push    si
+    lea     si, ins_unknown
+    call    loadTextToBuffer
+    pop     si
     ret
 OPCODE_ffh ENDP

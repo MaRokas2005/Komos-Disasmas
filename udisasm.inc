@@ -77,7 +77,7 @@ loadPointer PROC
 
     call    getByte
     cbw
-    add     dx, word ptr byteInFile
+    mov     dx, word ptr byteInFile
     add     dx, ax
     call    printWord
 
@@ -470,28 +470,28 @@ printCodeSegment PROC
 
         @@continue:
         ;; testing
-        push dx
-        call load_test_code
-        mov dx, word ptr [byteInFile+2]
-        call printWord
-        mov dx, word ptr byteInFile
-        call printWord
-        call loadNewline
-        call load_test_data
-        mov dx, word ptr [dataSegmentStart+2]
-        call printWord
-        mov dx, word ptr dataSegmentStart
-        call printWord
-        call loadNewline
-        call load_test_used
-        mov dx, word ptr usedBytes
-        call printWord
-        call loadNewline
-        mov dx, si
-        call load_test_si
-        call printWord
-        call loadNewline
-        pop dx
+        ; push dx
+        ; call load_test_code
+        ; mov dx, word ptr [byteInFile+2]
+        ; call printWord
+        ; mov dx, word ptr byteInFile
+        ; call printWord
+        ; call loadNewline
+        ; call load_test_data
+        ; mov dx, word ptr [dataSegmentStart+2]
+        ; call printWord
+        ; mov dx, word ptr dataSegmentStart
+        ; call printWord
+        ; call loadNewline
+        ; call load_test_used
+        ; mov dx, word ptr usedBytes
+        ; call printWord
+        ; call loadNewline
+        ; mov dx, si
+        ; call load_test_si
+        ; call printWord
+        ; call loadNewline
+        ; pop dx
         ;; end testing
         jmp     @@continue2
         @@done_temp:
@@ -499,27 +499,36 @@ printCodeSegment PROC
         @@continue2:
 
         call    getByte
-        call    load_test_curr
-        mov     dl, al
-        call    printByte
-        call    loadNewline
+        ; call    load_test_curr
+        ; mov     dl, al
+        ; call    printByte
+        ; call    loadNewline
 
         push    ax
         push    dx
+        
         call    loadPlace
         mov     dx, word ptr byteInFile
         dec     dx
         call    printWord
         mov     al, ":"
         stosb
-        call    loadNewline
+        inc     word ptr outputLength
+        mov     al, " "
+        stosb
+        inc     word ptr outputLength
+        stosb
+        inc     word ptr outputLength
+        stosb
+        inc     word ptr outputLength
+        ; call    loadNewline
         pop     dx
         pop     ax
 
         ; call    printOutputBuffer
         call    OPCODE_00h
         call    loadNewline
-        call    loadNewline
+        ; call    loadNewline
         call    printOutputBuffer
 
         jmp     @@read_and_print

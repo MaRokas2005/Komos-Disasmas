@@ -10,7 +10,8 @@ hyphenHyphenHelpHelp    db "--help", 0
 _help           db  "HELP -- HELP -- HELP -- HELP -- HELP -- HELP -- HELP -- HELP -- HELP -- HELP", 13, 10, 13, 10, "$"
 _name           db  "NAME", 13, 10
                 db  "       disasm - Disassemble executable code files", 13, 10
-                db  "       and output assembly code.", 13, 10, 13, 10, "$"
+                db  "       and output assembly code.", 13, 10
+                db  "       Works only with SMALL executable files.", 13, 10, 13, 10, "$"
 _synopsis       db  "SYNOPSIS", 13, 10
                 db  "       disasm INPUT_FILE OUTPUT_FILE", 13, 10, 13, 10
                 db  "       disasm /?", 13, 10, 13, 10

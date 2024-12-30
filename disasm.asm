@@ -19,6 +19,7 @@ LOCALS @@
     stackSize               dw  0
     codeSegmentOffset       dw  0
     relocationTableOffset   dw  0
+    startingIPAddress       dw  0
 
     dataTagByte             dd  0
     byteInFile              dd  0   ; current
@@ -28,16 +29,16 @@ LOCALS @@
     opcodeReg   db  0
     opcodeRM    db  0
 
-    prefix      db  0ffh    ; 0ffh = no prefix
+    prefix      db  03eh    ; 0ffh = no prefix
 
     tagDB       db  "    db  ", 0
     tagData     db  "@data", 0
     tagByte     db  "byte ptr ", 0
     tagWord     db  "word ptr ", 0
     tagSegES    db  "es:[ ", 0, "  "
-    tagSegDS    db  "ds:[ ", 0, "  "
-    tagSegSS    db  "ss:[ ", 0, "  "
     tagSegCS    db  "cs:[ ", 0, "  "
+    tagSegSS    db  "ss:[ ", 0, "  "
+    tagSegDS    db  "ds:[ ", 0, "  "
     tagStart    db  "[ ", 0
     tagClose    db  " ]", 0
 
@@ -45,7 +46,8 @@ LOCALS @@
     segStack    db  ".STACK ", 0
     segData     db  ".DATA", 0 
     segCode     db  ".CODE", 0
-    segEnd      db  "END", 0
+    segStart    db  "START:", 0
+    segEnd      db  "END START", 0dh, 0ah, "END", 0
 
     place       db  "place_", 0
 

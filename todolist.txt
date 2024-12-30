@@ -1,1 +1,5 @@
-fix jumps. from opcode_70h
+fix @data
+
+add starting point using ip 14h word from data executable file and end at the end
+
+use all relocation table values
