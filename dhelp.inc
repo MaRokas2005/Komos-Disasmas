@@ -49,7 +49,7 @@ _notes          db  "NOTES", 13, 10
 _examples       db  "EXAMPLES", 13, 10
                 db  "       To disassemble a file named 'code.exe'", 13, 10
                 db  "        into a readable assembly file 'output.asm':", 13, 10
-                db  "              disasm code.bin output.asm", 13, 10, 13, 10
+                db  "              disasm code.exe output.asm", 13, 10, 13, 10
                 db  "       To view help about the tool:", 13, 10
                 db  "              disasm --help", 13, 10, 13, 10, "$"
 _author         db  "AUTHOR", 13, 10

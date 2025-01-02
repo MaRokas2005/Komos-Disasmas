@@ -229,3279 +229,473 @@
     db  00ah, 020h, 020h, 020h, 020h, 020h, 020h, 020h, 043h, 06fh, 070h, 079h, 072h, 069h, 067h, 068h
     db  074h, 020h, 032h, 030h, 032h, 034h, 020h, 056h, 055h, 02eh, 00dh, 00ah, 024h
 .CODE
-;;  SCANNING...
-;;           code byte in file : 00000h00200h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00000h
-;;                 si register : 00202h
-; 00591h
-;;                      opcode : 050h
-place_00200h:       push    ax
-;;           code byte in file : 00000h00201h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00001h
-;;                 si register : 00203h
-; 00591h
-;;                      opcode : 052h
-place_00201h:       push    dx
-;;           code byte in file : 00000h00202h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00002h
-;;                 si register : 00204h
-; 00591h
-;;                      opcode : 0b4h
-place_00202h:       mov     ah, 009h
-;;           code byte in file : 00000h00204h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00004h
-;;                 si register : 00206h
-; 00591h
-;;                      opcode : 0bah
-place_00204h:       mov     dx, 00461h
-;;           code byte in file : 00000h00207h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00007h
-;;                 si register : 00209h
-; 00591h
-;;                      opcode : 0cdh
-place_00207h:       int     021h
-;;           code byte in file : 00000h00209h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00009h
-;;                 si register : 0020bh
-; 00591h
-;;                      opcode : 0e8h
-place_00209h:       call    place_002aah
-;;           code byte in file : 00000h0020ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000ch
-;;                 si register : 0020eh
-; 00591h
-;;                      opcode : 05ah
-place_0020ch:       pop     dx
-;;           code byte in file : 00000h0020dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000dh
-;;                 si register : 0020fh
-; 00591h
-;;                      opcode : 058h
-place_0020dh:       pop     ax
-;;           code byte in file : 00000h0020eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000eh
-;;                 si register : 00210h
-; 00591h
-;;                      opcode : 0c3h
-place_0020eh:       ret     
-;;           code byte in file : 00000h0020fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000fh
-;;                 si register : 00211h
-; 00591h
-;;                      opcode : 0b4h
-place_0020fh:       mov     ah, 03eh
-;;           code byte in file : 00000h00211h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00011h
-;;                 si register : 00213h
-; 00591h
-;;                      opcode : 08bh
-place_00211h:       mov     bx, word ptr ds:[ 001feh ]
-;;           code byte in file : 00000h00215h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00015h
-;;                 si register : 00217h
-; 00591h
-;;                      opcode : 0cdh
-place_00215h:       int     021h
-;;           code byte in file : 00000h00217h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00017h
-;;                 si register : 00219h
-; 00591h
-;;                      opcode : 08bh
-place_00217h:       mov     bx, word ptr ds:[ 00200h ]
-;;           code byte in file : 00000h0021bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001bh
-;;                 si register : 0021dh
-; 00591h
-;;                      opcode : 0cdh
-place_0021bh:       int     021h
-;;           code byte in file : 00000h0021dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001dh
-;;                 si register : 0021fh
-; 00591h
-;;                      opcode : 0b8h
-place_0021dh:       mov     ax, 04c00h
-;;           code byte in file : 00000h00220h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00020h
-;;                 si register : 00222h
-; 00591h
-;;                      opcode : 0cdh
-place_00220h:       int     021h
-;;           code byte in file : 00000h00222h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00022h
-;;                 si register : 00224h
-; 00591h
-;;                      opcode : 050h
-place_00222h:       push    ax
-;;           code byte in file : 00000h00223h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00023h
-;;                 si register : 00225h
-; 00591h
-;;                      opcode : 052h
-place_00223h:       push    dx
-;;           code byte in file : 00000h00224h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00024h
-;;                 si register : 00226h
-; 00591h
-;;                      opcode : 0b4h
-place_00224h:       mov     ah, 009h
-;;           code byte in file : 00000h00226h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00026h
-;;                 si register : 00228h
-; 00591h
-;;                      opcode : 0bah
-place_00226h:       mov     dx, 004c6h
-;;           code byte in file : 00000h00229h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00029h
-;;                 si register : 0022bh
-; 00591h
-;;                      opcode : 0cdh
-place_00229h:       int     021h
-;;           code byte in file : 00000h0022bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002bh
-;;                 si register : 0022dh
-; 00591h
-;;                      opcode : 0bah
-place_0022bh:       mov     dx, 004cfh
-;;           code byte in file : 00000h0022eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002eh
-;;                 si register : 00230h
-; 00591h
-;;                      opcode : 0cdh
-place_0022eh:       int     021h
-;;           code byte in file : 00000h00230h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00030h
-;;                 si register : 00232h
-; 00591h
-;;                      opcode : 05ah
-place_00230h:       pop     dx
-;;           code byte in file : 00000h00231h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00031h
-;;                 si register : 00233h
-; 00591h
-;;                      opcode : 058h
-place_00231h:       pop     ax
-;;           code byte in file : 00000h00232h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00032h
-;;                 si register : 00234h
-; 00591h
-;;                      opcode : 0c3h
-place_00232h:       ret     
-;;           code byte in file : 00000h00233h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00033h
-;;                 si register : 00235h
-; 00591h
-;;                      opcode : 050h
-place_00233h:       push    ax
-;;           code byte in file : 00000h00234h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00034h
-;;                 si register : 00236h
-; 00591h
-;;                      opcode : 052h
-place_00234h:       push    dx
-;;           code byte in file : 00000h00235h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00035h
-;;                 si register : 00237h
-; 00591h
-;;                      opcode : 0b4h
-place_00235h:       mov     ah, 009h
-;;           code byte in file : 00000h00237h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00037h
-;;                 si register : 00239h
-; 00591h
-;;                      opcode : 0bah
-place_00237h:       mov     dx, 004c6h
-;;           code byte in file : 00000h0023ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003ah
-;;                 si register : 0023ch
-; 00591h
-;;                      opcode : 0cdh
-place_0023ah:       int     021h
-;;           code byte in file : 00000h0023ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003ch
-;;                 si register : 0023eh
-; 00591h
-;;                      opcode : 0bah
-place_0023ch:       mov     dx, 004e7h
-;;           code byte in file : 00000h0023fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003fh
-;;                 si register : 00241h
-; 00591h
-;;                      opcode : 0cdh
-place_0023fh:       int     021h
-;;           code byte in file : 00000h00241h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00041h
-;;                 si register : 00243h
-; 00591h
-;;                      opcode : 05ah
-place_00241h:       pop     dx
-;;           code byte in file : 00000h00242h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00042h
-;;                 si register : 00244h
-; 00591h
-;;                      opcode : 058h
-place_00242h:       pop     ax
-;;           code byte in file : 00000h00243h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00043h
-;;                 si register : 00245h
-; 00591h
-;;                      opcode : 0c3h
-place_00243h:       ret     
-;;           code byte in file : 00000h00244h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00044h
-;;                 si register : 00246h
-; 00591h
-;;                      opcode : 050h
-place_00244h:       push    ax
-;;           code byte in file : 00000h00245h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00045h
-;;                 si register : 00247h
-; 00591h
-;;                      opcode : 052h
-place_00245h:       push    dx
-;;           code byte in file : 00000h00246h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00046h
-;;                 si register : 00248h
-; 00591h
-;;                      opcode : 0b4h
-place_00246h:       mov     ah, 009h
-;;           code byte in file : 00000h00248h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00048h
-;;                 si register : 0024ah
-; 00591h
-;;                      opcode : 0bah
-place_00248h:       mov     dx, 004c6h
-;;           code byte in file : 00000h0024bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004bh
-;;                 si register : 0024dh
-; 00591h
-;;                      opcode : 0cdh
-place_0024bh:       int     021h
-;;           code byte in file : 00000h0024dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004dh
-;;                 si register : 0024fh
-; 00591h
-;;                      opcode : 0bah
-place_0024dh:       mov     dx, 00501h
-;;           code byte in file : 00000h00250h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00050h
-;;                 si register : 00252h
-; 00591h
-;;                      opcode : 0cdh
-place_00250h:       int     021h
-;;           code byte in file : 00000h00252h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00052h
-;;                 si register : 00254h
-; 00591h
-;;                      opcode : 05ah
-place_00252h:       pop     dx
-;;           code byte in file : 00000h00253h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00053h
-;;                 si register : 00255h
-; 00591h
-;;                      opcode : 058h
-place_00253h:       pop     ax
-;;           code byte in file : 00000h00254h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00054h
-;;                 si register : 00256h
-; 00591h
-;;                      opcode : 0c3h
-place_00254h:       ret     
-;;           code byte in file : 00000h00255h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00055h
-;;                 si register : 00257h
-; 00591h
-;;                      opcode : 050h
-place_00255h:       push    ax
-;;           code byte in file : 00000h00256h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00056h
-;;                 si register : 00258h
-; 00591h
-;;                      opcode : 052h
-place_00256h:       push    dx
-;;           code byte in file : 00000h00257h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00057h
-;;                 si register : 00259h
-; 00591h
-;;                      opcode : 0b4h
-place_00257h:       mov     ah, 009h
-;;           code byte in file : 00000h00259h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00059h
-;;                 si register : 0025bh
-; 00591h
-;;                      opcode : 0bah
-place_00259h:       mov     dx, 004c6h
-;;           code byte in file : 00000h0025ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005ch
-;;                 si register : 0025eh
-; 00591h
-;;                      opcode : 0cdh
-place_0025ch:       int     021h
-;;           code byte in file : 00000h0025eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005eh
-;;                 si register : 00260h
-; 00591h
-;;                      opcode : 0bah
-place_0025eh:       mov     dx, 00519h
-;;           code byte in file : 00000h00261h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00061h
-;;                 si register : 00263h
-; 00591h
-;;                      opcode : 0cdh
-place_00261h:       int     021h
-;;           code byte in file : 00000h00263h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00063h
-;;                 si register : 00265h
-; 00591h
-;;                      opcode : 05ah
-place_00263h:       pop     dx
-;;           code byte in file : 00000h00264h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00064h
-;;                 si register : 00266h
-; 00591h
-;;                      opcode : 058h
-place_00264h:       pop     ax
-;;           code byte in file : 00000h00265h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00065h
-;;                 si register : 00267h
-; 00591h
-;;                      opcode : 0c3h
-place_00265h:       ret     
-;;           code byte in file : 00000h00266h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00066h
-;;                 si register : 00268h
-; 00591h
-;;                      opcode : 050h
-place_00266h:       push    ax
-;;           code byte in file : 00000h00267h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00067h
-;;                 si register : 00269h
-; 00591h
-;;                      opcode : 052h
-place_00267h:       push    dx
-;;           code byte in file : 00000h00268h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00068h
-;;                 si register : 0026ah
-; 00591h
-;;                      opcode : 0b4h
-place_00268h:       mov     ah, 009h
-;;           code byte in file : 00000h0026ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006ah
-;;                 si register : 0026ch
-; 00591h
-;;                      opcode : 0bah
-place_0026ah:       mov     dx, 004c6h
-;;           code byte in file : 00000h0026dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006dh
-;;                 si register : 0026fh
-; 00591h
-;;                      opcode : 0cdh
-place_0026dh:       int     021h
-;;           code byte in file : 00000h0026fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006fh
-;;                 si register : 00271h
-; 00591h
-;;                      opcode : 0bah
-place_0026fh:       mov     dx, 00535h
-;;           code byte in file : 00000h00272h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00072h
-;;                 si register : 00274h
-; 00591h
-;;                      opcode : 0cdh
-place_00272h:       int     021h
-;;           code byte in file : 00000h00274h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00074h
-;;                 si register : 00276h
-; 00591h
-;;                      opcode : 05ah
-place_00274h:       pop     dx
-;;           code byte in file : 00000h00275h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00075h
-;;                 si register : 00277h
-; 00591h
-;;                      opcode : 058h
-place_00275h:       pop     ax
-;;           code byte in file : 00000h00276h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00076h
-;;                 si register : 00278h
-; 00591h
-;;                      opcode : 0c3h
-place_00276h:       ret     
-;;           code byte in file : 00000h00277h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00077h
-;;                 si register : 00279h
-; 00591h
-;;                      opcode : 050h
-place_00277h:       push    ax
-;;           code byte in file : 00000h00278h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00078h
-;;                 si register : 0027ah
-; 00591h
-;;                      opcode : 052h
-place_00278h:       push    dx
-;;           code byte in file : 00000h00279h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00079h
-;;                 si register : 0027bh
-; 00591h
-;;                      opcode : 0b4h
-place_00279h:       mov     ah, 009h
-;;           code byte in file : 00000h0027bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007bh
-;;                 si register : 0027dh
-; 00591h
-;;                      opcode : 0bah
-place_0027bh:       mov     dx, 004c6h
-;;           code byte in file : 00000h0027eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007eh
-;;                 si register : 00280h
-; 00591h
-;;                      opcode : 0cdh
-place_0027eh:       int     021h
-;;           code byte in file : 00000h00280h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00080h
-;;                 si register : 00282h
-; 00591h
-;;                      opcode : 0bah
-place_00280h:       mov     dx, 00556h
-;;           code byte in file : 00000h00283h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00083h
-;;                 si register : 00285h
-; 00591h
-;;                      opcode : 0cdh
-place_00283h:       int     021h
-;;           code byte in file : 00000h00285h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00085h
-;;                 si register : 00287h
-; 00591h
-;;                      opcode : 05ah
-place_00285h:       pop     dx
-;;           code byte in file : 00000h00286h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00086h
-;;                 si register : 00288h
-; 00591h
-;;                      opcode : 058h
-place_00286h:       pop     ax
-;;           code byte in file : 00000h00287h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00087h
-;;                 si register : 00289h
-; 00591h
-;;                      opcode : 0c3h
-place_00287h:       ret     
-;;           code byte in file : 00000h00288h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00088h
-;;                 si register : 0028ah
-; 00591h
-;;                      opcode : 050h
-place_00288h:       push    ax
-;;           code byte in file : 00000h00289h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00089h
-;;                 si register : 0028bh
-; 00591h
-;;                      opcode : 052h
-place_00289h:       push    dx
-;;           code byte in file : 00000h0028ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008ah
-;;                 si register : 0028ch
-; 00591h
-;;                      opcode : 0b4h
-place_0028ah:       mov     ah, 009h
-;;           code byte in file : 00000h0028ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008ch
-;;                 si register : 0028eh
-; 00591h
-;;                      opcode : 0bah
-place_0028ch:       mov     dx, 004c6h
-;;           code byte in file : 00000h0028fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008fh
-;;                 si register : 00291h
-; 00591h
-;;                      opcode : 0cdh
-place_0028fh:       int     021h
-;;           code byte in file : 00000h00291h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00091h
-;;                 si register : 00293h
-; 00591h
-;;                      opcode : 0bah
-place_00291h:       mov     dx, 0056eh
-;;           code byte in file : 00000h00294h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00094h
-;;                 si register : 00296h
-; 00591h
-;;                      opcode : 0cdh
-place_00294h:       int     021h
-;;           code byte in file : 00000h00296h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00096h
-;;                 si register : 00298h
-; 00591h
-;;                      opcode : 05ah
-place_00296h:       pop     dx
-;;           code byte in file : 00000h00297h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00097h
-;;                 si register : 00299h
-; 00591h
-;;                      opcode : 058h
-place_00297h:       pop     ax
-;;           code byte in file : 00000h00298h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00098h
-;;                 si register : 0029ah
-; 00591h
-;;                      opcode : 0c3h
-place_00298h:       ret     
-;;           code byte in file : 00000h00299h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00099h
-;;                 si register : 0029bh
-; 00591h
-;;                      opcode : 050h
-place_00299h:       push    ax
-;;           code byte in file : 00000h0029ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009ah
-;;                 si register : 0029ch
-; 00591h
-;;                      opcode : 052h
-place_0029ah:       push    dx
-;;           code byte in file : 00000h0029bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009bh
-;;                 si register : 0029dh
-; 00591h
-;;                      opcode : 0b4h
-place_0029bh:       mov     ah, 009h
-;;           code byte in file : 00000h0029dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009dh
-;;                 si register : 0029fh
-; 00591h
-;;                      opcode : 0bah
-place_0029dh:       mov     dx, 004c6h
-;;           code byte in file : 00000h002a0h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a0h
-;;                 si register : 002a2h
-; 00591h
-;;                      opcode : 0cdh
-place_002a0h:       int     021h
-;;           code byte in file : 00000h002a2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a2h
-;;                 si register : 002a4h
-; 00591h
-;;                      opcode : 0bah
-place_002a2h:       mov     dx, 005b4h
-;;           code byte in file : 00000h002a5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a5h
-;;                 si register : 002a7h
-; 00591h
-;;                      opcode : 0cdh
-place_002a5h:       int     021h
-;;           code byte in file : 00000h002a7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a7h
-;;                 si register : 002a9h
-; 00591h
-;;                      opcode : 05ah
-place_002a7h:       pop     dx
-;;           code byte in file : 00000h002a8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a8h
-;;                 si register : 002aah
-; 00591h
-;;                      opcode : 058h
-place_002a8h:       pop     ax
-;;           code byte in file : 00000h002a9h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a9h
-;;                 si register : 002abh
-; 00591h
-;;                      opcode : 0c3h
-place_002a9h:       ret     
-;;           code byte in file : 00000h002aah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000aah
-;;                 si register : 002ach
-; 00591h
-;;                      opcode : 050h
-place_002aah:       push    ax
-;;           code byte in file : 00000h002abh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000abh
-;;                 si register : 002adh
-; 00591h
-;;                      opcode : 052h
-place_002abh:       push    dx
-;;           code byte in file : 00000h002ach
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000ach
-;;                 si register : 002aeh
-; 00591h
-;;                      opcode : 0b4h
-place_002ach:       mov     ah, 009h
-;;           code byte in file : 00000h002aeh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000aeh
-;;                 si register : 002b0h
-; 00591h
-;;                      opcode : 0bah
-place_002aeh:       mov     dx, 00487h
-;;           code byte in file : 00000h002b1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b1h
-;;                 si register : 002b3h
-; 00591h
-;;                      opcode : 0cdh
-place_002b1h:       int     021h
-;;           code byte in file : 00000h002b3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b3h
-;;                 si register : 002b5h
-; 00591h
-;;                      opcode : 0b4h
-place_002b3h:       mov     ah, 008h
-;;           code byte in file : 00000h002b5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b5h
-;;                 si register : 002b7h
-; 00591h
-;;                      opcode : 0cdh
-place_002b5h:       int     021h
-;;           code byte in file : 00000h002b7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b7h
-;;                 si register : 002b9h
-; 00591h
-;;                      opcode : 0b4h
-place_002b7h:       mov     ah, 009h
-;;           code byte in file : 00000h002b9h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b9h
-;;                 si register : 002bbh
-; 00591h
-;;                      opcode : 0bah
-place_002b9h:       mov     dx, 004a4h
-;;           code byte in file : 00000h002bch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000bch
-;;                 si register : 002beh
-; 00591h
-;;                      opcode : 0cdh
-place_002bch:       int     021h
-;;           code byte in file : 00000h002beh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000beh
-;;                 si register : 002c0h
-; 00591h
-;;                      opcode : 05ah
-place_002beh:       pop     dx
-;;           code byte in file : 00000h002bfh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000bfh
-;;                 si register : 002c1h
-; 00591h
-;;                      opcode : 058h
-place_002bfh:       pop     ax
-;;           code byte in file : 00000h002c0h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c0h
-;;                 si register : 002c2h
-; 00591h
-;;                      opcode : 0c3h
-place_002c0h:       ret     
-;;           code byte in file : 00000h002c1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c1h
-;;                 si register : 002c3h
-; 00591h
-;;                      opcode : 050h
-place_002c1h:       push    ax
-;;           code byte in file : 00000h002c2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c2h
-;;                 si register : 002c4h
-; 00591h
-;;                      opcode : 052h
-place_002c2h:       push    dx
-;;           code byte in file : 00000h002c3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c3h
-;;                 si register : 002c5h
-; 00591h
-;;                      opcode : 0b4h
-place_002c3h:       mov     ah, 009h
-;;           code byte in file : 00000h002c5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c5h
-;;                 si register : 002c7h
-; 00591h
-;;                      opcode : 0bah
-place_002c5h:       mov     dx, 005e8h
-;;           code byte in file : 00000h002c8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c8h
-;;                 si register : 002cah
-; 00591h
-;;                      opcode : 0cdh
-place_002c8h:       int     021h
-;;           code byte in file : 00000h002cah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cah
-;;                 si register : 002cch
-; 00591h
-;;                      opcode : 0bah
-place_002cah:       mov     dx, 00639h
-;;           code byte in file : 00000h002cdh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cdh
-;;                 si register : 002cfh
-; 00591h
-;;                      opcode : 0cdh
-place_002cdh:       int     021h
-;;           code byte in file : 00000h002cfh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cfh
-;;                 si register : 002d1h
-; 00591h
-;;                      opcode : 0e8h
-place_002cfh:       call    place_002aah
-;;           code byte in file : 00000h002d2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d2h
-;;                 si register : 002d4h
-; 00591h
-;;                      opcode : 0bah
-place_002d2h:       mov     dx, 006aah
-;;           code byte in file : 00000h002d5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d5h
-;;                 si register : 002d7h
-; 00591h
-;;                      opcode : 0cdh
-place_002d5h:       int     021h
-;;           code byte in file : 00000h002d7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d7h
-;;                 si register : 002d9h
-; 00591h
-;;                      opcode : 0e8h
-place_002d7h:       call    place_002aah
-;;           code byte in file : 00000h002dah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000dah
-;;                 si register : 002dch
-; 00591h
-;;                      opcode : 0bah
-place_002dah:       mov     dx, 00762h
-;;           code byte in file : 00000h002ddh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000ddh
-;;                 si register : 002dfh
-; 00591h
-;;                      opcode : 0cdh
-place_002ddh:       int     021h
-;;           code byte in file : 00000h002dfh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000dfh
-;;                 si register : 002e1h
-; 00591h
-;;                      opcode : 0e8h
-place_002dfh:       call    place_002aah
-;;           code byte in file : 00000h002e2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e2h
-;;                 si register : 002e4h
-; 00591h
-;;                      opcode : 0bah
-place_002e2h:       mov     dx, 0087ah
-;;           code byte in file : 00000h002e5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e5h
-;;                 si register : 002e7h
-; 00591h
-;;                      opcode : 0cdh
-place_002e5h:       int     021h
-;;           code byte in file : 00000h002e7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e7h
-;;                 si register : 002e9h
-; 00591h
-;;                      opcode : 0e8h
-place_002e7h:       call    place_002aah
-;;           code byte in file : 00000h002eah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000eah
-;;                 si register : 002ech
-; 00591h
-;;                      opcode : 0bah
-place_002eah:       mov     dx, 0098dh
-;;           code byte in file : 00000h002edh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000edh
-;;                 si register : 002efh
-; 00591h
-;;                      opcode : 0cdh
-place_002edh:       int     021h
-;;           code byte in file : 00000h002efh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000efh
-;;                 si register : 002f1h
-; 00591h
-;;                      opcode : 0e8h
-place_002efh:       call    place_002aah
-;;           code byte in file : 00000h002f2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f2h
-;;                 si register : 002f4h
-; 00591h
-;;                      opcode : 0bah
-place_002f2h:       mov     dx, 00b2dh
-;;           code byte in file : 00000h002f5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f5h
-;;                 si register : 002f7h
-; 00591h
-;;                      opcode : 0cdh
-place_002f5h:       int     021h
-;;           code byte in file : 00000h002f7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f7h
-;;                 si register : 002f9h
-; 00591h
-;;                      opcode : 0e8h
-place_002f7h:       call    place_002aah
-;;           code byte in file : 00000h002fah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000fah
-;;                 si register : 002fch
-; 00591h
-;;                      opcode : 0bah
-place_002fah:       mov     dx, 00c91h
-;;           code byte in file : 00000h002fdh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000fdh
-;;                 si register : 002ffh
-; 00591h
-;;                      opcode : 0cdh
-place_002fdh:       int     021h
-;;  SCANNING...
-;;           code byte in file : 00000h002ffh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00000h
-;;                 si register : 00202h
-; 00591h
-;;                      opcode : 0e8h
-place_002ffh:       call    place_002aah
-;;           code byte in file : 00000h00302h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00003h
-;;                 si register : 00205h
-; 00591h
-;;                      opcode : 0bah
-place_00302h:       mov     dx, 00dc7h
-;;           code byte in file : 00000h00305h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00006h
-;;                 si register : 00208h
-; 00591h
-;;                      opcode : 0cdh
-place_00305h:       int     021h
-;;           code byte in file : 00000h00307h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00008h
-;;                 si register : 0020ah
-; 00591h
-;;                      opcode : 0e8h
-place_00307h:       call    place_002aah
-;;           code byte in file : 00000h0030ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000bh
-;;                 si register : 0020dh
-; 00591h
-;;                      opcode : 0bah
-place_0030ah:       mov     dx, 00df6h
-;;           code byte in file : 00000h0030dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000eh
-;;                 si register : 00210h
-; 00591h
-;;                      opcode : 0cdh
-place_0030dh:       int     021h
-;;           code byte in file : 00000h0030fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00010h
-;;                 si register : 00212h
-; 00591h
-;;                      opcode : 05ah
-place_0030fh:       pop     dx
-;;           code byte in file : 00000h00310h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00011h
-;;                 si register : 00213h
-; 00591h
-;;                      opcode : 058h
-place_00310h:       pop     ax
-;;           code byte in file : 00000h00311h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00012h
-;;                 si register : 00214h
-; 00591h
-;;                      opcode : 0c3h
-place_00311h:       ret     
-;;           code byte in file : 00000h00312h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00013h
-;;                 si register : 00215h
-; 00591h
-;;                      opcode : 050h
-place_00312h:       push    ax
-;;           code byte in file : 00000h00313h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00014h
-;;                 si register : 00216h
-; 00591h
-;;                      opcode : 057h
-place_00313h:       push    di
-;;           code byte in file : 00000h00314h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00015h
-;;                 si register : 00217h
-; 00591h
-;;                      opcode : 056h
-place_00314h:       push    si
-;;           code byte in file : 00000h00315h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00016h
-;;                 si register : 00218h
-; 00591h
-;;                      opcode : 026h
-place_00315h:       mov     al, byte ptr es:[ di ]
-;;           code byte in file : 00000h00318h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00019h
-;;                 si register : 0021bh
-; 00591h
-;;                      opcode : 03ah
-place_00318h:       cmp     al, byte ptr ds:[ si ]
-;;           code byte in file : 00000h0031ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001bh
-;;                 si register : 0021dh
-; 00591h
-;;                      opcode : 075h
-place_0031ah:       jne     place_00343h
-;;           code byte in file : 00000h0031ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001dh
-;;                 si register : 0021fh
-; 00591h
-;;                      opcode : 046h
-place_0031ch:       inc     si
-;;           code byte in file : 00000h0031dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001eh
-;;                 si register : 00220h
-; 00591h
-;;                      opcode : 047h
-place_0031dh:       inc     di
-;;           code byte in file : 00000h0031eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001fh
-;;                 si register : 00221h
-; 00591h
-;;                      opcode : 080h
-place_0031eh:       cmp     byte ptr ds:[ si ], 000h
-;;           code byte in file : 00000h00321h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00022h
-;;                 si register : 00224h
-; 00591h
-;;                      opcode : 074h
-place_00321h:       je      place_0032bh
-;;           code byte in file : 00000h00323h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00024h
-;;                 si register : 00226h
-; 00591h
-;;                      opcode : 026h
-place_00323h:       cmp     byte ptr es:[ di ], 000h
-;;           code byte in file : 00000h00327h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00028h
-;;                 si register : 0022ah
-; 00591h
-;;                      opcode : 074h
-place_00327h:       je      place_00343h
-;;           code byte in file : 00000h00329h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002ah
-;;                 si register : 0022ch
-; 00591h
-;;                      opcode : 0ebh
-place_00329h:       jmp     place_00315h
-;;           code byte in file : 00000h0032bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002ch
-;;                 si register : 0022eh
-; 00591h
-;;                      opcode : 026h
-place_0032bh:       cmp     byte ptr es:[ di ], 000h
-;;           code byte in file : 00000h0032fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00030h
-;;                 si register : 00232h
-; 00591h
-;;                      opcode : 074h
-place_0032fh:       je      place_00340h
-;;           code byte in file : 00000h00331h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00032h
-;;                 si register : 00234h
-; 00591h
-;;                      opcode : 026h
-place_00331h:       cmp     byte ptr es:[ di ], 00dh
-;;           code byte in file : 00000h00335h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00036h
-;;                 si register : 00238h
-; 00591h
-;;                      opcode : 074h
-place_00335h:       je      place_00340h
-;;           code byte in file : 00000h00337h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00038h
-;;                 si register : 0023ah
-; 00591h
-;;                      opcode : 026h
-place_00337h:       cmp     byte ptr es:[ di ], 020h
-;;           code byte in file : 00000h0033bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003ch
-;;                 si register : 0023eh
-; 00591h
-;;                      opcode : 074h
-place_0033bh:       je      place_00340h
-;;           code byte in file : 00000h0033dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003eh
-;;                 si register : 00240h
-; 00591h
-;;                      opcode : 0ebh
-place_0033dh:       jmp     place_00343h
-;;           code byte in file : 00000h0033fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00040h
-;;                 si register : 00242h
-; 00591h
-;;                      opcode : 090h
-place_0033fh:       nop     
-;;           code byte in file : 00000h00340h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00041h
-;;                 si register : 00243h
-; 00591h
-;;                      opcode : 0bbh
-place_00340h:       mov     bx, 00001h
-;;           code byte in file : 00000h00343h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00044h
-;;                 si register : 00246h
-; 00591h
-;;                      opcode : 05eh
-place_00343h:       pop     si
-;;           code byte in file : 00000h00344h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00045h
-;;                 si register : 00247h
-; 00591h
-;;                      opcode : 05fh
-place_00344h:       pop     di
-;;           code byte in file : 00000h00345h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00046h
-;;                 si register : 00248h
-; 00591h
-;;                      opcode : 058h
-place_00345h:       pop     ax
-;;           code byte in file : 00000h00346h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00047h
-;;                 si register : 00249h
-; 00591h
-;;                      opcode : 0c3h
-place_00346h:       ret     
-;;           code byte in file : 00000h00347h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00048h
-;;                 si register : 0024ah
-; 00591h
-;;                      opcode : 056h
-place_00347h:       push    si
-;;           code byte in file : 00000h00348h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00049h
-;;                 si register : 0024bh
-; 00591h
-;;                      opcode : 057h
-place_00348h:       push    di
-;;           code byte in file : 00000h00349h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004ah
-;;                 si register : 0024ch
-; 00591h
-;;                      opcode : 0beh
-place_00349h:       mov     si, 00471h
-;;           code byte in file : 00000h0034ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004dh
-;;                 si register : 0024fh
-; 00591h
-;;                      opcode : 0e8h
-place_0034ch:       call    place_00312h
-;;           code byte in file : 00000h0034fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00050h
-;;                 si register : 00252h
-; 00591h
-;;                      opcode : 083h
-place_0034fh:       cmp     bx, 00001h
-;;           code byte in file : 00000h00352h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00053h
-;;                 si register : 00255h
-; 00591h
-;;                      opcode : 074h
-place_00352h:       je      place_00389h
-;;           code byte in file : 00000h00354h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00055h
-;;                 si register : 00257h
-; 00591h
-;;                      opcode : 0beh
-place_00354h:       mov     si, 00474h
-;;           code byte in file : 00000h00357h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00058h
-;;                 si register : 0025ah
-; 00591h
-;;                      opcode : 0e8h
-place_00357h:       call    place_00312h
-;;           code byte in file : 00000h0035ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005bh
-;;                 si register : 0025dh
-; 00591h
-;;                      opcode : 083h
-place_0035ah:       cmp     bx, 00001h
-;;           code byte in file : 00000h0035dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005eh
-;;                 si register : 00260h
-; 00591h
-;;                      opcode : 074h
-place_0035dh:       je      place_00389h
-;;           code byte in file : 00000h0035fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00060h
-;;                 si register : 00262h
-; 00591h
-;;                      opcode : 0beh
-place_0035fh:       mov     si, 00477h
-;;           code byte in file : 00000h00362h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00063h
-;;                 si register : 00265h
-; 00591h
-;;                      opcode : 0e8h
-place_00362h:       call    place_00312h
-;;           code byte in file : 00000h00365h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00066h
-;;                 si register : 00268h
-; 00591h
-;;                      opcode : 083h
-place_00365h:       cmp     bx, 00001h
-;;           code byte in file : 00000h00368h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00069h
-;;                 si register : 0026bh
-; 00591h
-;;                      opcode : 074h
-place_00368h:       je      place_00389h
-;;           code byte in file : 00000h0036ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006bh
-;;                 si register : 0026dh
-; 00591h
-;;                      opcode : 0beh
-place_0036ah:       mov     si, 0047ah
-;;           code byte in file : 00000h0036dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006eh
-;;                 si register : 00270h
-; 00591h
-;;                      opcode : 0e8h
-place_0036dh:       call    place_00312h
-;;           code byte in file : 00000h00370h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00071h
-;;                 si register : 00273h
-; 00591h
-;;                      opcode : 083h
-place_00370h:       cmp     bx, 00001h
-;;           code byte in file : 00000h00373h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00074h
-;;                 si register : 00276h
-; 00591h
-;;                      opcode : 074h
-place_00373h:       je      place_00389h
-;;           code byte in file : 00000h00375h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00076h
-;;                 si register : 00278h
-; 00591h
-;;                      opcode : 0beh
-place_00375h:       mov     si, 0047dh
-;;           code byte in file : 00000h00378h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00079h
-;;                 si register : 0027bh
-; 00591h
-;;                      opcode : 0e8h
-place_00378h:       call    place_00312h
-;;           code byte in file : 00000h0037bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007ch
-;;                 si register : 0027eh
-; 00591h
-;;                      opcode : 083h
-place_0037bh:       cmp     bx, 00001h
-;;           code byte in file : 00000h0037eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007fh
-;;                 si register : 00281h
-; 00591h
-;;                      opcode : 074h
-place_0037eh:       je      place_00389h
-;;           code byte in file : 00000h00380h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00081h
-;;                 si register : 00283h
-; 00591h
-;;                      opcode : 0beh
-place_00380h:       mov     si, 00480h
-;;           code byte in file : 00000h00383h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00084h
-;;                 si register : 00286h
-; 00591h
-;;                      opcode : 0e8h
-place_00383h:       call    place_00312h
-;;           code byte in file : 00000h00386h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00087h
-;;                 si register : 00289h
-; 00591h
-;;                      opcode : 083h
-place_00386h:       cmp     bx, 00001h
-;;           code byte in file : 00000h00389h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008ah
-;;                 si register : 0028ch
-; 00591h
-;;                      opcode : 05fh
-place_00389h:       pop     di
-;;           code byte in file : 00000h0038ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008bh
-;;                 si register : 0028dh
-; 00591h
-;;                      opcode : 05eh
-place_0038ah:       pop     si
-;;           code byte in file : 00000h0038bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008ch
-;;                 si register : 0028eh
-; 00591h
-;;                      opcode : 0c3h
-place_0038bh:       ret     
-;;           code byte in file : 00000h0038ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008dh
-;;                 si register : 0028fh
-; 00591h
-;;                      opcode : 050h
-place_0038ch:       push    ax
-;;           code byte in file : 00000h0038dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008eh
-;;                 si register : 00290h
-; 00591h
-;;                      opcode : 051h
-place_0038dh:       push    cx
-;;           code byte in file : 00000h0038eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008fh
-;;                 si register : 00291h
-; 00591h
-;;                      opcode : 052h
-place_0038eh:       push    dx
-;;           code byte in file : 00000h0038fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00090h
-;;                 si register : 00292h
-; 00591h
-;;                      opcode : 0b4h
-place_0038fh:       mov     ah, 03ch
-;;           code byte in file : 00000h00391h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00092h
-;;                 si register : 00294h
-; 00591h
-;;                      opcode : 033h
-place_00391h:       xor     cx, cx
-;;           code byte in file : 00000h00393h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00094h
-;;                 si register : 00296h
-; 00591h
-;;                      opcode : 0bah
-place_00393h:       mov     dx, 000ffh
-;;           code byte in file : 00000h00396h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00097h
-;;                 si register : 00299h
-; 00591h
-;;                      opcode : 0cdh
-place_00396h:       int     021h
-;;           code byte in file : 00000h00398h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00099h
-;;                 si register : 0029bh
-; 00591h
-;;                      opcode : 073h
-place_00398h:       jae     place_003a3h
-;;           code byte in file : 00000h0039ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009bh
-;;                 si register : 0029dh
-; 00591h
-;;                      opcode : 0e8h
-place_0039ah:       call    place_00233h
-;;           code byte in file : 00000h0039dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009eh
-;;                 si register : 002a0h
-; 00591h
-;;                      opcode : 0e8h
-place_0039dh:       call    place_002c1h
-;;           code byte in file : 00000h003a0h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a1h
-;;                 si register : 002a3h
-; 00591h
-;;                      opcode : 0e8h
-place_003a0h:       call    place_0020fh
-;;           code byte in file : 00000h003a3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a4h
-;;                 si register : 002a6h
-; 00591h
-;;                      opcode : 0a3h
-place_003a3h:       mov     word ptr ds:[ 00201h ], ax
-;;           code byte in file : 00000h003a6h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a7h
-;;                 si register : 002a9h
-; 00591h
-;;                      opcode : 05ah
-place_003a6h:       pop     dx
-;;           code byte in file : 00000h003a7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a8h
-;;                 si register : 002aah
-; 00591h
-;;                      opcode : 059h
-place_003a7h:       pop     cx
-;;           code byte in file : 00000h003a8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a9h
-;;                 si register : 002abh
-; 00591h
-;;                      opcode : 058h
-place_003a8h:       pop     ax
-;;           code byte in file : 00000h003a9h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000aah
-;;                 si register : 002ach
-; 00591h
-;;                      opcode : 0c3h
-place_003a9h:       ret     
-;;           code byte in file : 00000h003aah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000abh
-;;                 si register : 002adh
-; 00591h
-;;                      opcode : 026h
-place_003aah:       mov     al, byte ptr es:[ di ]
-;;           code byte in file : 00000h003adh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000aeh
-;;                 si register : 002b0h
-; 00591h
-;;                      opcode : 03ch
-place_003adh:       cmp     al, 020h
-;;           code byte in file : 00000h003afh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b0h
-;;                 si register : 002b2h
-; 00591h
-;;                      opcode : 074h
-place_003afh:       je      place_003b2h
-;;           code byte in file : 00000h003b1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b2h
-;;                 si register : 002b4h
-; 00591h
-;;                      opcode : 0c3h
-place_003b1h:       ret     
-;;           code byte in file : 00000h003b2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b3h
-;;                 si register : 002b5h
-; 00591h
-;;                      opcode : 047h
-place_003b2h:       inc     di
-;;           code byte in file : 00000h003b3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b4h
-;;                 si register : 002b6h
-; 00591h
-;;                      opcode : 0ebh
-place_003b3h:       jmp     place_003aah
-;;           code byte in file : 00000h003b5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b6h
-;;                 si register : 002b8h
-; 00591h
-;;                      opcode : 0c3h
-place_003b5h:       ret     
-;;           code byte in file : 00000h003b6h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b7h
-;;                 si register : 002b9h
-; 00591h
-;;                      opcode : 050h
-place_003b6h:       push    ax
-;;           code byte in file : 00000h003b7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b8h
-;;                 si register : 002bah
-; 00591h
-;;                      opcode : 052h
-place_003b7h:       push    dx
-;;           code byte in file : 00000h003b8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b9h
-;;                 si register : 002bbh
-; 00591h
-;;                      opcode : 0b8h
-place_003b8h:       mov     ax, 03d00h
-;;           code byte in file : 00000h003bbh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000bch
-;;                 si register : 002beh
-; 00591h
-;;                      opcode : 0bah
-place_003bbh:       mov     dx, 00000h
-;;           code byte in file : 00000h003beh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000bfh
-;;                 si register : 002c1h
-; 00591h
-;;                      opcode : 0cdh
-place_003beh:       int     021h
-;;           code byte in file : 00000h003c0h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c1h
-;;                 si register : 002c3h
-; 00591h
-;;                      opcode : 073h
-place_003c0h:       jae     place_003cbh
-;;           code byte in file : 00000h003c2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c3h
-;;                 si register : 002c5h
-; 00591h
-;;                      opcode : 0e8h
-place_003c2h:       call    place_00222h
-;;           code byte in file : 00000h003c5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c6h
-;;                 si register : 002c8h
-; 00591h
-;;                      opcode : 0e8h
-place_003c5h:       call    place_002c1h
-;;           code byte in file : 00000h003c8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c9h
-;;                 si register : 002cbh
-; 00591h
-;;                      opcode : 0e8h
-place_003c8h:       call    place_0020fh
-;;           code byte in file : 00000h003cbh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cch
-;;                 si register : 002ceh
-; 00591h
-;;                      opcode : 0a3h
-place_003cbh:       mov     word ptr ds:[ 00201h ], ax
-;;           code byte in file : 00000h003ceh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cfh
-;;                 si register : 002d1h
-; 00591h
-;;                      opcode : 05ah
-place_003ceh:       pop     dx
-;;           code byte in file : 00000h003cfh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d0h
-;;                 si register : 002d2h
-; 00591h
-;;                      opcode : 058h
-place_003cfh:       pop     ax
-;;           code byte in file : 00000h003d0h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d1h
-;;                 si register : 002d3h
-; 00591h
-;;                      opcode : 0c3h
-place_003d0h:       ret     
-;;           code byte in file : 00000h003d1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d2h
-;;                 si register : 002d4h
-; 00591h
-;;                      opcode : 050h
-place_003d1h:       push    ax
-;;           code byte in file : 00000h003d2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d3h
-;;                 si register : 002d5h
-; 00591h
-;;                      opcode : 052h
-place_003d2h:       push    dx
-;;           code byte in file : 00000h003d3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d4h
-;;                 si register : 002d6h
-; 00591h
-;;                      opcode : 0e8h
-place_003d3h:       call    place_0038ch
-;;           code byte in file : 00000h003d6h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d7h
-;;                 si register : 002d9h
-; 00591h
-;;                      opcode : 05ah
-place_003d6h:       pop     dx
-;;           code byte in file : 00000h003d7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d8h
-;;                 si register : 002dah
-; 00591h
-;;                      opcode : 058h
-place_003d7h:       pop     ax
-;;           code byte in file : 00000h003d8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d9h
-;;                 si register : 002dbh
-; 00591h
-;;                      opcode : 0c3h
-place_003d8h:       ret     
-;;           code byte in file : 00000h003d9h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000dah
-;;                 si register : 002dch
-; 00591h
-;;                      opcode : 050h
-place_003d9h:       push    ax
-;;           code byte in file : 00000h003dah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000dbh
-;;                 si register : 002ddh
-; 00591h
-;;                      opcode : 026h
-place_003dah:       mov     al, byte ptr es:[ di ]
-;;           code byte in file : 00000h003ddh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000deh
-;;                 si register : 002e0h
-; 00591h
-;;                      opcode : 03ch
-place_003ddh:       cmp     al, 022h
-;;           code byte in file : 00000h003dfh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e0h
-;;                 si register : 002e2h
-; 00591h
-;;                      opcode : 075h
-place_003dfh:       jne     place_003e8h
-;;           code byte in file : 00000h003e1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e2h
-;;                 si register : 002e4h
-; 00591h
-;;                      opcode : 0bbh
-place_003e1h:       mov     bx, 00001h
-;;           code byte in file : 00000h003e4h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e5h
-;;                 si register : 002e7h
-; 00591h
-;;                      opcode : 088h
-place_003e4h:       mov     byte ptr ds:[ si ], al
-;;           code byte in file : 00000h003e6h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e7h
-;;                 si register : 002e9h
-; 00591h
-;;                      opcode : 046h
-place_003e6h:       inc     si
-;;           code byte in file : 00000h003e7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e8h
-;;                 si register : 002eah
-; 00591h
-;;                      opcode : 047h
-place_003e7h:       inc     di
-;;           code byte in file : 00000h003e8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e9h
-;;                 si register : 002ebh
-; 00591h
-;;                      opcode : 026h
-place_003e8h:       mov     al, byte ptr es:[ di ]
-;;           code byte in file : 00000h003ebh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000ech
-;;                 si register : 002eeh
-; 00591h
-;;                      opcode : 03ch
-place_003ebh:       cmp     al, 000h
-;;           code byte in file : 00000h003edh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000eeh
-;;                 si register : 002f0h
-; 00591h
-;;                      opcode : 074h
-place_003edh:       je      place_00409h
-;;           code byte in file : 00000h003efh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f0h
-;;                 si register : 002f2h
-; 00591h
-;;                      opcode : 03ch
-place_003efh:       cmp     al, 00dh
-;;           code byte in file : 00000h003f1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f2h
-;;                 si register : 002f4h
-; 00591h
-;;                      opcode : 074h
-place_003f1h:       je      place_00409h
-;;           code byte in file : 00000h003f3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f4h
-;;                 si register : 002f6h
-; 00591h
-;;                      opcode : 03ch
-place_003f3h:       cmp     al, 022h
-;;           code byte in file : 00000h003f5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f6h
-;;                 si register : 002f8h
-; 00591h
-;;                      opcode : 074h
-place_003f5h:       je      place_00406h
-;;           code byte in file : 00000h003f7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f8h
-;;                 si register : 002fah
-; 00591h
-;;                      opcode : 03ch
-place_003f7h:       cmp     al, 020h
-;;           code byte in file : 00000h003f9h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000fah
-;;                 si register : 002fch
-; 00591h
-;;                      opcode : 075h
-place_003f9h:       jne     place_00400h
-;;           code byte in file : 00000h003fbh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000fch
-;;                 si register : 002feh
-; 00591h
-;;                      opcode : 083h
-place_003fbh:       cmp     bx, 00001h
-;;  SCANNING...
-;;           code byte in file : 00000h003feh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00000h
-;;                 si register : 00202h
-; 00591h
-;;                      opcode : 075h
-place_003feh:       jne     place_00409h
-;;           code byte in file : 00000h00400h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00002h
-;;                 si register : 00204h
-; 00591h
-;;                      opcode : 088h
-place_00400h:       mov     byte ptr ds:[ si ], al
-;;           code byte in file : 00000h00402h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00004h
-;;                 si register : 00206h
-; 00591h
-;;                      opcode : 047h
-place_00402h:       inc     di
-;;           code byte in file : 00000h00403h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00005h
-;;                 si register : 00207h
-; 00591h
-;;                      opcode : 046h
-place_00403h:       inc     si
-;;           code byte in file : 00000h00404h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00006h
-;;                 si register : 00208h
-; 00591h
-;;                      opcode : 0ebh
-place_00404h:       jmp     place_003e8h
-;;           code byte in file : 00000h00406h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00008h
-;;                 si register : 0020ah
-; 00591h
-;;                      opcode : 047h
-place_00406h:       inc     di
-;;           code byte in file : 00000h00407h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00009h
-;;                 si register : 0020bh
-; 00591h
-;;                      opcode : 088h
-place_00407h:       mov     byte ptr ds:[ si ], al
-;;           code byte in file : 00000h00409h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000bh
-;;                 si register : 0020dh
-; 00591h
-;;                      opcode : 046h
-place_00409h:       inc     si
-;;           code byte in file : 00000h0040ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000ch
-;;                 si register : 0020eh
-; 00591h
-;;                      opcode : 0c6h
-place_0040ah:       mov     byte ptr ds:[ si ], 000h
-;;           code byte in file : 00000h0040dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000fh
-;;                 si register : 00211h
-; 00591h
-;;                      opcode : 058h
-place_0040dh:       pop     ax
-;;           code byte in file : 00000h0040eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00010h
-;;                 si register : 00212h
-; 00591h
-;;                      opcode : 0c3h
-place_0040eh:       ret     
-;;           code byte in file : 00000h0040fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00011h
-;;                 si register : 00213h
-; 00591h
-;;                      opcode : 050h
-place_0040fh:       push    ax
-;;           code byte in file : 00000h00410h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00012h
-;;                 si register : 00214h
-; 00591h
-;;                      opcode : 053h
-place_00410h:       push    bx
-;;           code byte in file : 00000h00411h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00013h
-;;                 si register : 00215h
-; 00591h
-;;                      opcode : 051h
-place_00411h:       push    cx
-;;           code byte in file : 00000h00412h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00014h
-;;                 si register : 00216h
-; 00591h
-;;                      opcode : 052h
-place_00412h:       push    dx
-;;           code byte in file : 00000h00413h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00015h
-;;                 si register : 00217h
-; 00591h
-;;                      opcode : 033h
-place_00413h:       xor     ax, ax
-;;           code byte in file : 00000h00415h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00017h
-;;                 si register : 00219h
-; 00591h
-;;                      opcode : 0bbh
-place_00415h:       mov     bx, 0000ah
-;;           code byte in file : 00000h00418h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001ah
-;;                 si register : 0021ch
-; 00591h
-;;                      opcode : 033h
-place_00418h:       xor     cx, cx
-;;           code byte in file : 00000h0041ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001ch
-;;                 si register : 0021eh
-; 00591h
-;;                      opcode : 026h
-place_0041ah:       mov     cl, byte ptr es:[ di ]
-;;           code byte in file : 00000h0041dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001fh
-;;                 si register : 00221h
-; 00591h
-;;                      opcode : 047h
-place_0041dh:       inc     di
-;;           code byte in file : 00000h0041eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00020h
-;;                 si register : 00222h
-; 00591h
-;;                      opcode : 080h
-place_0041eh:       cmp     cl, 000h
-;;           code byte in file : 00000h00421h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00023h
-;;                 si register : 00225h
-; 00591h
-;;                      opcode : 074h
-place_00421h:       je      place_0045ch
-;;           code byte in file : 00000h00423h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00025h
-;;                 si register : 00227h
-; 00591h
-;;                      opcode : 080h
-place_00423h:       cmp     cl, 020h
-;;           code byte in file : 00000h00426h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00028h
-;;                 si register : 0022ah
-; 00591h
-;;                      opcode : 074h
-place_00426h:       je      place_0045ch
-;;           code byte in file : 00000h00428h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002ah
-;;                 si register : 0022ch
-; 00591h
-;;                      opcode : 080h
-place_00428h:       cmp     cl, 00dh
-;;           code byte in file : 00000h0042bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002dh
-;;                 si register : 0022fh
-; 00591h
-;;                      opcode : 074h
-place_0042bh:       je      place_0045ch
-;;           code byte in file : 00000h0042dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002fh
-;;                 si register : 00231h
-; 00591h
-;;                      opcode : 080h
-place_0042dh:       cmp     cl, 030h
-;;           code byte in file : 00000h00430h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00032h
-;;                 si register : 00234h
-; 00591h
-;;                      opcode : 072h
-place_00430h:       jb      place_0044ah
-;;           code byte in file : 00000h00432h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00034h
-;;                 si register : 00236h
-; 00591h
-;;                      opcode : 080h
-place_00432h:       cmp     cl, 039h
-;;           code byte in file : 00000h00435h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00037h
-;;                 si register : 00239h
-; 00591h
-;;                      opcode : 077h
-place_00435h:       ja      place_0044ah
-;;           code byte in file : 00000h00437h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00039h
-;;                 si register : 0023bh
-; 00591h
-;;                      opcode : 0f7h
-place_00437h:       mul     bx
-;;           code byte in file : 00000h00439h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003bh
-;;                 si register : 0023dh
-; 00591h
-;;                      opcode : 03dh
-place_00439h:       cmp     ax, 000ffh
-;;           code byte in file : 00000h0043ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003eh
-;;                 si register : 00240h
-; 00591h
-;;                      opcode : 077h
-place_0043ch:       ja      place_00453h
-;;           code byte in file : 00000h0043eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00040h
-;;                 si register : 00242h
-; 00591h
-;;                      opcode : 080h
-place_0043eh:       sub     cl, 030h
-;;           code byte in file : 00000h00441h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00043h
-;;                 si register : 00245h
-; 00591h
-;;                      opcode : 003h
-place_00441h:       add     ax, cx
-;;           code byte in file : 00000h00443h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00045h
-;;                 si register : 00247h
-; 00591h
-;;                      opcode : 03dh
-place_00443h:       cmp     ax, 000ffh
-;;           code byte in file : 00000h00446h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00048h
-;;                 si register : 0024ah
-; 00591h
-;;                      opcode : 077h
-place_00446h:       ja      place_00453h
-;;           code byte in file : 00000h00448h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004ah
-;;                 si register : 0024ch
-; 00591h
-;;                      opcode : 0ebh
-place_00448h:       jmp     place_0041ah
-;;           code byte in file : 00000h0044ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004ch
-;;                 si register : 0024eh
-; 00591h
-;;                      opcode : 0e8h
-place_0044ah:       call    place_00288h
-;;           code byte in file : 00000h0044dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004fh
-;;                 si register : 00251h
-; 00591h
-;;                      opcode : 0e8h
-place_0044dh:       call    place_002c1h
-;;           code byte in file : 00000h00450h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00052h
-;;                 si register : 00254h
-; 00591h
-;;                      opcode : 0e8h
-place_00450h:       call    place_0020fh
-;;           code byte in file : 00000h00453h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00055h
-;;                 si register : 00257h
-; 00591h
-;;                      opcode : 0e8h
-place_00453h:       call    place_00299h
-;;           code byte in file : 00000h00456h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00058h
-;;                 si register : 0025ah
-; 00591h
-;;                      opcode : 0e8h
-place_00456h:       call    place_002c1h
-;;           code byte in file : 00000h00459h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005bh
-;;                 si register : 0025dh
-; 00591h
-;;                      opcode : 0e8h
-place_00459h:       call    place_0020fh
-;;           code byte in file : 00000h0045ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005eh
-;;                 si register : 00260h
-; 00591h
-;;                      opcode : 03ch
-place_0045ch:       cmp     al, 000h
-;;           code byte in file : 00000h0045eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00060h
-;;                 si register : 00262h
-; 00591h
-;;                      opcode : 075h
-place_0045eh:       jne     place_00463h
-;;           code byte in file : 00000h00460h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00062h
-;;                 si register : 00264h
-; 00591h
-;;                      opcode : 0e8h
-place_00460h:       call    place_00288h
-;;           code byte in file : 00000h00463h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00065h
-;;                 si register : 00267h
-; 00591h
-;;                      opcode : 0a2h
-place_00463h:       mov     byte ptr ds:[ 00200h ], al
-;;           code byte in file : 00000h00466h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00068h
-;;                 si register : 0026ah
-; 00591h
-;;                      opcode : 05ah
-place_00466h:       pop     dx
-;;           code byte in file : 00000h00467h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00069h
-;;                 si register : 0026bh
-; 00591h
-;;                      opcode : 059h
-place_00467h:       pop     cx
-;;           code byte in file : 00000h00468h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006ah
-;;                 si register : 0026ch
-; 00591h
-;;                      opcode : 05bh
-place_00468h:       pop     bx
-;;           code byte in file : 00000h00469h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006bh
-;;                 si register : 0026dh
-; 00591h
-;;                      opcode : 058h
-place_00469h:       pop     ax
-;;           code byte in file : 00000h0046ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006ch
-;;                 si register : 0026eh
-; 00591h
-;;                      opcode : 0c3h
-place_0046ah:       ret     
-;;           code byte in file : 00000h0046bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006dh
-;;                 si register : 0026fh
-; 00591h
-;;                      opcode : 050h
-place_0046bh:       push    ax
-;;           code byte in file : 00000h0046ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006eh
-;;                 si register : 00270h
-; 00591h
-;;                      opcode : 053h
-place_0046ch:       push    bx
-;;           code byte in file : 00000h0046dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006fh
-;;                 si register : 00271h
-; 00591h
-;;                      opcode : 051h
-place_0046dh:       push    cx
-;;           code byte in file : 00000h0046eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00070h
-;;                 si register : 00272h
-; 00591h
-;;                      opcode : 052h
-place_0046eh:       push    dx
-;;           code byte in file : 00000h0046fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00071h
-;;                 si register : 00273h
-; 00591h
-;;                      opcode : 056h
-place_0046fh:       push    si
-;;           code byte in file : 00000h00470h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00072h
-;;                 si register : 00274h
-; 00591h
-;;                      opcode : 057h
-place_00470h:       push    di
-;;           code byte in file : 00000h00471h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00073h
-;;                 si register : 00275h
-; 00591h
-;;                      opcode : 026h
-place_00471h:       mov     al, byte ptr es:[ 00200h ]
-;;           code byte in file : 00000h00475h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00077h
-;;                 si register : 00279h
-; 00591h
-;;                      opcode : 03ch
-place_00475h:       cmp     al, 000h
-;;           code byte in file : 00000h00477h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00079h
-;;                 si register : 0027bh
-; 00591h
-;;                      opcode : 075h
-place_00477h:       jne     place_00482h
-;;           code byte in file : 00000h00479h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007bh
-;;                 si register : 0027dh
-; 00591h
-;;                      opcode : 0e8h
-place_00479h:       call    place_00266h
-;;           code byte in file : 00000h0047ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007eh
-;;                 si register : 00280h
-; 00591h
-;;                      opcode : 0e8h
-place_0047ch:       call    place_002c1h
-;;           code byte in file : 00000h0047fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00081h
-;;                 si register : 00283h
-; 00591h
-;;                      opcode : 0e8h
-place_0047fh:       call    place_0020fh
-;;           code byte in file : 00000h00482h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00084h
-;;                 si register : 00286h
-; 00591h
-;;                      opcode : 0bfh
-place_00482h:       mov     di, 00081h
-;;           code byte in file : 00000h00485h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00087h
-;;                 si register : 00289h
-; 00591h
-;;                      opcode : 0e8h
-place_00485h:       call    place_003aah
-;;           code byte in file : 00000h00488h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008ah
-;;                 si register : 0028ch
-; 00591h
-;;                      opcode : 0e8h
-place_00488h:       call    place_00347h
-;;           code byte in file : 00000h0048bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008dh
-;;                 si register : 0028fh
-; 00591h
-;;                      opcode : 083h
-place_0048bh:       cmp     bx, 00001h
-;;           code byte in file : 00000h0048eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00090h
-;;                 si register : 00292h
-; 00591h
-;;                      opcode : 075h
-place_0048eh:       jne     place_00496h
-;;           code byte in file : 00000h00490h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00092h
-;;                 si register : 00294h
-; 00591h
-;;                      opcode : 0e8h
-place_00490h:       call    place_002c1h
-;;           code byte in file : 00000h00493h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00095h
-;;                 si register : 00297h
-; 00591h
-;;                      opcode : 0e8h
-place_00493h:       call    place_0020fh
-;;           code byte in file : 00000h00496h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00098h
-;;                 si register : 0029ah
-; 00591h
-;;                      opcode : 0beh
-place_00496h:       mov     si, 00000h
-;;           code byte in file : 00000h00499h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009bh
-;;                 si register : 0029dh
-; 00591h
-;;                      opcode : 0e8h
-place_00499h:       call    place_003d9h
-;;           code byte in file : 00000h0049ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009eh
-;;                 si register : 002a0h
-; 00591h
-;;                      opcode : 0e8h
-place_0049ch:       call    place_003aah
-;;           code byte in file : 00000h0049fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a1h
-;;                 si register : 002a3h
-; 00591h
-;;                      opcode : 0beh
-place_0049fh:       mov     si, 0045ch
-;;           code byte in file : 00000h004a2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a4h
-;;                 si register : 002a6h
-; 00591h
-;;                      opcode : 0e8h
-place_004a2h:       call    place_0040fh
-;;           code byte in file : 00000h004a5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a7h
-;;                 si register : 002a9h
-; 00591h
-;;                      opcode : 0e8h
-place_004a5h:       call    place_003aah
-;;           code byte in file : 00000h004a8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000aah
-;;                 si register : 002ach
-; 00591h
-;;                      opcode : 0beh
-place_004a8h:       mov     si, 000ffh
-;;           code byte in file : 00000h004abh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000adh
-;;                 si register : 002afh
-; 00591h
-;;                      opcode : 0e8h
-place_004abh:       call    place_003d9h
-;;           code byte in file : 00000h004aeh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b0h
-;;                 si register : 002b2h
-; 00591h
-;;                      opcode : 0e8h
-place_004aeh:       call    place_003aah
-;;           code byte in file : 00000h004b1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b3h
-;;                 si register : 002b5h
-; 00591h
-;;                      opcode : 033h
-place_004b1h:       xor     ax, ax
-;;           code byte in file : 00000h004b3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b5h
-;;                 si register : 002b7h
-; 00591h
-;;                      opcode : 026h
-place_004b3h:       mov     al, byte ptr es:[ 00300h ]
-;;           code byte in file : 00000h004b7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b9h
-;;                 si register : 002bbh
-; 00591h
-;;                      opcode : 005h
-place_004b7h:       add     ax, 00081h
-;;           code byte in file : 00000h004bah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000bch
-;;                 si register : 002beh
-; 00591h
-;;                      opcode : 03bh
-place_004bah:       cmp     ax, di
-;;           code byte in file : 00000h004bch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000beh
-;;                 si register : 002c0h
-; 00591h
-;;                      opcode : 074h
-place_004bch:       je      place_004c7h
-;;           code byte in file : 00000h004beh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c0h
-;;                 si register : 002c2h
-; 00591h
-;;                      opcode : 0e8h
-place_004beh:       call    place_00277h
-;;           code byte in file : 00000h004c1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c3h
-;;                 si register : 002c5h
-; 00591h
-;;                      opcode : 0e8h
-place_004c1h:       call    place_002c1h
-;;           code byte in file : 00000h004c4h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c6h
-;;                 si register : 002c8h
-; 00591h
-;;                      opcode : 0e8h
-place_004c4h:       call    place_0020fh
-;;           code byte in file : 00000h004c7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000c9h
-;;                 si register : 002cbh
-; 00591h
-;;                      opcode : 05fh
-place_004c7h:       pop     di
-;;           code byte in file : 00000h004c8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cah
-;;                 si register : 002cch
-; 00591h
-;;                      opcode : 05eh
-place_004c8h:       pop     si
-;;           code byte in file : 00000h004c9h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cbh
-;;                 si register : 002cdh
-; 00591h
-;;                      opcode : 05ah
-place_004c9h:       pop     dx
-;;           code byte in file : 00000h004cah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cch
-;;                 si register : 002ceh
-; 00591h
-;;                      opcode : 059h
-place_004cah:       pop     cx
-;;           code byte in file : 00000h004cbh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cdh
-;;                 si register : 002cfh
-; 00591h
-;;                      opcode : 05bh
-place_004cbh:       pop     bx
-;;           code byte in file : 00000h004cch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000ceh
-;;                 si register : 002d0h
-; 00591h
-;;                      opcode : 058h
-place_004cch:       pop     ax
-;;           code byte in file : 00000h004cdh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000cfh
-;;                 si register : 002d1h
-; 00591h
-;;                      opcode : 0c3h
-place_004cdh:       ret     
-;;           code byte in file : 00000h004ceh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d0h
-;;                 si register : 002d2h
-; 00591h
-;;                      opcode : 050h
-place_004ceh:       push    ax
-;;           code byte in file : 00000h004cfh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d1h
-;;                 si register : 002d3h
-; 00591h
-;;                      opcode : 053h
-place_004cfh:       push    bx
-;;           code byte in file : 00000h004d0h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d2h
-;;                 si register : 002d4h
-; 00591h
-;;                      opcode : 051h
-place_004d0h:       push    cx
-;;           code byte in file : 00000h004d1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d3h
-;;                 si register : 002d5h
-; 00591h
-;;                      opcode : 052h
-place_004d1h:       push    dx
-;;           code byte in file : 00000h004d2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d4h
-;;                 si register : 002d6h
-; 00591h
-;;                      opcode : 056h
-place_004d2h:       push    si
-;;           code byte in file : 00000h004d3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d5h
-;;                 si register : 002d7h
-; 00591h
-;;                      opcode : 0beh
-place_004d3h:       mov     si, 0045dh
-;;           code byte in file : 00000h004d6h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000d8h
-;;                 si register : 002dah
-; 00591h
-;;                      opcode : 08bh
-place_004d6h:       mov     cx, word ptr ds:[ si ]
-;;           code byte in file : 00000h004d8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000dah
-;;                 si register : 002dch
-; 00591h
-;;                      opcode : 08bh
-place_004d8h:       mov     dx, word ptr ds:[ si + 002h ]
-;;           code byte in file : 00000h004dbh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000ddh
-;;                 si register : 002dfh
-; 00591h
-;;                      opcode : 002h
-place_004dbh:       add     dl, ah
-;;           code byte in file : 00000h004ddh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000dfh
-;;                 si register : 002e1h
-; 00591h
-;;                      opcode : 080h
-place_004ddh:       adc     dh, 000h
-;;           code byte in file : 00000h004e0h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e2h
-;;                 si register : 002e4h
-; 00591h
-;;                      opcode : 083h
-place_004e0h:       adc     cx, 00000h
-;;           code byte in file : 00000h004e3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e5h
-;;                 si register : 002e7h
-; 00591h
-;;                      opcode : 0b8h
-place_004e3h:       mov     ax, 04200h
-;;           code byte in file : 00000h004e6h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000e8h
-;;                 si register : 002eah
-; 00591h
-;;                      opcode : 08bh
-place_004e6h:       mov     bx, word ptr ds:[ 001feh ]
-;;           code byte in file : 00000h004eah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000ech
-;;                 si register : 002eeh
-; 00591h
-;;                      opcode : 0cdh
-place_004eah:       int     021h
-;;           code byte in file : 00000h004ech
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000eeh
-;;                 si register : 002f0h
-; 00591h
-;;                      opcode : 089h
-place_004ech:       mov     dx, word ptr ds:[ si ]
-;;           code byte in file : 00000h004eeh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f0h
-;;                 si register : 002f2h
-; 00591h
-;;                      opcode : 089h
-place_004eeh:       mov     ax, word ptr ds:[ si + 002h ]
-;;           code byte in file : 00000h004f1h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f3h
-;;                 si register : 002f5h
-; 00591h
-;;                      opcode : 05eh
-place_004f1h:       pop     si
-;;           code byte in file : 00000h004f2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f4h
-;;                 si register : 002f6h
-; 00591h
-;;                      opcode : 05ah
-place_004f2h:       pop     dx
-;;           code byte in file : 00000h004f3h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f5h
-;;                 si register : 002f7h
-; 00591h
-;;                      opcode : 059h
-place_004f3h:       pop     cx
-;;           code byte in file : 00000h004f4h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f6h
-;;                 si register : 002f8h
-; 00591h
-;;                      opcode : 05bh
-place_004f4h:       pop     bx
-;;           code byte in file : 00000h004f5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f7h
-;;                 si register : 002f9h
-; 00591h
-;;                      opcode : 058h
-place_004f5h:       pop     ax
-;;           code byte in file : 00000h004f6h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f8h
-;;                 si register : 002fah
-; 00591h
-;;                      opcode : 0c3h
-place_004f6h:       ret     
-;;           code byte in file : 00000h004f7h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000f9h
-;;                 si register : 002fbh
-; 00591h
-;;                      opcode : 050h
-place_004f7h:       push    ax
-;;           code byte in file : 00000h004f8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000fah
-;;                 si register : 002fch
-; 00591h
-;;                      opcode : 053h
-place_004f8h:       push    bx
-;;           code byte in file : 00000h004f9h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000fbh
-;;                 si register : 002fdh
-; 00591h
-;;                      opcode : 051h
-place_004f9h:       push    cx
-;;           code byte in file : 00000h004fah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000fch
-;;                 si register : 002feh
-; 00591h
-;;                      opcode : 052h
-place_004fah:       push    dx
-;;           code byte in file : 00000h004fbh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000fdh
-;;                 si register : 002ffh
-; 00591h
-;;                      opcode : 057h
-place_004fbh:       push    di
-;;           code byte in file : 00000h004fch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000feh
-;;                 si register : 00300h
-; 00591h
-;;                      opcode : 033h
-place_004fch:       xor     cx, cx
-;;  SCANNING...
-;;           code byte in file : 00000h004feh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00000h
-;;                 si register : 00202h
-; 00591h
-;;                      opcode : 08ah
-place_004feh:       mov     cl, ah
-;;           code byte in file : 00000h00500h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00002h
-;;                 si register : 00204h
-; 00591h
-;;                      opcode : 0bah
-place_00500h:       mov     dx, 00330h
-;;           code byte in file : 00000h00503h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00005h
-;;                 si register : 00207h
-; 00591h
-;;                      opcode : 0b4h
-place_00503h:       mov     ah, 040h
-;;           code byte in file : 00000h00505h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00007h
-;;                 si register : 00209h
-; 00591h
-;;                      opcode : 080h
-place_00505h:       cmp     bh, 000h
-;;           code byte in file : 00000h00508h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000ah
-;;                 si register : 0020ch
-; 00591h
-;;                      opcode : 074h
-place_00508h:       je      place_00510h
-;;           code byte in file : 00000h0050ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000ch
-;;                 si register : 0020eh
-; 00591h
-;;                      opcode : 083h
-place_0050ah:       add     cx, 00002h
-;;           code byte in file : 00000h0050dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0000fh
-;;                 si register : 00211h
-; 00591h
-;;                      opcode : 083h
-place_0050dh:       sub     dx, 00002h
-;;           code byte in file : 00000h00510h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00012h
-;;                 si register : 00214h
-; 00591h
-;;                      opcode : 08bh
-place_00510h:       mov     bx, word ptr ds:[ 00200h ]
-;;           code byte in file : 00000h00514h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00016h
-;;                 si register : 00218h
-; 00591h
-;;                      opcode : 0cdh
-place_00514h:       int     021h
-;;           code byte in file : 00000h00516h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00018h
-;;                 si register : 0021ah
-; 00591h
-;;                      opcode : 072h
-place_00516h:       jb      place_0051bh
-;;           code byte in file : 00000h00518h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001ah
-;;                 si register : 0021ch
-; 00591h
-;;                      opcode : 0ebh
-place_00518h:       jmp     place_00521h
-;;           code byte in file : 00000h0051ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001ch
-;;                 si register : 0021eh
-; 00591h
-;;                      opcode : 090h
-place_0051ah:       nop     
-;;           code byte in file : 00000h0051bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0001dh
-;;                 si register : 0021fh
-; 00591h
-;;                      opcode : 0e8h
-place_0051bh:       call    place_00255h
-;;           code byte in file : 00000h0051eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00020h
-;;                 si register : 00222h
-; 00591h
-;;                      opcode : 0e8h
-place_0051eh:       call    place_0020fh
-;;           code byte in file : 00000h00521h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00023h
-;;                 si register : 00225h
-; 00591h
-;;                      opcode : 05fh
-place_00521h:       pop     di
-;;           code byte in file : 00000h00522h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00024h
-;;                 si register : 00226h
-; 00591h
-;;                      opcode : 05ah
-place_00522h:       pop     dx
-;;           code byte in file : 00000h00523h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00025h
-;;                 si register : 00227h
-; 00591h
-;;                      opcode : 059h
-place_00523h:       pop     cx
-;;           code byte in file : 00000h00524h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00026h
-;;                 si register : 00228h
-; 00591h
-;;                      opcode : 05bh
-place_00524h:       pop     bx
-;;           code byte in file : 00000h00525h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00027h
-;;                 si register : 00229h
-; 00591h
-;;                      opcode : 058h
-place_00525h:       pop     ax
-;;           code byte in file : 00000h00526h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00028h
-;;                 si register : 0022ah
-; 00591h
-;;                      opcode : 0c3h
-place_00526h:       ret     
-;;           code byte in file : 00000h00527h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00029h
-;;                 si register : 0022bh
-; 00591h
-;;                      opcode : 050h
-place_00527h:       push    ax
-;;           code byte in file : 00000h00528h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002ah
-;;                 si register : 0022ch
-; 00591h
-;;                      opcode : 053h
-place_00528h:       push    bx
-;;           code byte in file : 00000h00529h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002bh
-;;                 si register : 0022dh
-; 00591h
-;;                      opcode : 051h
-place_00529h:       push    cx
-;;           code byte in file : 00000h0052ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002ch
-;;                 si register : 0022eh
-; 00591h
-;;                      opcode : 052h
-place_0052ah:       push    dx
-;;           code byte in file : 00000h0052bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002dh
-;;                 si register : 0022fh
-; 00591h
-;;                      opcode : 056h
-place_0052bh:       push    si
-;;           code byte in file : 00000h0052ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002eh
-;;                 si register : 00230h
-; 00591h
-;;                      opcode : 057h
-place_0052ch:       push    di
-;;           code byte in file : 00000h0052dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0002fh
-;;                 si register : 00231h
-; 00591h
-;;                      opcode : 0b4h
-place_0052dh:       mov     ah, 03fh
-;;           code byte in file : 00000h0052fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00031h
-;;                 si register : 00233h
-; 00591h
-;;                      opcode : 053h
-place_0052fh:       push    bx
-;;           code byte in file : 00000h00530h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00032h
-;;                 si register : 00234h
-; 00591h
-;;                      opcode : 08bh
-place_00530h:       mov     bx, word ptr ds:[ 001feh ]
-;;           code byte in file : 00000h00534h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00036h
-;;                 si register : 00238h
-; 00591h
-;;                      opcode : 0bah
-place_00534h:       mov     dx, 00202h
-;;           code byte in file : 00000h00537h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00039h
-;;                 si register : 0023bh
-; 00591h
-;;                      opcode : 033h
-place_00537h:       xor     cx, cx
-;;           code byte in file : 00000h00539h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003bh
-;;                 si register : 0023dh
-; 00591h
-;;                      opcode : 08ah
-place_00539h:       mov     cl, byte ptr ds:[ 0045ch ]
-;;           code byte in file : 00000h0053dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0003fh
-;;                 si register : 00241h
-; 00591h
-;;                      opcode : 0cdh
-place_0053dh:       int     021h
-;;           code byte in file : 00000h0053fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00041h
-;;                 si register : 00243h
-; 00591h
-;;                      opcode : 05bh
-place_0053fh:       pop     bx
-;;           code byte in file : 00000h00540h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00042h
-;;                 si register : 00244h
-; 00591h
-;;                      opcode : 072h
-place_00540h:       jb      place_0058bh
-;;           code byte in file : 00000h00542h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00044h
-;;                 si register : 00246h
-; 00591h
-;;                      opcode : 03dh
-place_00542h:       cmp     ax, 00000h
-;;           code byte in file : 00000h00545h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00047h
-;;                 si register : 00249h
-; 00591h
-;;                      opcode : 074h
-place_00545h:       je      place_00584h
-;;           code byte in file : 00000h00547h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00049h
-;;                 si register : 0024bh
-; 00591h
-;;                      opcode : 0beh
-place_00547h:       mov     si, 00202h
-;;           code byte in file : 00000h0054ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004ch
-;;                 si register : 0024eh
-; 00591h
-;;                      opcode : 0bfh
-place_0054ah:       mov     di, 00330h
-;;           code byte in file : 00000h0054dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0004fh
-;;                 si register : 00251h
-; 00591h
-;;                      opcode : 08ah
-place_0054dh:       mov     bl, al
-;;           code byte in file : 00000h0054fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00051h
-;;                 si register : 00253h
-; 00591h
-;;                      opcode : 08ah
-place_0054fh:       mov     al, byte ptr ds:[ si ]
-;;           code byte in file : 00000h00551h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00053h
-;;                 si register : 00255h
-; 00591h
-;;                      opcode : 03ch
-place_00551h:       cmp     al, 000h
-;;           code byte in file : 00000h00553h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00055h
-;;                 si register : 00257h
-; 00591h
-;;                      opcode : 075h
-place_00553h:       jne     place_0055dh
-;;           code byte in file : 00000h00555h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00057h
-;;                 si register : 00259h
-; 00591h
-;;                      opcode : 0e8h
-place_00555h:       call    place_004f7h
-;;           code byte in file : 00000h00558h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005ah
-;;                 si register : 0025ch
-; 00591h
-;;                      opcode : 0b7h
-place_00558h:       mov     bh, 001h
-;;           code byte in file : 00000h0055ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005ch
-;;                 si register : 0025eh
-; 00591h
-;;                      opcode : 0ebh
-place_0055ah:       jmp     place_00584h
-;;           code byte in file : 00000h0055ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005eh
-;;                 si register : 00260h
-; 00591h
-;;                      opcode : 090h
-place_0055ch:       nop     
-;;           code byte in file : 00000h0055dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0005fh
-;;                 si register : 00261h
-; 00591h
-;;                      opcode : 03ch
-place_0055dh:       cmp     al, 00dh
-;;           code byte in file : 00000h0055fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00061h
-;;                 si register : 00263h
-; 00591h
-;;                      opcode : 075h
-place_0055fh:       jne     place_0056eh
-;;           code byte in file : 00000h00561h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00063h
-;;                 si register : 00265h
-; 00591h
-;;                      opcode : 0e8h
-place_00561h:       call    place_004f7h
-;;           code byte in file : 00000h00564h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00066h
-;;                 si register : 00268h
-; 00591h
-;;                      opcode : 080h
-place_00564h:       add     ah, 002h
-;;           code byte in file : 00000h00567h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00069h
-;;                 si register : 0026bh
-; 00591h
-;;                      opcode : 0e8h
-place_00567h:       call    place_004ceh
-;;           code byte in file : 00000h0056ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006ch
-;;                 si register : 0026eh
-; 00591h
-;;                      opcode : 0b7h
-place_0056ah:       mov     bh, 001h
-;;           code byte in file : 00000h0056ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0006eh
-;;                 si register : 00270h
-; 00591h
-;;                      opcode : 0ebh
-place_0056ch:       jmp     place_0052dh
-;;           code byte in file : 00000h0056eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00070h
-;;                 si register : 00272h
-; 00591h
-;;                      opcode : 088h
-place_0056eh:       mov     byte ptr ds:[ di ], al
-;;           code byte in file : 00000h00570h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00072h
-;;                 si register : 00274h
-; 00591h
-;;                      opcode : 046h
-place_00570h:       inc     si
-;;           code byte in file : 00000h00571h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00073h
-;;                 si register : 00275h
-; 00591h
-;;                      opcode : 047h
-place_00571h:       inc     di
-;;           code byte in file : 00000h00572h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00074h
-;;                 si register : 00276h
-; 00591h
-;;                      opcode : 0feh
-place_00572h:       inc     ah
-;;           code byte in file : 00000h00574h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00076h
-;;                 si register : 00278h
-; 00591h
-;;                      opcode : 03ah
-place_00574h:       cmp     ah, bl
-;;           code byte in file : 00000h00576h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00078h
-;;                 si register : 0027ah
-; 00591h
-;;                      opcode : 075h
-place_00576h:       jne     place_00582h
-;;           code byte in file : 00000h00578h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007ah
-;;                 si register : 0027ch
-; 00591h
-;;                      opcode : 0e8h
-place_00578h:       call    place_004f7h
-;;           code byte in file : 00000h0057bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007dh
-;;                 si register : 0027fh
-; 00591h
-;;                      opcode : 0b7h
-place_0057bh:       mov     bh, 001h
-;;           code byte in file : 00000h0057dh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0007fh
-;;                 si register : 00281h
-; 00591h
-;;                      opcode : 0e8h
-place_0057dh:       call    place_004ceh
-;;           code byte in file : 00000h00580h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00082h
-;;                 si register : 00284h
-; 00591h
-;;                      opcode : 0ebh
-place_00580h:       jmp     place_0052dh
-;;           code byte in file : 00000h00582h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00084h
-;;                 si register : 00286h
-; 00591h
-;;                      opcode : 0e2h
-place_00582h:       loop    place_0054fh
-;;           code byte in file : 00000h00584h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00086h
-;;                 si register : 00288h
-; 00591h
-;;                      opcode : 05fh
-place_00584h:       pop     di
-;;           code byte in file : 00000h00585h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00087h
-;;                 si register : 00289h
-; 00591h
-;;                      opcode : 05eh
-place_00585h:       pop     si
-;;           code byte in file : 00000h00586h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00088h
-;;                 si register : 0028ah
-; 00591h
-;;                      opcode : 05ah
-place_00586h:       pop     dx
-;;           code byte in file : 00000h00587h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00089h
-;;                 si register : 0028bh
-; 00591h
-;;                      opcode : 059h
-place_00587h:       pop     cx
-;;           code byte in file : 00000h00588h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008ah
-;;                 si register : 0028ch
-; 00591h
-;;                      opcode : 05bh
-place_00588h:       pop     bx
-;;           code byte in file : 00000h00589h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008bh
-;;                 si register : 0028dh
-; 00591h
-;;                      opcode : 058h
-place_00589h:       pop     ax
-;;           code byte in file : 00000h0058ah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008ch
-;;                 si register : 0028eh
-; 00591h
-;;                      opcode : 0c3h
-place_0058ah:       ret     
-;;           code byte in file : 00000h0058bh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0008dh
-;;                 si register : 0028fh
-; 00591h
-;;                      opcode : 0e8h
-place_0058bh:       call    place_00244h
-;;           code byte in file : 00000h0058eh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00090h
-;;                 si register : 00292h
-; 00591h
-;;                      opcode : 0e8h
-place_0058eh:       call    place_0020fh
-;;           code byte in file : 00000h00591h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00093h
-;;                 si register : 00295h
-; 00591h
-;;                      opcode : 0b8h
+place_00200h:       push    ax                              ; 50 
+place_00201h:       push    dx                              ; 52 
+place_00202h:       mov     ah, 009h                        ; b4 09 
+place_00204h:       mov     dx, 00461h                      ; ba 61 04 
+place_00207h:       int     021h                            ; cd 21 
+place_00209h:       call    place_002aah                    ; e8 9e 00 
+place_0020ch:       pop     dx                              ; 5a 
+place_0020dh:       pop     ax                              ; 58 
+place_0020eh:       ret                                     ; c3 
+place_0020fh:       mov     ah, 03eh                        ; b4 3e 
+place_00211h:       mov     bx, word ptr ds:[ 001feh ]      ; 8b 1e fe 01 
+place_00215h:       int     021h                            ; cd 21 
+place_00217h:       mov     bx, word ptr ds:[ 00200h ]      ; 8b 1e 00 02 
+place_0021bh:       int     021h                            ; cd 21 
+place_0021dh:       mov     ax, 04c00h                      ; b8 00 4c 
+place_00220h:       int     021h                            ; cd 21 
+place_00222h:       push    ax                              ; 50 
+place_00223h:       push    dx                              ; 52 
+place_00224h:       mov     ah, 009h                        ; b4 09 
+place_00226h:       mov     dx, 004c6h                      ; ba c6 04 
+place_00229h:       int     021h                            ; cd 21 
+place_0022bh:       mov     dx, 004cfh                      ; ba cf 04 
+place_0022eh:       int     021h                            ; cd 21 
+place_00230h:       pop     dx                              ; 5a 
+place_00231h:       pop     ax                              ; 58 
+place_00232h:       ret                                     ; c3 
+place_00233h:       push    ax                              ; 50 
+place_00234h:       push    dx                              ; 52 
+place_00235h:       mov     ah, 009h                        ; b4 09 
+place_00237h:       mov     dx, 004c6h                      ; ba c6 04 
+place_0023ah:       int     021h                            ; cd 21 
+place_0023ch:       mov     dx, 004e7h                      ; ba e7 04 
+place_0023fh:       int     021h                            ; cd 21 
+place_00241h:       pop     dx                              ; 5a 
+place_00242h:       pop     ax                              ; 58 
+place_00243h:       ret                                     ; c3 
+place_00244h:       push    ax                              ; 50 
+place_00245h:       push    dx                              ; 52 
+place_00246h:       mov     ah, 009h                        ; b4 09 
+place_00248h:       mov     dx, 004c6h                      ; ba c6 04 
+place_0024bh:       int     021h                            ; cd 21 
+place_0024dh:       mov     dx, 00501h                      ; ba 01 05 
+place_00250h:       int     021h                            ; cd 21 
+place_00252h:       pop     dx                              ; 5a 
+place_00253h:       pop     ax                              ; 58 
+place_00254h:       ret                                     ; c3 
+place_00255h:       push    ax                              ; 50 
+place_00256h:       push    dx                              ; 52 
+place_00257h:       mov     ah, 009h                        ; b4 09 
+place_00259h:       mov     dx, 004c6h                      ; ba c6 04 
+place_0025ch:       int     021h                            ; cd 21 
+place_0025eh:       mov     dx, 00519h                      ; ba 19 05 
+place_00261h:       int     021h                            ; cd 21 
+place_00263h:       pop     dx                              ; 5a 
+place_00264h:       pop     ax                              ; 58 
+place_00265h:       ret                                     ; c3 
+place_00266h:       push    ax                              ; 50 
+place_00267h:       push    dx                              ; 52 
+place_00268h:       mov     ah, 009h                        ; b4 09 
+place_0026ah:       mov     dx, 004c6h                      ; ba c6 04 
+place_0026dh:       int     021h                            ; cd 21 
+place_0026fh:       mov     dx, 00535h                      ; ba 35 05 
+place_00272h:       int     021h                            ; cd 21 
+place_00274h:       pop     dx                              ; 5a 
+place_00275h:       pop     ax                              ; 58 
+place_00276h:       ret                                     ; c3 
+place_00277h:       push    ax                              ; 50 
+place_00278h:       push    dx                              ; 52 
+place_00279h:       mov     ah, 009h                        ; b4 09 
+place_0027bh:       mov     dx, 004c6h                      ; ba c6 04 
+place_0027eh:       int     021h                            ; cd 21 
+place_00280h:       mov     dx, 00556h                      ; ba 56 05 
+place_00283h:       int     021h                            ; cd 21 
+place_00285h:       pop     dx                              ; 5a 
+place_00286h:       pop     ax                              ; 58 
+place_00287h:       ret                                     ; c3 
+place_00288h:       push    ax                              ; 50 
+place_00289h:       push    dx                              ; 52 
+place_0028ah:       mov     ah, 009h                        ; b4 09 
+place_0028ch:       mov     dx, 004c6h                      ; ba c6 04 
+place_0028fh:       int     021h                            ; cd 21 
+place_00291h:       mov     dx, 0056eh                      ; ba 6e 05 
+place_00294h:       int     021h                            ; cd 21 
+place_00296h:       pop     dx                              ; 5a 
+place_00297h:       pop     ax                              ; 58 
+place_00298h:       ret                                     ; c3 
+place_00299h:       push    ax                              ; 50 
+place_0029ah:       push    dx                              ; 52 
+place_0029bh:       mov     ah, 009h                        ; b4 09 
+place_0029dh:       mov     dx, 004c6h                      ; ba c6 04 
+place_002a0h:       int     021h                            ; cd 21 
+place_002a2h:       mov     dx, 005b4h                      ; ba b4 05 
+place_002a5h:       int     021h                            ; cd 21 
+place_002a7h:       pop     dx                              ; 5a 
+place_002a8h:       pop     ax                              ; 58 
+place_002a9h:       ret                                     ; c3 
+place_002aah:       push    ax                              ; 50 
+place_002abh:       push    dx                              ; 52 
+place_002ach:       mov     ah, 009h                        ; b4 09 
+place_002aeh:       mov     dx, 00487h                      ; ba 87 04 
+place_002b1h:       int     021h                            ; cd 21 
+place_002b3h:       mov     ah, 008h                        ; b4 08 
+place_002b5h:       int     021h                            ; cd 21 
+place_002b7h:       mov     ah, 009h                        ; b4 09 
+place_002b9h:       mov     dx, 004a4h                      ; ba a4 04 
+place_002bch:       int     021h                            ; cd 21 
+place_002beh:       pop     dx                              ; 5a 
+place_002bfh:       pop     ax                              ; 58 
+place_002c0h:       ret                                     ; c3 
+place_002c1h:       push    ax                              ; 50 
+place_002c2h:       push    dx                              ; 52 
+place_002c3h:       mov     ah, 009h                        ; b4 09 
+place_002c5h:       mov     dx, 005e8h                      ; ba e8 05 
+place_002c8h:       int     021h                            ; cd 21 
+place_002cah:       mov     dx, 00639h                      ; ba 39 06 
+place_002cdh:       int     021h                            ; cd 21 
+place_002cfh:       call    place_002aah                    ; e8 d8 ff 
+place_002d2h:       mov     dx, 006aah                      ; ba aa 06 
+place_002d5h:       int     021h                            ; cd 21 
+place_002d7h:       call    place_002aah                    ; e8 d0 ff 
+place_002dah:       mov     dx, 00762h                      ; ba 62 07 
+place_002ddh:       int     021h                            ; cd 21 
+place_002dfh:       call    place_002aah                    ; e8 c8 ff 
+place_002e2h:       mov     dx, 0087ah                      ; ba 7a 08 
+place_002e5h:       int     021h                            ; cd 21 
+place_002e7h:       call    place_002aah                    ; e8 c0 ff 
+place_002eah:       mov     dx, 0098dh                      ; ba 8d 09 
+place_002edh:       int     021h                            ; cd 21 
+place_002efh:       call    place_002aah                    ; e8 b8 ff 
+place_002f2h:       mov     dx, 00b2dh                      ; ba 2d 0b 
+place_002f5h:       int     021h                            ; cd 21 
+place_002f7h:       call    place_002aah                    ; e8 b0 ff 
+place_002fah:       mov     dx, 00c91h                      ; ba 91 0c 
+place_002fdh:       int     021h                            ; cd 21 
+place_002ffh:       call    place_002aah                    ; e8 a8 ff 
+place_00302h:       mov     dx, 00dc7h                      ; ba c7 0d 
+place_00305h:       int     021h                            ; cd 21 
+place_00307h:       call    place_002aah                    ; e8 a0 ff 
+place_0030ah:       mov     dx, 00df6h                      ; ba f6 0d 
+place_0030dh:       int     021h                            ; cd 21 
+place_0030fh:       pop     dx                              ; 5a 
+place_00310h:       pop     ax                              ; 58 
+place_00311h:       ret                                     ; c3 
+place_00312h:       push    ax                              ; 50 
+place_00313h:       push    di                              ; 57 
+place_00314h:       push    si                              ; 56 
+place_00315h:       mov     al, byte ptr es:[ di ]          ; 26 8a 05 
+place_00318h:       cmp     al, byte ptr ds:[ si ]          ; 3a 04 
+place_0031ah:       jne     place_00343h                    ; 75 27 
+place_0031ch:       inc     si                              ; 46 
+place_0031dh:       inc     di                              ; 47 
+place_0031eh:       cmp     byte ptr ds:[ si ], 000h        ; 80 3c 00 
+place_00321h:       je      place_0032bh                    ; 74 08 
+place_00323h:       cmp     byte ptr es:[ di ], 000h        ; 26 80 3d 00 
+place_00327h:       je      place_00343h                    ; 74 1a 
+place_00329h:       jmp     place_00315h                    ; eb ea 
+place_0032bh:       cmp     byte ptr es:[ di ], 000h        ; 26 80 3d 00 
+place_0032fh:       je      place_00340h                    ; 74 0f 
+place_00331h:       cmp     byte ptr es:[ di ], 00dh        ; 26 80 3d 0d 
+place_00335h:       je      place_00340h                    ; 74 09 
+place_00337h:       cmp     byte ptr es:[ di ], 020h        ; 26 80 3d 20 
+place_0033bh:       je      place_00340h                    ; 74 03 
+place_0033dh:       jmp     place_00343h                    ; eb 04 
+place_0033fh:       nop                                     ; 90 
+place_00340h:       mov     bx, 00001h                      ; bb 01 00 
+place_00343h:       pop     si                              ; 5e 
+place_00344h:       pop     di                              ; 5f 
+place_00345h:       pop     ax                              ; 58 
+place_00346h:       ret                                     ; c3 
+place_00347h:       push    si                              ; 56 
+place_00348h:       push    di                              ; 57 
+place_00349h:       mov     si, 00471h                      ; be 71 04 
+place_0034ch:       call    place_00312h                    ; e8 c3 ff 
+place_0034fh:       cmp     bx, 00001h                      ; 83 fb 01 
+place_00352h:       je      place_00389h                    ; 74 35 
+place_00354h:       mov     si, 00474h                      ; be 74 04 
+place_00357h:       call    place_00312h                    ; e8 b8 ff 
+place_0035ah:       cmp     bx, 00001h                      ; 83 fb 01 
+place_0035dh:       je      place_00389h                    ; 74 2a 
+place_0035fh:       mov     si, 00477h                      ; be 77 04 
+place_00362h:       call    place_00312h                    ; e8 ad ff 
+place_00365h:       cmp     bx, 00001h                      ; 83 fb 01 
+place_00368h:       je      place_00389h                    ; 74 1f 
+place_0036ah:       mov     si, 0047ah                      ; be 7a 04 
+place_0036dh:       call    place_00312h                    ; e8 a2 ff 
+place_00370h:       cmp     bx, 00001h                      ; 83 fb 01 
+place_00373h:       je      place_00389h                    ; 74 14 
+place_00375h:       mov     si, 0047dh                      ; be 7d 04 
+place_00378h:       call    place_00312h                    ; e8 97 ff 
+place_0037bh:       cmp     bx, 00001h                      ; 83 fb 01 
+place_0037eh:       je      place_00389h                    ; 74 09 
+place_00380h:       mov     si, 00480h                      ; be 80 04 
+place_00383h:       call    place_00312h                    ; e8 8c ff 
+place_00386h:       cmp     bx, 00001h                      ; 83 fb 01 
+place_00389h:       pop     di                              ; 5f 
+place_0038ah:       pop     si                              ; 5e 
+place_0038bh:       ret                                     ; c3 
+place_0038ch:       push    ax                              ; 50 
+place_0038dh:       push    cx                              ; 51 
+place_0038eh:       push    dx                              ; 52 
+place_0038fh:       mov     ah, 03ch                        ; b4 3c 
+place_00391h:       xor     cx, cx                          ; 33 c9 
+place_00393h:       mov     dx, 000ffh                      ; ba ff 00 
+place_00396h:       int     021h                            ; cd 21 
+place_00398h:       jae     place_003a3h                    ; 73 09 
+place_0039ah:       call    place_00233h                    ; e8 96 fe 
+place_0039dh:       call    place_002c1h                    ; e8 21 ff 
+place_003a0h:       call    place_0020fh                    ; e8 6c fe 
+place_003a3h:       mov     word ptr ds:[ 00200h ], ax      ; a3 00 02 
+place_003a6h:       pop     dx                              ; 5a 
+place_003a7h:       pop     cx                              ; 59 
+place_003a8h:       pop     ax                              ; 58 
+place_003a9h:       ret                                     ; c3 
+place_003aah:       mov     al, byte ptr es:[ di ]          ; 26 8a 05 
+place_003adh:       cmp     al, 020h                        ; 3c 20 
+place_003afh:       je      place_003b2h                    ; 74 01 
+place_003b1h:       ret                                     ; c3 
+place_003b2h:       inc     di                              ; 47 
+place_003b3h:       jmp     place_003aah                    ; eb f5 
+place_003b5h:       ret                                     ; c3 
+place_003b6h:       push    ax                              ; 50 
+place_003b7h:       push    dx                              ; 52 
+place_003b8h:       mov     ax, 03d00h                      ; b8 00 3d 
+place_003bbh:       mov     dx, 00000h                      ; ba 00 00 
+place_003beh:       int     021h                            ; cd 21 
+place_003c0h:       jae     place_003cbh                    ; 73 09 
+place_003c2h:       call    place_00222h                    ; e8 5d fe 
+place_003c5h:       call    place_002c1h                    ; e8 f9 fe 
+place_003c8h:       call    place_0020fh                    ; e8 44 fe 
+place_003cbh:       mov     word ptr ds:[ 001feh ], ax      ; a3 fe 01 
+place_003ceh:       pop     dx                              ; 5a 
+place_003cfh:       pop     ax                              ; 58 
+place_003d0h:       ret                                     ; c3 
+place_003d1h:       push    ax                              ; 50 
+place_003d2h:       push    dx                              ; 52 
+place_003d3h:       call    place_0038ch                    ; e8 b6 ff 
+place_003d6h:       pop     dx                              ; 5a 
+place_003d7h:       pop     ax                              ; 58 
+place_003d8h:       ret                                     ; c3 
+place_003d9h:       push    ax                              ; 50 
+place_003dah:       mov     al, byte ptr es:[ di ]          ; 26 8a 05 
+place_003ddh:       cmp     al, 022h                        ; 3c 22 
+place_003dfh:       jne     place_003e8h                    ; 75 07 
+place_003e1h:       mov     bx, 00001h                      ; bb 01 00 
+place_003e4h:       mov     byte ptr ds:[ si ], al          ; 88 04 
+place_003e6h:       inc     si                              ; 46 
+place_003e7h:       inc     di                              ; 47 
+place_003e8h:       mov     al, byte ptr es:[ di ]          ; 26 8a 05 
+place_003ebh:       cmp     al, 000h                        ; 3c 00 
+place_003edh:       je      place_00409h                    ; 74 1a 
+place_003efh:       cmp     al, 00dh                        ; 3c 0d 
+place_003f1h:       je      place_00409h                    ; 74 16 
+place_003f3h:       cmp     al, 022h                        ; 3c 22 
+place_003f5h:       je      place_00406h                    ; 74 0f 
+place_003f7h:       cmp     al, 020h                        ; 3c 20 
+place_003f9h:       jne     place_00400h                    ; 75 05 
+place_003fbh:       cmp     bx, 00001h                      ; 83 fb 01 
+place_003feh:       jne     place_00409h                    ; 75 09 
+place_00400h:       mov     byte ptr ds:[ si ], al          ; 88 04 
+place_00402h:       inc     di                              ; 47 
+place_00403h:       inc     si                              ; 46 
+place_00404h:       jmp     place_003e8h                    ; eb e2 
+place_00406h:       inc     di                              ; 47 
+place_00407h:       mov     byte ptr ds:[ si ], al          ; 88 04 
+place_00409h:       inc     si                              ; 46 
+place_0040ah:       mov     byte ptr ds:[ si ], 000h        ; c6 04 00 
+place_0040dh:       pop     ax                              ; 58 
+place_0040eh:       ret                                     ; c3 
+place_0040fh:       push    ax                              ; 50 
+place_00410h:       push    bx                              ; 53 
+place_00411h:       push    cx                              ; 51 
+place_00412h:       push    dx                              ; 52 
+place_00413h:       xor     ax, ax                          ; 33 c0 
+place_00415h:       mov     bx, 0000ah                      ; bb 0a 00 
+place_00418h:       xor     cx, cx                          ; 33 c9 
+place_0041ah:       mov     cl, byte ptr es:[ di ]          ; 26 8a 0d 
+place_0041dh:       inc     di                              ; 47 
+place_0041eh:       cmp     cl, 000h                        ; 80 f9 00 
+place_00421h:       je      place_0045ch                    ; 74 39 
+place_00423h:       cmp     cl, 020h                        ; 80 f9 20 
+place_00426h:       je      place_0045ch                    ; 74 34 
+place_00428h:       cmp     cl, 00dh                        ; 80 f9 0d 
+place_0042bh:       je      place_0045ch                    ; 74 2f 
+place_0042dh:       cmp     cl, 030h                        ; 80 f9 30 
+place_00430h:       jb      place_0044ah                    ; 72 18 
+place_00432h:       cmp     cl, 039h                        ; 80 f9 39 
+place_00435h:       ja      place_0044ah                    ; 77 13 
+place_00437h:       mul     bx                              ; f7 e3 
+place_00439h:       cmp     ax, 000ffh                      ; 3d ff 00 
+place_0043ch:       ja      place_00453h                    ; 77 15 
+place_0043eh:       sub     cl, 030h                        ; 80 e9 30 
+place_00441h:       add     ax, cx                          ; 03 c1 
+place_00443h:       cmp     ax, 000ffh                      ; 3d ff 00 
+place_00446h:       ja      place_00453h                    ; 77 0b 
+place_00448h:       jmp     place_0041ah                    ; eb d0 
+place_0044ah:       call    place_00288h                    ; e8 3b fe 
+place_0044dh:       call    place_002c1h                    ; e8 71 fe 
+place_00450h:       call    place_0020fh                    ; e8 bc fd 
+place_00453h:       call    place_00299h                    ; e8 43 fe 
+place_00456h:       call    place_002c1h                    ; e8 68 fe 
+place_00459h:       call    place_0020fh                    ; e8 b3 fd 
+place_0045ch:       cmp     al, 000h                        ; 3c 00 
+place_0045eh:       jne     place_00463h                    ; 75 03 
+place_00460h:       call    place_00288h                    ; e8 25 fe 
+place_00463h:       mov     byte ptr ds:[ 0045ch ], al      ; a2 5c 04 
+place_00466h:       pop     dx                              ; 5a 
+place_00467h:       pop     cx                              ; 59 
+place_00468h:       pop     bx                              ; 5b 
+place_00469h:       pop     ax                              ; 58 
+place_0046ah:       ret                                     ; c3 
+place_0046bh:       push    ax                              ; 50 
+place_0046ch:       push    bx                              ; 53 
+place_0046dh:       push    cx                              ; 51 
+place_0046eh:       push    dx                              ; 52 
+place_0046fh:       push    si                              ; 56 
+place_00470h:       push    di                              ; 57 
+place_00471h:       mov     al, byte ptr es:[ 00080h ]      ; 26 a0 80 00 
+place_00475h:       cmp     al, 000h                        ; 3c 00 
+place_00477h:       jne     place_00482h                    ; 75 09 
+place_00479h:       call    place_00266h                    ; e8 ea fd 
+place_0047ch:       call    place_002c1h                    ; e8 42 fe 
+place_0047fh:       call    place_0020fh                    ; e8 8d fd 
+place_00482h:       mov     di, 00081h                      ; bf 81 00 
+place_00485h:       call    place_003aah                    ; e8 22 ff 
+place_00488h:       call    place_00347h                    ; e8 bc fe 
+place_0048bh:       cmp     bx, 00001h                      ; 83 fb 01 
+place_0048eh:       jne     place_00496h                    ; 75 06 
+place_00490h:       call    place_002c1h                    ; e8 2e fe 
+place_00493h:       call    place_0020fh                    ; e8 79 fd 
+place_00496h:       mov     si, 00000h                      ; be 00 00 
+place_00499h:       call    place_003d9h                    ; e8 3d ff 
+place_0049ch:       call    place_003aah                    ; e8 0b ff 
+place_0049fh:       mov     si, 0045ch                      ; be 5c 04 
+place_004a2h:       call    place_0040fh                    ; e8 6a ff 
+place_004a5h:       call    place_003aah                    ; e8 02 ff 
+place_004a8h:       mov     si, 000ffh                      ; be ff 00 
+place_004abh:       call    place_003d9h                    ; e8 2b ff 
+place_004aeh:       call    place_003aah                    ; e8 f9 fe 
+place_004b1h:       xor     ax, ax                          ; 33 c0 
+place_004b3h:       mov     al, byte ptr es:[ 00080h ]      ; 26 a0 80 00 
+place_004b7h:       add     ax, 00081h                      ; 05 81 00 
+place_004bah:       cmp     ax, di                          ; 3b c7 
+place_004bch:       je      place_004c7h                    ; 74 09 
+place_004beh:       call    place_00277h                    ; e8 b6 fd 
+place_004c1h:       call    place_002c1h                    ; e8 fd fd 
+place_004c4h:       call    place_0020fh                    ; e8 48 fd 
+place_004c7h:       pop     di                              ; 5f 
+place_004c8h:       pop     si                              ; 5e 
+place_004c9h:       pop     dx                              ; 5a 
+place_004cah:       pop     cx                              ; 59 
+place_004cbh:       pop     bx                              ; 5b 
+place_004cch:       pop     ax                              ; 58 
+place_004cdh:       ret                                     ; c3 
+place_004ceh:       push    ax                              ; 50 
+place_004cfh:       push    bx                              ; 53 
+place_004d0h:       push    cx                              ; 51 
+place_004d1h:       push    dx                              ; 52 
+place_004d2h:       push    si                              ; 56 
+place_004d3h:       mov     si, 0045dh                      ; be 5d 04 
+place_004d6h:       mov     cx, word ptr ds:[ si ]          ; 8b 0c 
+place_004d8h:       mov     dx, word ptr ds:[ si + 002h ]   ; 8b 54 02 
+place_004dbh:       add     dl, ah                          ; 02 d4 
+place_004ddh:       adc     dh, 000h                        ; 80 d6 00 
+place_004e0h:       adc     cx, 00000h                      ; 83 d1 00 
+place_004e3h:       mov     ax, 04200h                      ; b8 00 42 
+place_004e6h:       mov     bx, word ptr ds:[ 001feh ]      ; 8b 1e fe 01 
+place_004eah:       int     021h                            ; cd 21 
+place_004ech:       mov     word ptr ds:[ si ], dx          ; 89 14 
+place_004eeh:       mov     word ptr ds:[ si + 002h ], ax   ; 89 44 02 
+place_004f1h:       pop     si                              ; 5e 
+place_004f2h:       pop     dx                              ; 5a 
+place_004f3h:       pop     cx                              ; 59 
+place_004f4h:       pop     bx                              ; 5b 
+place_004f5h:       pop     ax                              ; 58 
+place_004f6h:       ret                                     ; c3 
+place_004f7h:       push    ax                              ; 50 
+place_004f8h:       push    bx                              ; 53 
+place_004f9h:       push    cx                              ; 51 
+place_004fah:       push    dx                              ; 52 
+place_004fbh:       push    di                              ; 57 
+place_004fch:       xor     cx, cx                          ; 33 c9 
+place_004feh:       mov     cl, ah                          ; 8a cc 
+place_00500h:       mov     dx, 00330h                      ; ba 30 03 
+place_00503h:       mov     ah, 040h                        ; b4 40 
+place_00505h:       cmp     bh, 000h                        ; 80 ff 00 
+place_00508h:       je      place_00510h                    ; 74 06 
+place_0050ah:       add     cx, 00002h                      ; 83 c1 02 
+place_0050dh:       sub     dx, 00002h                      ; 83 ea 02 
+place_00510h:       mov     bx, word ptr ds:[ 00200h ]      ; 8b 1e 00 02 
+place_00514h:       int     021h                            ; cd 21 
+place_00516h:       jb      place_0051bh                    ; 72 03 
+place_00518h:       jmp     place_00521h                    ; eb 07 
+place_0051ah:       nop                                     ; 90 
+place_0051bh:       call    place_00255h                    ; e8 37 fd 
+place_0051eh:       call    place_0020fh                    ; e8 ee fc 
+place_00521h:       pop     di                              ; 5f 
+place_00522h:       pop     dx                              ; 5a 
+place_00523h:       pop     cx                              ; 59 
+place_00524h:       pop     bx                              ; 5b 
+place_00525h:       pop     ax                              ; 58 
+place_00526h:       ret                                     ; c3 
+place_00527h:       push    ax                              ; 50 
+place_00528h:       push    bx                              ; 53 
+place_00529h:       push    cx                              ; 51 
+place_0052ah:       push    dx                              ; 52 
+place_0052bh:       push    si                              ; 56 
+place_0052ch:       push    di                              ; 57 
+place_0052dh:       mov     ah, 03fh                        ; b4 3f 
+place_0052fh:       push    bx                              ; 53 
+place_00530h:       mov     bx, word ptr ds:[ 001feh ]      ; 8b 1e fe 01 
+place_00534h:       mov     dx, 00202h                      ; ba 02 02 
+place_00537h:       xor     cx, cx                          ; 33 c9 
+place_00539h:       mov     cl, byte ptr ds:[ 0045ch ]      ; 8a 0e 5c 04 
+place_0053dh:       int     021h                            ; cd 21 
+place_0053fh:       pop     bx                              ; 5b 
+place_00540h:       jb      place_0058bh                    ; 72 49 
+place_00542h:       cmp     ax, 00000h                      ; 3d 00 00 
+place_00545h:       je      place_00584h                    ; 74 3d 
+place_00547h:       mov     si, 00202h                      ; be 02 02 
+place_0054ah:       mov     di, 00330h                      ; bf 30 03 
+place_0054dh:       mov     bl, al                          ; 8a d8 
+place_0054fh:       mov     al, byte ptr ds:[ si ]          ; 8a 04 
+place_00551h:       cmp     al, 000h                        ; 3c 00 
+place_00553h:       jne     place_0055dh                    ; 75 08 
+place_00555h:       call    place_004f7h                    ; e8 9f ff 
+place_00558h:       mov     bh, 001h                        ; b7 01 
+place_0055ah:       jmp     place_00584h                    ; eb 28 
+place_0055ch:       nop                                     ; 90 
+place_0055dh:       cmp     al, 00dh                        ; 3c 0d 
+place_0055fh:       jne     place_0056eh                    ; 75 0d 
+place_00561h:       call    place_004f7h                    ; e8 93 ff 
+place_00564h:       add     ah, 002h                        ; 80 c4 02 
+place_00567h:       call    place_004ceh                    ; e8 64 ff 
+place_0056ah:       mov     bh, 001h                        ; b7 01 
+place_0056ch:       jmp     place_0052dh                    ; eb bf 
+place_0056eh:       mov     byte ptr ds:[ di ], al          ; 88 05 
+place_00570h:       inc     si                              ; 46 
+place_00571h:       inc     di                              ; 47 
+place_00572h:       inc     ah                              ; fe c4 
+place_00574h:       cmp     ah, bl                          ; 3a e3 
+place_00576h:       jne     place_00582h                    ; 75 0a 
+place_00578h:       call    place_004f7h                    ; e8 7c ff 
+place_0057bh:       mov     bh, 001h                        ; b7 01 
+place_0057dh:       call    place_004ceh                    ; e8 4e ff 
+place_00580h:       jmp     place_0052dh                    ; eb ab 
+place_00582h:       loop    place_0054fh                    ; e2 cb 
+place_00584h:       pop     di                              ; 5f 
+place_00585h:       pop     si                              ; 5e 
+place_00586h:       pop     dx                              ; 5a 
+place_00587h:       pop     cx                              ; 59 
+place_00588h:       pop     bx                              ; 5b 
+place_00589h:       pop     ax                              ; 58 
+place_0058ah:       ret                                     ; c3 
+place_0058bh:       call    place_00244h                    ; e8 b6 fc 
+place_0058eh:       call    place_0020fh                    ; e8 7e fc 
 START:
-place_00591h:       mov     ax, @data
-;;           code byte in file : 00000h00594h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00096h
-;;                 si register : 00298h
-; 00591h
-;;                      opcode : 08eh
-place_00594h:       mov     ds, ax
-;;           code byte in file : 00000h00596h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 00098h
-;;                 si register : 0029ah
-; 00591h
-;;                      opcode : 0bfh
-place_00596h:       mov     di, 00081h
-;;           code byte in file : 00000h00599h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009bh
-;;                 si register : 0029dh
-; 00591h
-;;                      opcode : 0e8h
-place_00599h:       call    place_0046bh
-;;           code byte in file : 00000h0059ch
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 0009eh
-;;                 si register : 002a0h
-; 00591h
-;;                      opcode : 0e8h
-place_0059ch:       call    place_003b6h
-;;           code byte in file : 00000h0059fh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a1h
-;;                 si register : 002a3h
-; 00591h
-;;                      opcode : 0e8h
-place_0059fh:       call    place_003d1h
-;;           code byte in file : 00000h005a2h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a4h
-;;                 si register : 002a6h
-; 00591h
-;;                      opcode : 0e8h
-place_005a2h:       call    place_00527h
-;;           code byte in file : 00000h005a5h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000a7h
-;;                 si register : 002a9h
-; 00591h
-;;                      opcode : 0e8h
-place_005a5h:       call    place_0020fh
-;;           code byte in file : 00000h005a8h
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000aah
-;;                 si register : 002ach
-; 00591h
-;;                      opcode : 000h
-place_005a8h:       add     byte ptr ds:[ bx + si ], al
-;;           code byte in file : 00000h005aah
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000ach
-;;                 si register : 002aeh
-; 00591h
-;;                      opcode : 000h
-place_005aah:       add     byte ptr ds:[ bx + si ], al
-;;           code byte in file : 00000h005ach
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000aeh
-;;                 si register : 002b0h
-; 00591h
-;;                      opcode : 000h
-place_005ach:       add     byte ptr ds:[ bx + si ], al
-;;           code byte in file : 00000h005aeh
-;;     data start byte in file : 00000h005b0h
-;;  used bytes in code segment : 000b0h
-;;                 si register : 002b2h
-; 00591h
-;;                      opcode : 000h
-place_005aeh:       add     byte ptr ds:[ bx + si ], al
+place_00591h:       mov     ax, @data                       ; b8 3b 00 
+place_00594h:       mov     ds, ax                          ; 8e d8 
+place_00596h:       mov     di, 00081h                      ; bf 81 00 
+place_00599h:       call    place_0046bh                    ; e8 cf fe 
+place_0059ch:       call    place_003b6h                    ; e8 17 fe 
+place_0059fh:       call    place_003d1h                    ; e8 2f fe 
+place_005a2h:       call    place_00527h                    ; e8 82 ff 
+place_005a5h:       call    place_0020fh                    ; e8 67 fc 
+place_005a8h:       add     byte ptr ds:[ bx + si ], al     ; 00 00 
+place_005aah:       add     byte ptr ds:[ bx + si ], al     ; 00 00 
+place_005ach:       add     byte ptr ds:[ bx + si ], al     ; 00 00 
+place_005aeh:       add     byte ptr ds:[ bx + si ], al     ; 00 00 
 END START
 END

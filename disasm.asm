@@ -1,5 +1,5 @@
 LOCALS @@
-.MODEL small
+.MODEL SMALL
 .STACK 100h
 
 .DATA
@@ -30,6 +30,9 @@ LOCALS @@
     opcodeMod   db  0
     opcodeReg   db  0
     opcodeRM    db  0
+
+    MCLength    db  0
+    machineCode db  5 dup(0)
 
     prefix      db  03eh    ; 03eh = default 'ds' data segment
 

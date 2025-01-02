@@ -24,6 +24,45 @@ printOutputBuffer PROC
 printOutputBuffer ENDP
 
 ;***************************************************;
+;          Printing machine code to buffer          ;
+;***************************************************;
+printMachineCode PROC
+    push    ax
+    push    cx
+    push    dx
+    push    si
+
+    mov     cx, 44
+    sub     cx, word ptr outputLength
+    jns     @@positive
+    mov     cx, 4
+    @@positive:
+    mov     al, " "
+    @@loop_print_spaces:
+        stosb
+        inc     word ptr outputLength
+        loop    @@loop_print_spaces
+
+    call    loadComment
+    xor     cx, cx
+    mov     cl, byte ptr MCLength
+    lea     si, machineCode
+    @@loop_print_bytes:
+        lodsb
+        mov     dl, al
+        call    printMCByte
+        mov     al, " "
+        stosb
+        inc     word ptr outputLength
+        loop    @@loop_print_bytes
+
+    pop     si
+    pop     dx
+    pop     cx
+    pop     ax
+    ret
+printMachineCode ENDP
+;***************************************************;
 ;    getting byte to al and incrementing pointers   ;
 ;***************************************************;
 getByte PROC
@@ -31,6 +70,17 @@ getByte PROC
     add     word ptr usedBytes, 1
     add     word ptr byteInFile, 1
     adc     word ptr byteInFile + 2, 0
+    dec     cx
+    push    bx
+    push    di
+    lea     di, machineCode
+    xor     bx, bx
+    mov     bl, byte ptr MCLength
+    add     di, bx
+    stosb
+    inc     byte ptr MCLength
+    pop     di
+    pop     bx
     ret
 getByte ENDP
 
@@ -42,6 +92,19 @@ getWord PROC
     add     word ptr usedBytes, 2
     add     word ptr byteInFile, 2
     adc     word ptr byteInFile + 2, 0
+    dec     cx
+    dec     cx
+    push    bx
+    push    di
+    lea     di, machineCode
+    xor     bx, bx
+    mov     bl, byte ptr MCLength
+    add     di, bx
+    stosw
+    inc     byte ptr MCLength
+    inc     byte ptr MCLength
+    pop     di
+    pop     bx
     ret
 getWord ENDP
 
@@ -67,7 +130,6 @@ loadTextToBuffer ENDP
 
 ;***************************************************;
 ;          get byte and display as pointer          ;
-;             dx - command length bytes             ;
 ;***************************************************;
 loadPointer PROC
     push    ax
@@ -226,9 +288,9 @@ scanCodeSegment PROC
 
     mov     word ptr usedBytes, 0
 
-    call    loadScanning
-    call    loadNewline
-    call    printOutputBuffer
+    ; call    loadScanning
+    ; call    loadNewline
+    ; call    printOutputBuffer
 
     pop     dx
     pop     cx
@@ -432,8 +494,6 @@ printCodeSegment PROC
     push    di
     push    es
 
-    ;;call debug
-
     mov     ax, seg outputBuffer
     mov     es, ax
 
@@ -446,7 +506,6 @@ printCodeSegment PROC
 
     call    printOutputBuffer
 
-
     mov     ax, word ptr codeSegmentOffset
     mov     word ptr byteInFile, ax
  
@@ -458,10 +517,20 @@ printCodeSegment PROC
         call    scanCodeSegment
         cmp     ax, 0
         je      @@done_temp
+        mov     cx, ax
         lea     si, inputBuffer
         @@write:
         ; check if I am not in data segment
         mov     ax, word ptr byteInFile
+        cmp     ax, word ptr dataSegmentStart
+        jne     @@check_more
+        mov     ax, word ptr [byteInFile + 2]
+        cmp     ax, word ptr [dataSegmentStart + 2]
+        jae     @@done_temp
+
+        @@check_more:
+        mov     ax, word ptr byteInFile
+        inc     ax
         cmp     ax, word ptr dataSegmentStart
         jne     @@continue
         mov     ax, word ptr [byteInFile + 2]
@@ -469,8 +538,10 @@ printCodeSegment PROC
         jae     @@done_temp
 
         @@continue:
-        ; ; testing
+        ; ;; testing
+        ; push ax
         ; push dx
+        ; push si
         ; call load_test_code
         ; mov dx, word ptr [byteInFile+2]
         ; call printWord
@@ -495,18 +566,23 @@ printCodeSegment PROC
         ; mov dx, word ptr startingIPAddress
         ; call printWord
         ; call    loadNewline
+        ; pop si
         ; pop dx
-        ; ; end testing
+        ; pop ax
+        ; ;; end testing
         jmp     @@continue2
         @@done_temp:
         jmp     @@done
         @@continue2:
 
+        mov     byte ptr MCLength, 0
         call    getByte
+        ; ;; opcode
         ; call    load_test_curr
         ; mov     dl, al
         ; call    printByte
         ; call    loadNewline
+        ; ;; end
 
         push    ax
         push    dx
@@ -523,8 +599,7 @@ printCodeSegment PROC
 
         @@continue3:
         call    loadPlace
-        mov     dx, word ptr byteInFile
-        dec     dx
+        mov     dx, ax
         call    printWord
         mov     al, ":"
         stosb
@@ -536,16 +611,18 @@ printCodeSegment PROC
         inc     word ptr outputLength
         stosb
         inc     word ptr outputLength
-        ; call    loadNewline
         pop     si
         pop     dx
         pop     ax
 
-        ; call    printOutputBuffer
-        call    OPCODE_00h
-        call    loadNewline
-        ; call    loadNewline
         call    printOutputBuffer
+        call    OPCODE_00h
+        call    printMachineCode
+        call    loadNewline
+        call    printOutputBuffer
+
+        cmp     cx, 0
+        jbe     @@done
 
         jmp     @@read_and_print
 

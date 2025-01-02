@@ -13,14 +13,6 @@ debug PROC
     lea     dx, debugMessage
     int     21h
     call    askForMore
-
-    mov     ax, 0FFFFh
-    mov     bx, 0FFFFh
-    mov     cx, 0FFFFh
-    mov     dx, 0FFFFh
-    mov     si, 0FFFFh
-    mov     di, 0FFFFh
-
     
     pop     di
     pop     si
@@ -515,13 +507,13 @@ getParameters PROC
     call    skipSpaces
 
     ; Just checking if help is needed
-    ; FOR DEBUGING PURPOSES IT IS COMMENTED
-    ; call    checkIfHelp
-    ; cmp     bx, 1
-    ; jne     @@continue2
-    ; call    displayHelp
-    ; call    endProgram
-    ; @@continue2:
+    ; FOR DEBUGING PURPOSES IT WAS COMMENTED
+    call    checkIfHelp
+    cmp     bx, 1
+    jne     @@continue2
+    call    displayHelp
+    call    endProgram
+    @@continue2:
 
     ; Getting input file name
     lea     si, inputName

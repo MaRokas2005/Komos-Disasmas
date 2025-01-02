@@ -218,8 +218,6 @@ getRelocations PROC
     lea     dx, relocationBuffer
     int     21h
     jc      @@error
-    mov     ah, 01
-    int     21h
 
     pop     dx
     pop     cx

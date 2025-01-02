@@ -43,31 +43,51 @@ printByte ENDP
 
 printWord PROC
     ; checking if the word is '@data'
-    push    ax
+    push    ax ; get word from buffer using lodsw
     push    bx ; 0 - not the '@data', 1 - is the '@data'
-    push    cx
-    push    dx
-    push    si
+    push    cx ; number of relocations
+    push    dx ; for calculations of relocation address
+    push    si ; load effective address of buffer
 
+    ; mov ah, 1
+    ; int 21h
+    
     lea     si, relocationBuffer
     xor     bx, bx
     mov     cx, word ptr numberOfRelocations
-    mov     dx, 
+    
+    @@loop_checking:
+        lodsw
+        mov     dx, ax
+        lodsw
+        shl     ax, 4
+        add     dx, ax
+        add     dx, word ptr headerSize
+        inc     dx
+        inc     dx
+        cmp     dx, word ptr byteInFile
+        jne     @@not_done_checking
+        mov     bl, 1
+        jmp     @@done_checking
+        @@not_done_checking:
+        loop    @@loop_checking
 
-
+    @@done_checking:
+    cmp     bl, 0
+    je      @@continue
+    lea     si, tagData
+    call    loadTextToBuffer
     pop     si
     pop     dx
     pop     cx
     pop     bx
     pop     ax
-
-    cmp     bl, 0
-    je      @@continue
     ret
 
     @@continue:
-    push    ax
-    push    bx
+    pop     si
+    pop     dx
+    pop     cx
 
     mov     bx, dx
     shr     bx, 0ch
@@ -135,3 +155,39 @@ printWord PROC
     pop     ax
     ret
 printWord ENDP
+
+printMCByte PROC
+    push    ax
+    push    bx
+
+    mov     bl, dl
+    shr     bl, 04h
+    cmp     bl, 09h
+    ja      @@byte_a_f_1
+    add     bl, 30h
+    jmp     @@byte_done_1
+    @@byte_a_f_1:
+    add     bl, 57h
+    @@byte_done_1:
+    mov     al, bl
+    stosb
+    inc     word ptr outputLength
+
+    mov     bl, dl
+    shl     bl, 04h
+    shr     bl, 04h
+    cmp     bl, 09h
+    ja      @@byte_a_f_2
+    add     bl, 30h
+    jmp     @@byte_done_2
+    @@byte_a_f_2:
+    add     bl, 57h
+    @@byte_done_2:
+    mov     al, bl
+    stosb
+    inc     word ptr outputLength
+
+    pop     bx
+    pop     ax
+    ret
+printMCByte ENDP

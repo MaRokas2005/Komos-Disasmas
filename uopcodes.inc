@@ -75,7 +75,6 @@ loadTagClose ENDP
 loadModRM PROC
     push    ax
     push    bx
-    push    cx
     push    dx
 
     cmp     byte ptr opcodeMod, 3h
@@ -148,7 +147,6 @@ loadModRM PROC
 
     @@done:
     pop     dx
-    pop     cx
     pop     bx
     pop     ax
     ret
@@ -3307,10 +3305,10 @@ OPCODE_89h PROC
     pop     si
 
     mov     dl, 1
-    call    loadReg
-    call    loadCommaSpace
     mov     bl, 1
     call    loadModRM
+    call    loadCommaSpace
+    call    loadReg
 
     @@done:
     ret
@@ -3795,6 +3793,7 @@ OPCODE_a0h PROC
     call    loadPtr
     call    loadTagStart
     call    getWord
+    mov     dx, ax
     call    printWord
     call    loadTagClose
 
@@ -3821,6 +3820,7 @@ OPCODE_a1h PROC
     call    loadPtr
     call    loadTagStart
     call    getWord
+    mov     dx, ax
     call    printWord
     call    loadTagClose
 
@@ -3844,6 +3844,7 @@ OPCODE_a2h PROC
     call    loadPtr
     call    loadTagStart
     call    getWord
+    mov     dx, ax
     call    printWord
     call    loadTagClose
     call    loadCommaSpace
@@ -3872,6 +3873,7 @@ OPCODE_a3h PROC
     call    loadPtr
     call    loadTagStart
     call    getWord
+    mov     dx, ax
     call    printWord
     call    loadTagClose
     call    loadCommaSpace
@@ -5855,11 +5857,6 @@ OPCODE_fdh ENDP
 OPCODE_feh PROC
     cmp     al, 0feh
     je      @@continue
-        push si
-        lea si, ins_unknown
-        call loadTextToBuffer
-        pop si
-        ret
         call    OPCODE_ffh
         ret
     
@@ -5895,6 +5892,8 @@ OPCODE_feh PROC
     push    si
     lea     si, ins_unknown
     call    loadTextToBuffer
+    mov     dl, byte ptr opcodeReg
+    call    printByte
     pop     si
     ret
 OPCODE_feh ENDP
@@ -5977,6 +5976,8 @@ OPCODE_ffh PROC
     push    si
     lea     si, ins_unknown
     call    loadTextToBuffer
+    mov     dl, byte ptr opcodeReg
+    call    printByte
     pop     si
     ret
 OPCODE_ffh ENDP
