@@ -8,6 +8,7 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Configuration](#dosbox-x-configuration)
 - [Usage](#usage)
 - [Debugging](#debuging)
 - [Contributing](#contributing)
@@ -40,6 +41,14 @@ Clone this repository and navigate to the project directory:
 ```bash
 git clone https://github.com/MaRokas2005/Komos-Disasmas.git
 cd Komos-Disasmas
+```
+
+### DOSBox-X Configuration
+1. **Configuration**
+```bash
+   mount R path/to/the/project/Komos-Disasmas
+   R:
+   path R:\tasm\bin
 ```
 
 ## Usage
